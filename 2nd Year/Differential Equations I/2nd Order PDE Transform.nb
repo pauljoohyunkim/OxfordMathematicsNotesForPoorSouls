@@ -1,0 +1,191 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5927,        183]
+NotebookOptionsPosition[      5489,        165]
+NotebookOutlinePosition[      5837,        180]
+CellTagsIndexPosition[      5794,        177]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Set", " ", "Change", " ", "of", " ", "Variables"}], 
+  "*)"}]], "Input",
+ CellChangeTimes->{{3.8317390972289467`*^9, 3.8317391459165745`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[CurlyPhi]1", "=", 
+   RowBox[{"x", "-", 
+    SuperscriptBox["E", "y"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Phi]1", "=", 
+   RowBox[{"x", "+", 
+    SuperscriptBox["E", "y"]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.831739148645153*^9, 3.83173915093495*^9}, {
+  3.831739187732518*^9, 3.8317392048216925`*^9}, {3.831739308835315*^9, 
+  3.831739309753299*^9}, {3.8317402738380003`*^9, 3.8317402746098394`*^9}, {
+  3.8317405437454376`*^9, 3.831740547839216*^9}},
+ Background->RGBColor[1, 0.85, 0.85]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Intermediate", " ", "Chain", " ", "Rules"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ux", "=", 
+     RowBox[{"D", "[", 
+      RowBox[{
+       RowBox[{"u", "[", 
+        RowBox[{"\[CurlyPhi]1", ",", "\[Phi]1"}], "]"}], ",", "x"}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"uy", "=", 
+     RowBox[{"D", "[", 
+      RowBox[{
+       RowBox[{"u", "[", 
+        RowBox[{"\[CurlyPhi]1", ",", "\[Phi]1"}], "]"}], ",", "y"}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"uxx", "=", 
+     RowBox[{"D", "[", 
+      RowBox[{
+       RowBox[{"u", "[", 
+        RowBox[{"\[CurlyPhi]1", ",", "\[Phi]1"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "2"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"uyy", "=", 
+     RowBox[{"D", "[", 
+      RowBox[{
+       RowBox[{"u", "[", 
+        RowBox[{"\[CurlyPhi]1", ",", "\[Phi]1"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", "2"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"uxy", "=", 
+     RowBox[{"D", "[", 
+      RowBox[{
+       RowBox[{"D", "[", 
+        RowBox[{
+         RowBox[{"u", "[", 
+          RowBox[{"\[CurlyPhi]1", ",", "\[Phi]1"}], "]"}], ",", "x"}], "]"}], 
+       ",", "y"}], "]"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.831739363648129*^9, 3.8317394761477647`*^9}, {
+  3.831740276377646*^9, 3.8317402960695376`*^9}, {3.831740455273437*^9, 
+  3.831740456305835*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Simplify", "[", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"ux", "/.", 
+     RowBox[{"\[CurlyPhi]1", "\[Rule]", "\[CurlyPhi]"}]}], ")"}], "/.", 
+   RowBox[{"\[Phi]1", "\[Rule]", "\[Phi]"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Simplify", "[", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"uy", "/.", 
+     RowBox[{"\[CurlyPhi]1", "\[Rule]", "\[CurlyPhi]"}]}], ")"}], "/.", 
+   RowBox[{"\[Phi]1", "\[Rule]", "\[Phi]"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Simplify", "[", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"uxx", "/.", 
+     RowBox[{"\[CurlyPhi]1", "\[Rule]", "\[CurlyPhi]"}]}], ")"}], "/.", 
+   RowBox[{"\[Phi]1", "\[Rule]", "\[Phi]"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Simplify", "[", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"uyy", "/.", 
+     RowBox[{"\[CurlyPhi]1", "\[Rule]", "\[CurlyPhi]"}]}], ")"}], "/.", 
+   RowBox[{"\[Phi]1", "\[Rule]", "\[Phi]"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Simplify", "[", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"uxy", "/.", 
+     RowBox[{"\[CurlyPhi]1", "\[Rule]", "\[CurlyPhi]"}]}], ")"}], "/.", 
+   RowBox[{"\[Phi]1", "\[Rule]", "\[Phi]"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.831740300824492*^9, 3.8317403527623854`*^9}, {
+  3.8317404592177043`*^9, 3.831740486128267*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"a", 
+       RowBox[{"(", 
+        RowBox[{"x", ",", "y"}], ")"}], "u_xx"}], "+", 
+      RowBox[{"2", "b", 
+       RowBox[{"(", 
+        RowBox[{"x", ",", "y"}], ")"}], "u_xy"}], "+", 
+      RowBox[{"c", 
+       RowBox[{"(", 
+        RowBox[{"x", ",", "y"}], ")"}], "u_yy"}], "+"}], "..."}], "=", 
+    RowBox[{"0", " ", "LHS"}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"principle", "=", 
+    RowBox[{
+     RowBox[{
+      SuperscriptBox["E", 
+       RowBox[{"2", "y"}]], "uxx"}], "+", "uy", "-", "uyy"}]}], 
+   ";"}]}]], "Input",
+ CellChangeTimes->{{3.831739314070529*^9, 3.8317393584865685`*^9}, {
+  3.8317395321499186`*^9, 3.8317395343773537`*^9}, {3.8317397208224387`*^9, 
+  3.831739723267746*^9}, {3.8317398131604013`*^9, 3.831739849156047*^9}, {
+  3.8317400329174805`*^9, 3.831740056292557*^9}, {3.8317402849131956`*^9, 
+  3.8317402883259554`*^9}, {3.83174055360031*^9, 3.831740558576874*^9}, {
+  3.833286771056491*^9, 3.8332867723162947`*^9}},
+ Background->RGBColor[1, 0.85, 0.85]],
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"principle", "/.", 
+     RowBox[{"\[CurlyPhi]1", "\[Rule]", "\[CurlyPhi]"}]}], ")"}], "/.", 
+   RowBox[{"\[Phi]1", "\[Rule]", "\[Phi]"}]}], "]"}]], "Input"]
+},
+WindowSize->{775, 657},
+WindowMargins->{{Automatic, 295}, {Automatic, 30}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 183, 4, 30, "Input"],
+Cell[744, 26, 558, 13, 66, "Input"],
+Cell[1305, 41, 1560, 49, 126, "Input"],
+Cell[2868, 92, 1278, 32, 107, "Input"],
+Cell[4149, 126, 1096, 29, 66, "Input"],
+Cell[5248, 157, 237, 6, 30, "Input"]
+}
+]
+*)
+

@@ -1,0 +1,236 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7152,        228]
+NotebookOptionsPosition[      6608,        207]
+NotebookOutlinePosition[      6957,        222]
+CellTagsIndexPosition[      6914,        219]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Enter", " ", "X", " ", "and", " ", "Y", " ", "with", " ", "parameters", 
+    " ", "x", " ", "and", " ", "y"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"X", "=", "y"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Y", "=", 
+     RowBox[{"x", "+", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         SuperscriptBox["x", "2"]}], ")"}], "y"}], "-", 
+      SuperscriptBox["x", "3"]}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.831914070285784*^9, 3.8319140984383826`*^9}},
+ Background->RGBColor[1, 0.85, 0.85]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Steady", " ", "Points"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"s", "=", 
+    RowBox[{"Solve", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"X", "\[Equal]", "0"}], "&&", 
+       RowBox[{"Y", "\[Equal]", "0"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "y"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Steady", " ", "points", " ", "are", " ", "stored", " ", "as", " ", 
+     "rows", " ", "of", " ", "this", " ", 
+     RowBox[{"matrix", "."}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"steadystate", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x", ",", "y"}], "}"}], "/.", 
+       RowBox[{"s", "[", 
+        RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", 
+        RowBox[{"Length", "[", "s", "]"}]}], "}"}]}], "]"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.831914120967318*^9, 3.831914214852496*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Jacobian", " ", "Function"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"J", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"D", "[", 
+        RowBox[{"X", ",", "x"}], "]"}], ",", 
+       RowBox[{"D", "[", 
+        RowBox[{"X", ",", "y"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"D", "[", 
+        RowBox[{"Y", ",", "x"}], "]"}], ",", 
+       RowBox[{"D", "[", 
+        RowBox[{"Y", ",", "y"}], "]"}]}], "}"}]}], "}"}]}]}]], "Input",
+ CellChangeTimes->{{3.8319142358169317`*^9, 3.831914284430835*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Linear", " ", "Stability", " ", "Analysis"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Jacobians", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"J", "/.", 
+       RowBox[{"s", "[", 
+        RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", 
+        RowBox[{"Length", "[", "s", "]"}]}], "}"}]}], "]"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"EigenvalueList", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Eigenvalues", "[", 
+       RowBox[{"Jacobians", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", 
+        RowBox[{"Length", "[", "Jacobians", "]"}]}], "}"}]}], "]"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"NEigenvalueList", "=", 
+    RowBox[{"N", "[", "EigenvalueList", "]"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.8319143264584618`*^9, 3.831914357340397*^9}, {
+  3.831914397066084*^9, 3.8319144503378315`*^9}}],
+
+Cell["", "PageBreak",
+ PageBreakBelow->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Enter", " ", "plot", " ", "window", " ", "info"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"xlow", "=", 
+     RowBox[{"-", "3"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"xhigh", "=", "3"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ylow", "=", 
+     RowBox[{"-", "3"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"yhigh", "=", "3"}], ";"}]}]}]], "Input",
+ Background->RGBColor[1, 0.85, 0.85]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "Streamplot", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"plot", "=", 
+     RowBox[{"StreamPlot", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"X", ",", "Y"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "xlow", ",", "xhigh"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", "ylow", ",", "yhigh"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"nullclineX", "=", 
+     RowBox[{"ContourPlot", "[", 
+      RowBox[{
+       RowBox[{"X", "\[Equal]", "0"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "xlow", ",", "xhigh"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", "ylow", ",", "yhigh"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"nullclineY", "=", 
+     RowBox[{"ContourPlot", "[", 
+      RowBox[{
+       RowBox[{"Y", "\[Equal]", "0"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "xlow", ",", "xhigh"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", "ylow", ",", "yhigh"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Show", "[", 
+    RowBox[{"plot", ",", "nullclineX", ",", "nullclineY", ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+     RowBox[{"Axes", "\[Rule]", "True"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.83191450765821*^9, 3.8319145563578277`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "Summary", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"MatrixForm", "[", "J", "]"}], "\[IndentingNewLine]", 
+   RowBox[{"MatrixForm", "[", 
+    RowBox[{"Transpose", "[", 
+     RowBox[{"{", 
+      RowBox[{"steadystate", ",", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"MatrixForm", "[", 
+          RowBox[{"J", "/.", 
+           RowBox[{"s", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", 
+           RowBox[{"Length", "[", "s", "]"}]}], "}"}]}], "]"}], ",", 
+       "EigenvalueList", ",", "NEigenvalueList"}], "}"}], "]"}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.8319145644094925`*^9, 3.831914590932232*^9}}]
+},
+WindowSize->{864, 453},
+WindowMargins->{{Automatic, 174}, {Automatic, 138}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 624, 18, 89, "Input"],
+Cell[1185, 40, 1016, 29, 88, "Input"],
+Cell[2204, 71, 624, 19, 50, "Input"],
+Cell[2831, 92, 1013, 29, 88, "Input"],
+Cell[3847, 123, 44, 1, 4, "PageBreak",
+ PageBreakBelow->True],
+Cell[3894, 126, 521, 16, 123, "Input"],
+Cell[4418, 144, 1424, 39, 107, "Input"],
+Cell[5845, 185, 759, 20, 88, "Input"]
+}
+]
+*)
+

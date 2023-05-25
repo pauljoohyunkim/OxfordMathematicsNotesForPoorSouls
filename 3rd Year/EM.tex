@@ -1,0 +1,328 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,showframe]{geometry}
+\usepackage{xcolor,fancyhdr}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{stmaryrd}
+
+\usepackage{lineno}
+\linenumbers
+\setpagewiselinenumbers
+
+%%%%%%%%%%%%%  PLEASE DO NOT EDIT ANY OF THE LINES ABOVE %%%%%%%%%%%%%%%
+% Insert your text between "\begin{document}" and "\end{document}" below. 
+% The total length of your summary notes should not exceed 2 sides of a
+% single sheet of A4, with maximum 58 lines of text per page.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\E}{\mathbf{E}}
+\newcommand{\A}{\mathbf{A}}
+\newcommand{\B}{\mathbf{B}}
+\newcommand{\ezero}{\ensuremath{\epsilon_{0}}}
+\newcommand{\F}{\mathbf{F}}
+\newcommand{\Rvec}{\mathbf{r}}
+\newcommand{\Rzero}{\mathbf{r}_0}
+\newcommand{\Rp}{\mathbf{r}'}
+\newcommand{\nS}{\mathbf{S}}
+\newcommand{\nn}{\mathbf{n}}
+
+\newcommand{\Laplace}{\nabla^2}
+\newcommand{\Laplacep}{{\nabla'}^2}
+\newcommand{\tab}{\hspace{0.5cm}}
+\newcommand{\Parsep}{\rule{6cm}{0.4pt}}
+\newcommand{\const}{\text{const}}
+\newcommand{\J}{\mathbf{J}}
+
+\usepackage{mathtools}
+\begin{document}
+
+\include{stylefile}
+\textbf{\S Calculus} $\nabla \left( \frac{1}{r} \right)= -\frac{\Rvec}{r^3} $ \tab
+$\partial_x \left( \frac{-x}{r^3} \right) = \frac{-1}{r^3} + \frac{3x^2}{r^5}$ \tab
+$\frac{1}{|\Rvec - \Rp|} \stackrel{r\rightarrow\infty}{\sim} \frac{1}{r} + \frac{1}{r^3} \Rvec \cdot \Rp + O\left( \frac{1}{r^3} \right)$
+
+\underline{Delta}: $\int_{-\infty}^\infty f(x) \delta \left( x-x' \right)$ \tab
+$\delta\left[ a\left( x-x' \right) \right] = \frac{1}{|a|} \delta\left( x-x' \right)$ \tab
+$\delta\left( g(x) \right) = \sum_{i=1}^n \frac{\delta \left( x-x_i \right)}{|g'(x_i)|}$
+
+$\nabla \cdot \nabla \wedge = 0$ (div curl) \tab \tab $\nabla \wedge \nabla = 0$ (curl grad)
+
+\underline{Laplacian}: $\nabla^2 f = \frac{1}{\rho} {\left( \rho f_\rho \right)}_\rho + \frac{1}{\rho^2} f_{\varphi\varphi} + f_{zz}$ (Cyl)
+$\nabla^2 f = \frac{1}{r}{\left( rf \right)}_{rr} + \frac{1}{r^2 \sin{\theta}} {\left( \sin \theta f_\theta \right)}_\theta + \frac{1}{r^2 \sin^2 \theta}f_{\varphi\varphi}$ (Sph)
+
+\Parsep
+
+\textbf{\S Electrostatics} Point Charge $\E = \frac{q}{4 \pi \ezero} \frac{\Rvec - \Rzero}{ {|\Rvec-\Rzero|}^3}$ \tab
+\underline{Gauss' law}: $\int_\Sigma \E \cdot d \nS = \frac{Q}{\ezero}$ \tab
+$\nabla \cdot \E = \frac{\rho}{\ezero}$
+
+Continuum $\Longrightarrow Q = \int_R \rho dV$ \tab
+$\E = \frac{1}{4 \pi \ezero}\int_{\Rp \in R}\frac{\rho(\Rp)}{{|\Rvec - \Rp|}^3}(\Rvec - \Rp) dV'$
+
+\underline{``Green's function''}: $-4 \pi \delta(\Rvec - \Rzero) = \Laplace \left( \frac{1}{|\Rvec - \Rzero|} \right)$ \tab
+($-4 \pi \delta(\Rvec) = \Laplace(\frac{1}{r})$)
+
+\underline{Potential}: $\phi(\Rvec) = \frac{q}{4\pi \ezero} \frac{1}{|\Rvec - \Rzero|}$ \tab 
+$\phi(\Rvec) = \frac{1}{4\pi \ezero} \int_{\Rp \in R}\frac{\rho\left( \Rp \right)}{|\Rvec - \Rp|} dV'$ \tab
+($\phi(\Rvec) \xrightarrow{r \rightarrow \infty} 0$ with $O(\frac{1}{r})$)
+
+$-\nabla \phi = \E \Longrightarrow \Laplace \phi = -\frac{\rho}{\ezero}$ and $\nabla \wedge \E = \mathbf{0}$ \tab (No magnetism case)
+
+$W = q(\phi(\Rvec_1) - \phi(\Rzero))$ \tab
+$\E$ perp. to $\Sigma$ s.t. $\phi = \const$. \tab
+Conductor in stable equili. is equipot for $\phi$
+
+\underline{$\E^+ \cdot \nn - \E^-  \cdot \nn = \frac{\sigma}{\ezero}$} \tab \tab
+Tangential component is cts. (ie: $\E^+ \cdot \mathbf{t} - \E^- \cdot \mathbf{t} = 0$)
+
+Line (analog. surface) to field: $\E(\Rvec) = \frac{1}{4\pi\ezero}\int_{\Rp \in C}\frac{\lambda\left( \Rp \right)}{ {|\Rvec - \Rp|}^3 } (\Rvec - \Rp) |\frac{d\Rp}{ds'}| ds'$
+
+$W = \frac{1}{4\pi\ezero} \sum_{i = 1}^{N} \sum_{j<i} \frac{q_i q_j}{|\Rvec_i - \Rvec_j|}
+= \frac{1}{2} \times \frac{1}{4 \pi \ezero} \sum_{i = 1}^N \sum_{j \neq i} \frac{q_i q_j}{|\Rvec_i - \Rvec_j|}
+= \frac{1}{2}\sum_{i=1}^N q_i \phi_i
+$ 
+($\phi_i = \frac{1}{4\pi\ezero}\sum_{j \neq i}\frac{q_j}{|\Rvec_i - \Rvec_j|}$)
+
+$\xrightarrow{continuum} \frac{1}{2}\int_R \rho \phi dV = \frac{\ezero}{2}\left( \int_{\partial R} \phi \E \cdot d \nS + \int_R \E \cdot \E dV \right) = \frac{\ezero}{2}\int_R {|\E|}^2 dV$ ($\phi \xrightarrow{r \rightarrow \infty} 0$) $\Longrightarrow \mathcal{E} \coloneqq \frac{\ezero}{2}{|\E|}^2$
+
+\Parsep
+
+\textbf{\S BVP in Electrostatics} $\rho$ specified in $R$, conductor on $\partial R \Longrightarrow \sigma = \ezero {\frac{\partial\phi}{\partial n}|}_\Sigma$
+
+\underline{Green's Identity}
+(i) $\int_R = (u \Laplace v + \nabla u \cdot \nabla v) dV = \int_\Sigma u \frac{\partial v}{\partial n} dS \Longrightarrow$ Uniqueness (consider homogen)
+
+(ii) $\int_R u\Laplace v - v\nabla u dV = \int_\Sigma u \frac{\partial v}{\partial n} - v \frac{\partial u}{\partial n} dS \Longrightarrow$ Green's function sol.
+
+\underline{Green's Function} $G(\Rvec, \Rp)$ s.t. $\Laplacep G(\Rvec, \Rp) = -4 \pi \delta(\Rvec - \Rp)$ \tab
+$G(\Rvec, \Rp) = \frac{1}{|\Rvec - \Rp|} + F(\Rvec, \Rp)$ ($\Laplacep F = 0$)
+
+GI (ii) $\Longrightarrow \phi(\Rvec) = \frac{1}{4\pi\ezero}\int_R G(\Rvec, \Rp) \rho(\Rp) dV' + \frac{1}{4\pi}\int_{\Sigma = \partial R}\left( G(\Rvec,\Rp) \frac{\partial \phi\left( \Rp \right)}{\partial n'} - \phi \left( \Rp \right) \frac{\partial G(\Rvec, \Rp)}{\partial n'} \right) dS'$ 
+
+For Dirichlet, $G_D(\Rvec, \Rp) = 0$ on $\Rp \in \Sigma = \partial R'$, $\Rvec \in R$ 
+
+
+$\Longrightarrow \phi(\Rvec) = \frac{1}{4\pi\ezero}\int_R G_D(\Rvec, \Rp) \rho(\Rp) dV' - \frac{1}{4\pi}\int_\Sigma \phi(\Rp) \frac{\partial G_D\left( \Rvec, \Rp \right)}{\partial n'} dS'$ \tab
+$G_D(\Rvec_1, \Rvec_2) = G_D(\Rvec_2, \Rvec_1)$ (pf: GI(ii))
+
+\underline{Constructing GF}: Test charge solution by method of image, scale for GF (remove $\frac{q}{4\pi\ezero}$ factor)
+
+\underline{Sphere}: Inv pt of $\Rvec_0 = r \mathbf{e}_r$ is $\Rvec_0^* || \mathbf{e}_r$ s.t. $\Rvec_0 \cdot \Rvec_0^* = a^2$, $q^* = -\frac{a}{r}q$
+\tab
+GF: $G_D\left( \Rvec, \Rp \right) = \frac{1}{|\Rvec - \Rp|} - \frac{a}{r'} \frac{1}{|\Rvec - (a/r')^2 \Rp|}$
+
+\Parsep
+
+\textbf{\S Orthonormal Functions} $\int_a^b \overline{u_m(x)}u_n(x) dx = \delta_{mn}$, $\forall m,n \in I$ 
+
+For $f(x) = \sum_{n\in I}c_n u_n(x)$, $c_m = <u_m | f>$. Substitute $c_m$ back into expansion,
+
+$\Longrightarrow f(x) = \int_a^b f(x')\left( \sum_{n\in I}\overline{u_n(x')}u_n(x) \right)dx'$
+$\Longrightarrow \sum_{n\in I}\overline{u_n(x')}u_n(x) = \delta(x' - x)$
+
+\underline{Fourier sine series} For $f:[0,a] \rightarrow \mathbb{R}$ with $f(0) = f(a) = 0$, $u_n(x) \coloneqq \sqrt{\frac{2}{a}} \sin{(\frac{\pi n}{a}x)}$
+
+\underline{Complex exponential} For $f:[-\frac{L}{2},\frac{L}{2}] \rightarrow \mathbb{R}$, $u_n(x) \coloneqq \frac{1}{\sqrt{L}}e^{i\left( \frac{2 \pi n}{L} \right)x}$
+
+\underline{FT} $u_k(x) \coloneqq = \frac{1}{\sqrt{2\pi}}e^{ikx}$ with $f(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty C(k) e^{ikx} dk$,
+
+$\Longrightarrow C(k) = \frac{1}{\sqrt{2\pi}}\infty_{-\infty}^{\infty}e^{-ikx}f(x) dx = \int_{-\infty}^\infty \overline{u_k(x)}f(x)dx$
+
+
+$\int_{-\infty}^\infty \overline{u_k(x')}u_k(x) dk = \frac{1}{2\pi} e^{ik\left( x-x' \right)}dk = \delta(x-x')$
+
+\textbf{Cartesian} $\Laplace \phi = 0$ $\phi = X(x) Y(y) Z(z)$
+$\Longrightarrow \frac{1}{X}\frac{d^2 X}{dx^2} + \frac{1}{Y}\frac{d^2 Y}{dy^2} + \frac{1}{Z}\frac{d^2 Z}{dz^2} = 0$
+for nontrivial $z$ BC cond.
+
+$\Longrightarrow \phi(x,y,z) = e^{\pm i \alpha x} e^{\pm i \beta y} e^{\pm \sqrt{\alpha^2 + \beta^2}z}$
+
+\Parsep
+
+\textbf{\S Magnetostatics} $\J \coloneqq \rho \mathbf{v}$ (Electric Current Density) \tab
+$I \coloneqq \int_\Sigma \J \cdot d\nS$ (Current)
+
+By $\int_\Sigma \J \cdot d\nS = -\frac{dQ}{dt} \Longrightarrow \frac{\partial \rho}{\partial t} + \nabla \cdot \J = 0$ (Continuity)
+
+Magnetostatic: $\rho_t = 0 \Longrightarrow \nabla \cdot \J = 0$ (Steady Current)
+
+\underline{Lorentz Force}: $\mathbf{F} = q \E(\Rvec) + q \mathbf{u} \wedge \B (\Rvec)$
+
+\underline{Biot-Savart}: $\B(\Rvec) = \frac{\mu_0 q}{4\pi}\frac{\mathbf{v} \wedge (\Rvec - \Rp)}{ {|\Rvec - \Rp|}^3}$ \tab 
+$ \B(\Rvec) = \frac{\mu_0 I}{4\pi} \int_C \frac{d\Rp \wedge (\Rvec - \Rp)}{ {|\Rvec - \Rp|}^3}$ \tab
+$ \B(\Rvec) = \frac{\mu_0 }{4\pi} \int_{\Rp \in R} \frac{\J(\Rp) \wedge (\Rvec - \Rp)}{ {|\Rvec - \Rp|}^3} dV'$ 
+
+\underline{No magnetic monopole}: $\nabla \cdot \B = \mathbf{0}$
+
+$\mathbf{A}(\Rvec) \coloneqq \frac{\mu_0}{4\pi} \int_R \frac{\J (\Rp)}{|\Rvec - \Rp|}dV' \xRightarrow{\nabla \wedge (\varphi \mathbf{A}) = \varphi\left( \nabla \wedge \mathbf{A} \right) + \left( \nabla \varphi \right) \wedge \mathbf{A}} \nabla \wedge \mathbf{A} = \B$ (Consistent with no magnetic monopole)
+
+$\xRightarrow{\nabla \wedge \left( \nabla \wedge \right) \mathbf{A} = \nabla( \nabla \cdot \mathbf{A}) - \Laplace \mathbf{A}} \nabla \wedge \B = -\Laplace \mathbf{A} = \mu_0 \J$ (From def of $\mathbf{A}$) (\underline{Amp\`{e}re's law I})
+
+$
+\Longleftrightarrow \int_{C=\partial \Sigma} \B \cdot d\Rvec = \mu_0 \int_\Sigma \J \cdot d\nS = \mu_0 I
+$
+(\underline{Amp\`{e}re's law II})
+
+
+For steady current, $\nabla \cdot \mathbf{A} = 0$
+
+\Parsep
+
+\textbf{Magnetostatic vector potential} $\B = \nabla \wedge \mathbf{A}$ \tab
+Gauge Transform: $\A \rightarrow \hat \A \coloneqq \A + \nabla \psi$ 
+
+If $\Laplace \psi = -\nabla \cdot \A$, then $\nabla \cdot \hat \A = 0$ (Lorenz Gauge Condition)
+
+In Lorenz gauge, $\Laplace \A = - \mu_0 \J$
+
+\Parsep
+
+\textbf{\S Macroscopic Media}
+
+Force on dipole by $\E_{\text{ext}}$:
+$
+\F = q \E \left( \Rvec + \frac{\mathbf{d}}{2} \right) - q\left( \E\left( \Rvec - \frac{\mathbf{d}}{2} \right) \right) = 
+q\left( \E\left( \Rvec \right) + \left( \frac{\mathbf{d}}{2}\cdot \nabla \right) \E \left( \Rvec \right) + O(d^2) \right) - q (\cdot) =
+q\left( \left( \mathbf{d} \cdot \nabla \right) \E \left( \Rvec \right) + O(d^2) \right) \xrightarrow{\mathbf{p} \coloneqq q \mathbf{d}}
+\left( \mathbf{p} \cdot \nabla \right) \E
+$
+\tab $V = \mathbf{p} \cdot \nabla \phi$
+\tab $\tau \rightarrow \mathbf{p} \wedge \E$
+\tab (All $\E$ is $\E_{\text{ext}}$)
+
+\underline{Dipole}: 
+$
+\phi(\Rvec)_{\text{dipole}} = \frac{1}{4\pi \ezero} \frac{\mathbf{p} \cdot \Rvec}{r^3} = -\frac{1}{4\pi\ezero} \mathbf{p} \cdot \nabla \left( \frac{1}{r} \right)
+$ \tab
+$
+\E_{\text{dipole}} = \frac{1}{4\pi\ezero} \left( \frac{3 \mathbf{p} \cdot \Rvec}{r^5}\Rvec - \frac{\mathbf{p}}{r^3} \right) 
+$
+(pf:Cartes. expan)
+
+Many dipoles $\rightarrow \frac{1}{4\pi\ezero} \int_{\Rp \in R} \frac{\mathbf{P} (\Rp) \cdot \left( \Rvec - \Rp \right)}{ {|\Rvec - \Rp|}^3 } dV'
+= \frac{1}{4\pi\ezero} \int_{\Rp \in R} \frac{\left( - \nabla ' \cdot \mathbf{P} \left( \Rp \right) \right)}{|\Rvec - \Rp|} dV'
+$ 
+$P(\Rp)$: \underline{Elect polari density}
+
+Define $\rho_{\text{bound}} \coloneqq - \nabla \cdot \mathbf{P} (\Rvec)$ (cf: $\nabla \cdot \frac{\mathbf{P}}{\ezero} = - \frac{\rho_{\text{bound}}}{\ezero}$)
+
+Gauss' law: $\nabla \cdot \E = \frac{1}{\ezero} \left( \rho_{\text{free}} + \rho_{\text{bound}} \right) = \frac{1}{\ezero}\rho_{\text{free}} - \frac{1}{\ezero} \nabla \cdot \mathbf{P}$ (Note $\mathbf{P} || \E$ in equili)
+
+Write $\frac{\mathbf{P}}{\ezero} \coloneqq = \chi_e \E = \left( \frac{\epsilon}{\ezero} - 1 \right)\E$
+\tab $\chi_e \coloneqq \left( \frac{\epsilon}{\ezero} - 1 \right)$
+
+$\Longrightarrow \nabla \cdot \left( \epsilon \E \right)$ \tab
+$\nabla \wedge \E = 0$ \tab
+$\epsilon^+ \E^+ \cdot \nn - \epsilon^- \E^- \cdot \nn = \sigma$
+
+\Parsep
+
+\textbf{\S Maxwell} 
+(i) $\nabla \wedge \B = \mu \left( \J + \ezero \frac{\partial \E}{\partial t} \right)$ (Amp\`{e}re)
+
+(ii) $\nabla \wedge \E = - \frac{\partial \B}{\partial t}$ (Faraday) $\Longrightarrow \int_{\partial \Sigma} \E \cdot d\Rvec = -\frac{d}{dt} \int_{\Sigma} \B \cdot d\nS$ 
+
+(iii) $\nabla \cdot \E = \frac{\rho}{\ezero}$ (Gauss) \tab
+(iv) $\nabla \cdot \B = 0$ \tab
+(v) $\F = q\left( \E + \mathbf{u} \wedge \B \right)$
+
+Consistency: $\nabla \cdot \text{(i)} \Longrightarrow 0 = \rho_t + \nabla \cdot \J$ (Continuity)
+
+From $\B = \nabla \wedge \A$, $\text{(ii)} \Longrightarrow \mathbf{0} = \nabla \wedge \left( \E + \frac{\partial \A}{\partial t} \right) \Longrightarrow \exists \phi \left( \Rvec, t \right) \text{s.t.} \E + \frac{\partial \A}{\partial t} = -\nabla \phi$
+
+\underline{Gauge Transform}: $\A \rightarrow \A + \nabla \psi$, $\phi \rightarrow \phi - \frac{\partial \psi}{\partial t}$
+\tab
+\underline{Gauge Condition}: $\frac{1}{c^2} \frac{\partial^2 \phi}{ {\partial t}^2} + \nabla \cdot \A = 0$
+
+\underline{In gauge}: $\square \A = -\mu \J$ \tab
+$\square \phi = -\frac{\rho}{\ezero}$ where
+$\square = -\frac{1}{c^2}\frac{\partial^2}{ {\partial t}^2} + \Laplace$, \tab
+$c^2 = \frac{1}{\ezero \mu_0}$
+
+$\mathcal{E} \coloneqq \frac{1}{2} \left( \ezero {|\E|}^2 + \frac{1}{\mu_0} {|\B|}^2 \right) =
+\frac{\ezero}{2} \left( {|\E|}^2 + c^2 {|\B|}^2 \right) $
+
+\underline{Poynting Theorem}: $\frac{\partial \mathcal{E}}{\partial t} + \nabla \cdot \mathcal{P} = -\E \cdot \J$ where $\mathcal{P} = \frac{1}{\mu_0} \E \wedge \B$
+\tab Pf) $\frac{\partial \mathcal{E}}{\partial t} \stackrel{Elim \partial_t term}{=} \cdots$
+
+\underline{$\mathcal{P}$} is energy flow density; 
+$\frac{d}{dt} \int_R \mathcal{E} dV = - \int_\Sigma \mathcal{P} \cdot \nS - \int_R \E \cdot \J dV$ (2nd term: Power by field on source)
+
+\underline{Time Dep GF}: $\square \psi = -4\pi f(\Rvec, t)$ \tab
+$\square G (\Rvec, t; \Rp, t') = -4\pi \delta(t-t') \delta(\Rvec - \Rp)$
+
+$\Longrightarrow \psi(\Rvec,t) = \int_{\Rp \in {\mathbb{R}}^3} \int_{t' \in \mathbb{R}} G(\cdots) f(\Rp, t') dV' dt'$
+
+\underline{Derivation}: Seek $G\left( \Rvec, t; \Rp, t' \right) = \frac{1}{2 \pi} \int_{\omega = -\infty}^{\infty} \hat G \left( \Rvec, \Rp; \omega \right) e^{-i \omega \left( t-t' \right)} d \omega$, sub to equ, note:
+
+$\frac{1}{2\pi}\int_{\omega = -\infty}^\infty \left( -4\pi \delta \left( \Rvec - \Rp \right) \right) e^{-i \omega \left( t-t' \right)} = -4\pi \delta\left( \Rvec - \Rp \right) \delta \left( t-t' \right)$
+
+$\Longrightarrow \left( \nabla^2 + \frac{\omega^2}{c^2} \right) \hat G\left( \Rvec, \Rp, \omega \right) = -4\pi \delta\left( \Rvec - \Rp \right)
+\stackrel{\nabla^2 \left( \frac{e^{ikr}}{r} \right) = -k^2 \left( \frac{e^{ikr}}{r} \right) - 4\pi \delta \left( \Rvec \right)
+}{\Longrightarrow}
+\hat G_{\pm} \left( \Rvec, \Rp, \omega \right) = \frac{e^{\pm i \omega |\Rvec - \Rp| / c}}{|\Rvec - \Rp|}
+$
+
+$
+\stackrel{\delta\left( t-t' \right) = \int \frac{1}{2\pi}e^{-i\omega \left( t-t' \right)} d\omega}{\Longrightarrow}
+G_{\pm}(\Rvec, t; \Rp, t') = \frac{\delta\left( t-t' \mp |\Rvec - \Rp| / c \right)}{|\Rvec - \Rp|}
+$
+($G_+$ for \underline{Retarded GF})
+
+%$G = \frac{1}{|\Rvec - \Rp|} (\delta(t-t' - \frac{|\Rvec - \Rp|}{c}) - \delta(t-t' + \frac{|\Rvec - \Rp|}{c}))$
+%(First term is retarded)
+
+$\psi(\Rvec , t) = \int_{\Rp \in {\mathbb{R}}^3} \frac{1}{|\Rvec - \Rp|} f(\Rp, t - \frac{|\Rvec - \Rp|}{c}) dV'$
+
+$\Longrightarrow \phi = \frac{1}{4\pi\ezero} \int_{\Rp \in {\mathbb{R}}^3} \frac{\rho\left( \Rp, t - \frac{|\Rvec - \Rp|}{c} \right)}{|\Rvec - \Rp|} dV'
+$
+\tab
+$
+\A = \frac{1}{4\pi\ezero} \int_{\Rp \in {\mathbb{R}}^3} \frac{\J \left( \Rp, t - \frac{|\Rvec - \Rp|}{c} \right)}{|\Rvec - \Rp|} dV'
+$
+
+\underline{Maxwell in Macroscopic}: $\nabla \cdot (\epsilon \E) = \rho_{\text{free}}$ \tab
+$\nabla \wedge \E = -\frac{\partial \B}{\partial t}$ \tab
+$\nabla \cdot \B = 0$ \tab
+$\nabla \wedge \left( \frac{1}{\mu} \B \right) = \J_{\text{free}} + \frac{\partial(\epsilon \E)}{\partial t}$
+
+\Parsep
+
+\textbf{\S Electromagnetic Waves}
+
+Source-free Maxwell
+(i) $\nabla \cdot \E = 0$
+(ii) $\nabla \cdot \E = 0$
+(iii) $\nabla \wedge \E + \B_t = \mathbf{0}$
+(iv) $\nabla \wedge \E -\frac{1}{c^2} \E_t = \mathbf{0}$
+
+$\nabla \wedge$ (iii), (iv) $\Longrightarrow \square \E = \mathbf{0} = \square \B$ resp.
+
+$\square u = \mathbf{0} \Longrightarrow u = f(\mathbf{e} \cdot \Rvec - ct) \xRightarrow{\text{Monochromatic Sol}} u(\Rvec,t) = \alpha e^{i\left( \mathbf{k} \cdot \Rvec - \omega t \right)}$
+
+Seek $\E_{\mathbb{C}} = \E = \E_0 e^{i\left( \mathbf{k} \cdot \Rvec - \omega t \right)}$
+\tab
+$\B_{\mathbb{C}} = \B = \B_0 e^{i\left( \mathbf{k} \cdot \Rvec - \omega t \right)}$
+where $\mathbf{k} = k \mathbf{e}$, $k = \frac{\omega}{c}$
+
+(i),(ii) $\Longrightarrow \mathbf{k} \cdot \E_0 = 0 = \mathbf{k} \cdot \B_0$
+(Note $\nabla \cdot \E_{\mathbb{C}} = \E_0 \cdot \nabla e^{i\left( \mathbf{k} \cdot \Rvec - \omega t \right)} = i \mathbf{k} \cdot \E_0 e^{i\left( \mathbf{k} \cdot \Rvec - \omega t \right)}$)
+
+(iii) $\Longrightarrow \mathbf{0} = \left( i \mathbf{k} \wedge \E_0 - i \omega \B_0 \right)e^{i(\mathbf{k} \cdot \Rvec - \omega t)}
+\Longrightarrow \B_0 = \frac{1}{\omega} \mathbf{k} \wedge \E_0 = \frac{1}{c} \mathbf{e} \wedge \E_0
+\Longrightarrow c|\B| = |\E|$
+
+$\Longrightarrow \mathcal{E} = \epsilon_0 {|\E_0|}^2, \mathcal{P} = \frac{1}{\mu_0} \E \wedge \B = \frac{1}{\mu_0} \E \wedge \left( \frac{1}{c} \mathbf{e} \wedge \E \right) = \frac{1}{\mu_0 c} {|\E|}^2 \mathbf{e} = c \mathcal{E} \mathbf{e}
+$
+
+\underline{Sol}: $\E = \E_0 e^{i\left( \mathbf{k}\cdot \Rvec - \omega t \right)}, \B = \frac{1}{c} \mathbf{e} \wedge \E = \frac{1}{\omega}\mathbf{k} \wedge \E$
+
+\underline{Remark}: $\left[ \E \cdot \mathbf{t} \right]_-^+ = \left[ \frac{1}{\mu} \B \cdot \mathbf{t} \right]_-^+ = 0$ \tab
+$\left[ \epsilon \E \cdot \mathbf{n} \right]_-^+ = \left[ \B \cdot \mathbf{n} \right]_-^+ = 0$ (on boundary)
+
+$n=\sqrt{\frac{\epsilon \mu}{\epsilon_0 \mu_0}}$, $v^2 = \frac{1}{\epsilon \mu}$ \tab
+Snell: $\sin{\theta'} = \frac{n}{n'}\sin{\theta}$
+
+$\int_{z=-\infty}^{\infty}\frac{1}{{\sqrt{R^2 + z^2}}^3} dz = \frac{2}{R^2}$
+
+\end{document}

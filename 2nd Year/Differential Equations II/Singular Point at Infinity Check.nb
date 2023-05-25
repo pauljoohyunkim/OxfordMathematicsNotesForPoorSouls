@@ -1,0 +1,102 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      2732,         94]
+NotebookOptionsPosition[      2412,         79]
+NotebookOutlinePosition[      2760,         94]
+CellTagsIndexPosition[      2717,         91]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"L", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"y", "''"}], "[", "x", "]"}], "+", 
+   RowBox[{
+    FractionBox["1", 
+     SuperscriptBox["x", "2"]], 
+    RowBox[{"y", "[", "x", "]"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.831987507038867*^9, 3.8319875189924755`*^9}, {
+  3.8319875829792233`*^9, 3.8319875858770466`*^9}, {3.831987719341161*^9, 
+  3.8319877245240445`*^9}, {3.8335512750168276`*^9, 3.8335512795989895`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{"Substituting", " ", 
+    RowBox[{"y", "[", "x", "]"}]}], "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"u", "[", "t", "]"}], " ", "with", " ", "t"}], "=", 
+    FractionBox["1", "x"]}]}], "*)"}]], "Input",
+ CellChangeTimes->{{3.8319875522819047`*^9, 3.8319875672012672`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Ltilde", "=", 
+  RowBox[{"L", "/.", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"y", "[", "x", "]"}], "\[Rule]", 
+      RowBox[{"u", "[", "t", "]"}]}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"y", "'"}], "[", "x", "]"}], "\[Rule]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"u", "'"}], "[", "t", "]"}], "*", 
+       RowBox[{"(", 
+        RowBox[{"-", 
+         SuperscriptBox["t", "2"]}], ")"}]}]}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"y", "''"}], "[", "x", "]"}], "\[Rule]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"u", "''"}], "[", "t", "]"}], "*", 
+        SuperscriptBox["t", "4"]}], "+", 
+       RowBox[{"2", 
+        SuperscriptBox["t", "3"], 
+        RowBox[{
+         RowBox[{"u", "'"}], "[", "t", "]"}]}]}]}], ",", 
+     RowBox[{"x", "\[Rule]", 
+      FractionBox["1", "t"]}]}], "}"}]}]}]], "Input",
+ CellChangeTimes->{{3.8319875735766373`*^9, 3.8319877387950115`*^9}, {
+  3.8319878421189504`*^9, 3.831987849418811*^9}, {3.833551390267089*^9, 
+  3.8335513910510197`*^9}}]
+},
+WindowSize->{759, 697},
+WindowMargins->{{34, Automatic}, {-56, Automatic}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 443, 11, 50, "Input"],
+Cell[1004, 33, 325, 9, 38, "Input"],
+Cell[1332, 44, 1076, 33, 49, "Input"]
+}
+]
+*)
+

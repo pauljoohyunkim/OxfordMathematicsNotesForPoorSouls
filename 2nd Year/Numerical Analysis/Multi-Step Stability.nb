@@ -1,0 +1,186 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5652,        178]
+NotebookOptionsPosition[      5214,        160]
+NotebookOutlinePosition[      5561,        175]
+CellTagsIndexPosition[      5518,        172]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Characteristic", " ", "Polynomials"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"\[Rho]", "[", "z_", "]"}], "=", 
+     RowBox[{
+      SuperscriptBox["z", "2"], "-", "z"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"\[Sigma]", "[", "z_", "]"}], "=", 
+     RowBox[{
+      FractionBox["1", "6"], 
+      RowBox[{"(", 
+       RowBox[{
+        SuperscriptBox["z", "2"], "+", 
+        RowBox[{"4", "z"}], "+", "1"}], ")"}]}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.833467577091688*^9, 3.8334676245865817`*^9}, {
+  3.8334676872136517`*^9, 3.833467698217228*^9}, {3.8334725863035*^9, 
+  3.8334725908038874`*^9}},
+ Background->RGBColor[1, 0.85, 0.85]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Zero", " ", "Stability"}], ";", " ", 
+     RowBox[{
+     "Check", " ", "if", " ", "the", " ", "modulus", " ", "is", " ", "less", 
+      " ", "than", " ", "1"}]}], ",", " ", 
+    RowBox[{
+    "or", " ", "simple", " ", "if", " ", "on", " ", "the", " ", "boundary", 
+     " ", "of", " ", "unit", " ", "circle"}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"N", "[", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"\[Rho]", "[", "z", "]"}], "\[Equal]", "0"}], ",", "z"}], "]"}],
+    "]"}]}]], "Input",
+ CellChangeTimes->{{3.8334676542542095`*^9, 3.833467726263263*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "Consistency", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"D\[Rho]", "[", "z_", "]"}], "=", 
+     RowBox[{"D", "[", 
+      RowBox[{
+       RowBox[{"\[Rho]", "[", "z", "]"}], ",", "z"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"\[Rho]", "[", "1", "]"}], "\[IndentingNewLine]", 
+   RowBox[{"D\[Rho]", "[", "1", "]"}], "\[IndentingNewLine]", 
+   RowBox[{"\[Sigma]", "[", "1", "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"\[Rho]", "[", "1", "]"}], "\[Equal]", "0"}], "&&", 
+    RowBox[{
+     RowBox[{"D\[Rho]", "[", "1", "]"}], "\[Equal]", 
+     RowBox[{"\[Sigma]", "[", "1", "]"}]}], "&&", 
+    RowBox[{
+     RowBox[{"\[Sigma]", "[", "1", "]"}], "\[NotEqual]", "0"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.833467740619725*^9, 3.8334678946431875`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Stability", " ", "Polynomial"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"\[CapitalPi]", "[", "z_", "]"}], "=", 
+   RowBox[{"Simplify", "[", 
+    RowBox[{
+     RowBox[{"\[Rho]", "[", "x", "]"}], "-", 
+     RowBox[{"z", "*", 
+      RowBox[{"\[Sigma]", "[", "x", "]"}]}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.8334679231690507`*^9, 3.8334679879516373`*^9}, 
+   3.8334680357493563`*^9}],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Stability", " ", "Region"}], "*)"}]], "Input",
+ CellChangeTimes->{{3.8334732526961727`*^9, 3.833473257986456*^9}}],
+
+Cell[BoxData[
+ RowBox[{"RegionPlot", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Abs", "[", 
+        RowBox[{"(", 
+         RowBox[{"x", "/.", 
+          RowBox[{
+           RowBox[{"Solve", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"\[CapitalPi]", "[", 
+               RowBox[{"a", "+", 
+                RowBox[{"b", "*", "I"}]}], "]"}], "\[Equal]", "0"}], ",", 
+             "x"}], "]"}], "[", 
+           RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "]"}], "\[LessEqual]", 
+       "1"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", 
+        RowBox[{"Length", "[", 
+         RowBox[{"Solve", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"\[CapitalPi]", "[", 
+             RowBox[{"a", "+", 
+              RowBox[{"b", "*", "I"}]}], "]"}], "\[Equal]", "0"}], ",", "x"}],
+           "]"}], "]"}]}], "}"}]}], "]"}], "\[Equal]", 
+    RowBox[{"Table", "[", 
+     RowBox[{"True", ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", 
+        RowBox[{"Length", "[", 
+         RowBox[{"Solve", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"\[CapitalPi]", "[", 
+             RowBox[{"a", "+", 
+              RowBox[{"b", "*", "I"}]}], "]"}], "\[Equal]", "0"}], ",", "x"}],
+           "]"}], "]"}]}], "}"}]}], "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", 
+     RowBox[{"-", "4"}], ",", "4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"b", ",", 
+     RowBox[{"-", "4"}], ",", "4"}], "}"}], ",", 
+   RowBox[{"Axes", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.83347286692047*^9, 3.8334728690033407`*^9}, {
+  3.8334731689447613`*^9, 3.833473267284992*^9}}]
+},
+WindowSize->{775, 657},
+WindowMargins->{{Automatic, 30}, {Automatic, 36}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 772, 23, 103, "Input"],
+Cell[1333, 45, 667, 18, 69, "Input"],
+Cell[2003, 65, 866, 22, 126, "Input"],
+Cell[2872, 89, 457, 12, 50, "Input"],
+Cell[3332, 103, 155, 3, 30, "Input"],
+Cell[3490, 108, 1720, 50, 107, "Input"]
+}
+]
+*)
+

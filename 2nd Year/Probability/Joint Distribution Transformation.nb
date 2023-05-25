@@ -1,0 +1,164 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4861,        156]
+NotebookOptionsPosition[      4374,        136]
+NotebookOutlinePosition[      4722,        151]
+CellTagsIndexPosition[      4679,        148]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Bivariate", " ", "density", " ", "wrt", " ", "x", " ", "and", " ", "y"}], 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"fXY", "=", 
+    RowBox[{
+     SuperscriptBox["\[Lambda]", "2"], 
+     SuperscriptBox["E", 
+      RowBox[{
+       RowBox[{"-", "\[Lambda]"}], 
+       RowBox[{"(", 
+        RowBox[{"x", "+", "y"}], ")"}]}]]}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.8332045492502418`*^9, 3.8332046383819246`*^9}, 
+   3.833205446157403*^9, {3.833206357766659*^9, 3.833206418947836*^9}, {
+   3.833206564388858*^9, 3.8332065663227577`*^9}, {3.8332065995924516`*^9, 
+   3.8332065999305534`*^9}},
+ Background->RGBColor[1, 0.85, 0.85]],
+
+Cell["", "PageBreak",
+ PageBreakBelow->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"New", " ", "variables", " ", "u", " ", "and", " ", "v"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"U", "=", 
+     FractionBox["X", 
+      RowBox[{"X", "+", "Y"}]]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"V", "=", 
+     RowBox[{"X", "+", "Y"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.8332045492502418`*^9, 3.8332046383819246`*^9}, 
+   3.833205446157403*^9},
+ Background->RGBColor[1, 0.85, 0.85]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Inverting", " ", "the", " ", "transformation", " ", "to", " ", 
+    "represent", " ", "x", " ", "and", " ", "y", " ", "wrt", " ", "u", " ", 
+    "and", " ", "v"}], "*)"}], "\n", 
+  RowBox[{
+   RowBox[{"inverted", "=", 
+    RowBox[{
+     RowBox[{"Solve", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"u", "\[Equal]", "U"}], "&&", 
+        RowBox[{"v", "\[Equal]", "V"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"X", ",", "Y"}], "}"}]}], "]"}], "[", 
+     RowBox[{"[", "1", "]"}], "]"}]}], "\n", 
+   RowBox[{
+    RowBox[{"x", "=", 
+     RowBox[{"(", 
+      RowBox[{"X", "/.", "inverted"}], ")"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"y", "=", 
+     RowBox[{"(", 
+      RowBox[{"Y", "/.", "inverted"}], ")"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", "Jacobian", "*)"}], "\n", 
+   RowBox[{"J", "=", 
+    RowBox[{"(", GridBox[{
+       {
+        RowBox[{"D", "[", 
+         RowBox[{"x", ",", "u"}], "]"}], 
+        RowBox[{"D", "[", 
+         RowBox[{"x", ",", "v"}], "]"}]},
+       {
+        RowBox[{"D", "[", 
+         RowBox[{"y", ",", "u"}], "]"}], 
+        RowBox[{"D", "[", 
+         RowBox[{"y", ",", "v"}], "]"}]}
+      }], ")"}]}], "\[IndentingNewLine]", 
+   RowBox[{"Jdet", "=", 
+    RowBox[{"Det", "[", "J", "]"}]}], "\n", 
+   RowBox[{"(*", "Transformed", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"fXY", "*", "Jdet"}]}]}]], "Input",
+ CellChangeTimes->{{3.833204753326106*^9, 3.833204781389536*^9}, {
+  3.8332048139113026`*^9, 3.8332048370096393`*^9}, {3.8332058334293127`*^9, 
+  3.8332058592178755`*^9}, {3.833206443729525*^9, 3.8332064642908964`*^9}, {
+  3.833206529812069*^9, 3.833206534340624*^9}, {3.833206576993494*^9, 
+  3.8332066491667576`*^9}}],
+
+Cell["", "PageBreak",
+ PageBreakBelow->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Polar", " ", "Transformation"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", "Transformed", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"Simplify", "[", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"fXY", "/.", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"x", "\[Rule]", 
+         RowBox[{"r", "*", 
+          RowBox[{"Cos", "[", "t", "]"}]}]}], ",", 
+        RowBox[{"y", "\[Rule]", 
+         RowBox[{"r", "*", 
+          RowBox[{"Sin", "[", "t", "]"}]}]}]}], "}"}]}], ")"}], "*", "r"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.8332053724699097`*^9, 3.833205430516543*^9}, {
+  3.8332054872607193`*^9, 3.833205502055312*^9}, {3.8332066649376564`*^9, 
+  3.833206665614848*^9}}]
+},
+WindowSize->{775, 657},
+WindowMargins->{{Automatic, 176}, {50, Automatic}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 704, 19, 66, "Input"],
+Cell[1265, 41, 44, 1, 4, "PageBreak",
+ PageBreakBelow->True],
+Cell[1312, 44, 501, 15, 105, "Input"],
+Cell[1816, 61, 1760, 48, 200, "Input"],
+Cell[3579, 111, 44, 1, 4, "PageBreak",
+ PageBreakBelow->True],
+Cell[3626, 114, 744, 20, 69, "Input"]
+}
+]
+*)
+

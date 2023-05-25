@@ -1,0 +1,141 @@
+% arara: pdflatex
+%        File: residue.tex
+%     Created: Mon May 22 08:00 PM 2023 B
+% Last Change: Mon May 22 08:00 PM 2023 B
+%
+\documentclass[a4paper]{article}
+\usepackage[]{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[]{hyperref}
+
+\newtheorem{example}{Example}
+
+\newcommand{\res}{\mathop{\mathrm{Res}}}
+
+\title{Computing Residue}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+For a function $f(z)$ with isolated singularity at $z=z_0$, it is possible to write a Laurent exansion around $z = z_0$:
+\begin{equation}
+    f(z) \sim \sum_{k=-\infty}^{\infty} c_k (z-z_0)^k \hspace{1cm} \text{in an annulus around } z = z_0
+    \label{equ: Laurent}
+\end{equation}
+$c_{-1}$ is what is known as the \textbf{residue}.
+
+Often, functions are given in the form $f(z) = \frac{g(z)}{h(z)}$, where $h$ would have roots at which they become the poles of $f$.
+Strategies for computing the residue at $z=z_0$ is as follows:
+\begin{enumerate}
+    \item Decompose $f$ as a product of a function that are holomorphic around $z=z_0$,
+        and a function that results in a singularity, such as $f(z) = g(z) \times \frac{1}{h(z)}$,
+        where $h$ would have roots at $z=z_0$.
+    \item For the function holomorphic around $z=z_0$, just evaluate it at $z=z_0$, because around $z=z_0$, the approximation is its evaluation.
+    \item For the function with a pole, try Taylor expanding the denominator, then pull out a factor such that the dominant term is 1.
+        \begin{align*}
+            \frac{1}{h(z)} &= \frac{1}{h(z_0) + h'(z_0) (z-z_0) + \cdots} \\
+            &= \frac{1}{h'(z_0) (z-z_0) + \cdots} &\because z=z_0\text{ is the root of } h(z)\\
+            &= \frac{1}{h'(z_0)(z-z_0)} \times \underbrace{\frac{1}{1 + \cdots}}_{(*)}
+        \end{align*}
+    \item Notice that the non-dominant terms are ``small'' near $z = z_0$. Now recall the geometric series formula: \begin{equation}
+            \frac{1}{1-r} = 1 + r + r^2 + \cdots \hspace{1cm} \text{for } |r| < 1 \text{, in particular, } |r| \ll 1
+        \end{equation}
+        Note that you can apply this to $(*)$ to get the denominator as a series involving no denominators.
+    \item Expand and gather terms that are order -1. That is the term that gives residue.
+\end{enumerate}
+Now, if the pole at $z=z_0$ is \textbf{simple}, then a faster way is to just multiply by $(z-z_0)$, then take limit:
+\begin{equation}
+    \res_{z=z_0} f(z) = \lim_{z\rightarrow z_0} f(z) (z-z_0)
+\end{equation}
+This follows from substituting (\ref{equ: Laurent}) into the limit on the RHS.
+
+\section{Examples}
+\begin{example}
+    Find the residue of $f(z) = \frac{\sin{z}}{\cos{z}}$ at $z=\frac{\pi}{2}$.
+
+    \underline{Method 1}: Note that $f(z)$ has a simple pole at $z=\frac{\pi}{2}$. This means residue is just:
+    \begin{equation*}
+        \res_{z=\frac{\pi}{2}} f(z) = \lim_{z\rightarrow\frac{\pi}{2}} f(z) (z-\frac{\pi}{2}) = -1
+    \end{equation*}
+    Note that the evaluation of the limit is often done by noticing the definition of the derivative:
+    \begin{equation*}
+        \lim_{z\rightarrow\frac{\pi}{2}} \frac{z-\frac{\pi}{2}}{\cos{z}} = \frac{1}{\left( (\cos{z})' \right)|_{z=\frac{\pi}{2}}}
+    \end{equation*}
+
+    \underline{Method 2}: You can also compute the Laurent series. Because $\sin z$ is holomorphic at $z=\frac{\pi}{2}$, you don't need to take Laurent series of $\sin z$; you only need to take the Laurent series of $\frac{1}{\cos z}$.
+    Let's walk through the five-step method as before:
+    \begin{enumerate}
+        \item Decomposition: $f(z)$ can be written as:
+            \begin{equation*}
+                f(z) = \sin{z} \times \frac{1}{\cos{z}}
+            \end{equation*}
+        \item $\sin z$ being holomorphic at $z=\frac{\pi}{2}$ means $\sin z$ does not have $z^-n$ ($n > 1$) terms, so you can take Taylor series, but you actually only need the constant term for computing residue:
+            \begin{equation*}
+                \sin{\frac{\pi}{2}} = 1
+            \end{equation*}
+        \item Expand out $\frac{1}{\cos{z}}$ at $z=\frac{\pi}{2}$:
+            \begin{align*}
+                \frac{1}{\cos{z}} &= \frac{1}{-\left( z-\frac{\pi}{2} \right) + \frac{1}{3!}\left( z-\frac{\pi}{2} \right)^{3} + \cdots} \\
+                &= \frac{1}{-\left( z-\frac{\pi}{2} \right)} \times \frac{1}{\underbrace{1 - \frac{1}{3!}\left( z-\frac{\pi}{2} \right)^2 + \cdots}_{(\star)}}
+            \end{align*}
+        \item Since we are inspect around $\frac{\pi}{2}$, the subleading term in $(\star)$ is ``small'', so we may use the geometric series expansion:
+            \begin{align*}
+                \frac{1}{\cos{z}} &= \frac{1}{-\left( z-\frac{\pi}{2} \right)} \times \frac{1}{\underbrace{1 - \frac{1}{3!}\left( z-\frac{\pi}{2} \right)^2 + \cdots}_{(\star)}} \\
+                &= \frac{1}{-\left( z-\frac{\pi}{2} \right)} \left( 1 + \frac{1}{3!}\left( z-\frac{\pi}{2} \right)^2 + \cdots \right)
+            \end{align*}
+        \item Hence,
+            \begin{equation*}
+                \frac{\sin{z}}{\cos{z}} = \sin{z} \times \left( -\left( z-\frac{\pi}{2} \right)^{-1} + O\left( z-\frac{\pi}{2} \right) \right)
+            \end{equation*}
+    \end{enumerate}
+    Hence, (by evaluating $\sin{z}$ at $z=\frac{\pi}{2}$,) residue is $-1$.
+    Note that the full Laurent series can be acquired by Taylor exapnding $\sin z$ around $z=\frac{\pi}{2}$ as well.
+\end{example}
+
+\begin{example}
+    Find the residues of $f(z) = \frac{1}{(z+1)^2 (z-1)}$ at $z=-1$ and $z=1$.
+    
+    We will go through this one a bit quicker.
+    \underline{Residue at $z=1$}: $f(z)$ has a simple pole at $z=1$, so
+    \begin{equation*}
+        \res_{z=1}f(z) = \lim_{z\rightarrow 1} f(z) (z-1) = \frac{1}{4}
+    \end{equation*}
+
+    \underline{Residue at $z=-1$}: There is a double pole at $z=-1$. You can construct Laurent expansion:
+    \begin{align*}
+        f(z) &= \frac{1}{(z+1)^2} \times \frac{1}{z-1}  \\
+        &= \frac{1}{\left( z-1 \right)^2} \times \frac{1}{-2 + \left( z+1 \right)} &\because \text{Taylor of }z-1 \text{ at } z = -1 \\
+        &= \frac{1}{(z+1)^2} \times \frac{1}{-2} \times \frac{1}{1 - \frac{z+1}{2}} &\text{Get 1 in the leading term} \\
+        &= \frac{1}{(z+1)^2} \times \frac{1}{-2} \times \left(1 + \frac{z+1}{2} + \left( \frac{z+1}{2} \right)^2 + \cdots\right) \\
+        &= -\frac{1}{2} \left( \left( z+1 \right)^{-2} + \frac{1}{2}\left( z+1 \right)^{-1} + \cdots \right)
+    \end{align*}
+    So
+    \begin{equation*}
+        \res_{z=-1} f(z) = -\frac{1}{4}
+    \end{equation*}
+\end{example}
+
+\begin{example}
+    Define a branch cut at the positive real axis for $\sqrt{z}$. Find the residue of $f(z) = \frac{\sqrt{z}}{z+i}$ at $z=-i$.
+
+    Let $z=r e^{i \theta}$ where $r = |z|$ and $\theta \in \left( 0, 2\pi \right)$, and define the branch cut as:
+    \begin{equation*}
+        \sqrt{z} \coloneqq r^{\frac{1}{2}}e^{i \frac{\theta}{2}}
+    \end{equation*}
+    Now note that $\sqrt{z}$ is holomorphic away from the positive real axis, and specifically holomorphic at $z=-i$, hence it can be considered separately.
+    \begin{align*}
+        f(z) &= \frac{\sqrt{z}}{z + i} \\
+        &= \sqrt{z} \times \frac{1}{z+i}
+    \end{align*}
+    So
+    \begin{equation*}
+        \res_{z=-i} f(z) = \sqrt{-i} \times 1 = e^{\frac{3\pi}{4}i}
+    \end{equation*}
+\end{example}
+
+For more examples of residues, see \url{https://math.libretexts.org/Bookshelves/Analysis/Complex_Variables_with_Applications_(Orloff)/09%3A_Residue_Theorem/9.04%3A_Residues}
+\end{document}
+
+

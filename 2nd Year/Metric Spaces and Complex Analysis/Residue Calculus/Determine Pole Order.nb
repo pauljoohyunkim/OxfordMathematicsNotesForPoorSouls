@@ -1,0 +1,96 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      2608,         88]
+NotebookOptionsPosition[      2252,         72]
+NotebookOutlinePosition[      2600,         87]
+CellTagsIndexPosition[      2557,         84]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Pole", " ", "around", " ", "this", " ", "point"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"z0", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"f", "=", 
+     FractionBox["1", 
+      RowBox[{
+       SuperscriptBox["z", "2"], 
+       SuperscriptBox[
+        RowBox[{"Sinh", "[", "z", "]"}], "3"]}]]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.832524730649433*^9, 3.832524761451409*^9}, {
+  3.8325248494181805`*^9, 3.8325248545584497`*^9}, {3.8325248952505226`*^9, 
+  3.8325249021472855`*^9}, {3.8325249856459103`*^9, 3.832525006317875*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Testing", ";", " ", 
+    RowBox[{
+    "First", " ", "zero", " ", "entry", " ", "signifies", " ", "order"}]}], 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"Limit", "[", 
+     RowBox[{
+      RowBox[{"f", "*", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"z", "-", "z0"}], ")"}], "m"]}], ",", 
+      RowBox[{"z", "\[Rule]", "z0"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"m", ",", "1", ",", "10"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.832524766084936*^9, 3.8325248055417604`*^9}, {
+  3.8325248729760723`*^9, 3.8325248733506136`*^9}, {3.832524927890643*^9, 
+  3.832524938939886*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", "Residue", "*)"}]], "Input",
+ CellChangeTimes->{{3.832524948689947*^9, 3.832524950718331*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Residue", "[", 
+  RowBox[{"f", ",", 
+   RowBox[{"{", 
+    RowBox[{"z", ",", "z0"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.832524954124937*^9, 3.8325249644484057`*^9}}]
+},
+WindowSize->{775, 657},
+WindowMargins->{{Automatic, -3}, {-32, Automatic}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 645, 17, 92, "Input"],
+Cell[1206, 39, 712, 20, 50, "Input"],
+Cell[1921, 61, 123, 2, 30, "Input"],
+Cell[2047, 65, 201, 5, 30, "Input"]
+}
+]
+*)
+

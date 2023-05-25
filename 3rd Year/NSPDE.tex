@@ -1,0 +1,228 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,showframe]{geometry}
+\usepackage{xcolor,fancyhdr}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{stmaryrd}
+
+\usepackage{lineno}
+\linenumbers
+\setpagewiselinenumbers
+
+%%%%%%%%%%%%%  PLEASE DO NOT EDIT ANY OF THE LINES ABOVE %%%%%%%%%%%%%%%
+% Insert your text between "\begin{document}" and "\end{document}" below. 
+% The total length of your summary notes should not exceed 2 sides of a
+% single sheet of A4, with maximum 58 lines of text per page.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{mathtools}
+
+
+\begin{document}
+
+\include{stylefile}
+Finite Difference: $D_x^{\pm} u(x_i) = u'(x_i) + O(h)$ \hspace{0.5cm} $D_x^+ D_x^- u(x_i) = u''(x_i) + O(h^2)$
+
+$(V,W)_h \coloneqq \sum_{i=1}^{N-1} h V_i W_i$ \hspace{0.2cm} Sum. by parts: ${(-D_x^+ D_x^- U, V)}_h = (D_x^- U, D_x^- V]$ if $(U,V)_0=(U,V)_N=0$
+
+$\text{L}_2$ norm ${||U||}_h = {(U,U)}^{1/2}$ \hspace{0.5cm} Sob. norm ${||U||}_{1,h} = ({||U||}_h^{2} + {||D_x^- U|]}_h^2)^{1/2}$
+
+Discrete Poincar\'{e} ${||V||}_h^2 \leq c_* {||D_x^- V]|}_h^2$ (1D $c_* = \frac{1}{2}$) 
+
+\rule{6cm}{0.4pt}
+
+\textbf{1D Elliptic} $-u'' + c(x)u = f(x)$, $u(0)=0=u(1)$ \hspace{0.5cm} $Au = (-D_x^+ D_x^- + c)u$ \hspace{0.5cm} $c \geq 0$ 
+
+${(AV,V)}_h \geq {||D_x^- V]|}_h^2$ (\underline{Uniqueness}) \& ${(AV,V)}_h \geq \frac{1}{c_*} {||V||}_h^2 \Longrightarrow (1+c_*) {(AV,V)}_h \geq {||V||}_h^2 + {||D_x^- V]|}_h^2$
+
+$\Longrightarrow {(AV,V)}_h \geq c_0 {||V||}_{1,h}^2 \Longrightarrow {||U||}_{1,h} \leq \frac{1}{c_0}{||f||}_h$ (\underline{Stability})
+
+\underline{Global error} $e_i \coloneqq u(x_i) - U_i$ for $i=0,\cdots,N$
+
+$Ae_i = Au(x_i) - f(x_i) =u''(x_i) - D_x^+ D_x^- u(x_i) \Longrightarrow Ae_i = \varphi_i = O(h^2)$
+
+By stability result, ${||u-U||}_{1,h} = {||e||}_{1,h} \leq \frac{1}{c_0} {||\varphi||}_h$
+
+Since $|\varphi_i| \leq \frac{1}{12}h^2 {||u^{(4)}(x)||}_C$, we have ${||u-U||}_{1,h} \leq \frac{1}{8}{||u^{(4)}||}_{C[0,1]}$ (\underline{Convergence})
+
+\textbf{``Stability + Consistency $\Longrightarrow$ Convergence''}
+
+\rule{6cm}{0.4pt}
+
+\textbf{2D Elliptic} $\Delta u + c(x,y)u = f(x,y)$ in $\Omega$ and $u=0$ on $\partial \Omega$
+
+$AU_{i,j} = -(D_x^+ D_x^- U_{i,j} + D_y^+ D_y^- U_{i,j}) + c_{i,j}U_{i,j} = f_{i,j}$ \hspace{0.5cm} $U_{i,j} = 0$ for $\Gamma_h$ \hspace{0.5cm} ``5-pt \textbf{+} scheme''
+
+${(V,W)}_h = \sum_{i=1}^{N-1} \sum_{j=1}^{N-1} h^2 V_{i,j} W_{i,j}$
+
+Sum by Parts $\Longrightarrow {(AV,V)}_h \geq {||D_x^- V]|}_x^2 + {||D_y^- V]|}_y^2$ (\underline{Uniqueness}) 
+
+(Poincar\'{e}) ${||V||}_h^2 \leq c_* ({||D_x^- V]|}_x^2+{||D_y^- V]|}_y^2)$ (2D $c_* = \frac{1}{4}$)
+
+SBP + Poincar\'{e}: ${(AV,V)}_h \geq c_0 {||V||}_{1,h}^2$ ($c_0 = (1+c_*)^{-1}$) $\Longrightarrow {||U||}_{1,h} \leq \frac{1}{c_0}{||f||}_h$ (\underline{Stability})
+
+\underline{Global error} $e_{i,j} \coloneqq u(x_i,y_j) - U_{i,j}$ \hspace{0.5cm} \underline{Consistency Error} $\varphi_{i,j} \coloneqq Au_{i,j} - f_{i,j}$
+
+Since ${\varphi}_{i,j} = \frac{h^2}{12} (u_{xxxx} (\xi_i,y_j) + u_{yyyy}(x_i,\eta_j))$ and $Ae_{i,j} = \varphi_{i,j}$, $e=0$ on $\Gamma_h$
+
+${||u-U||}_{1,h} \leq \frac{5h^2}{48}({||u_{xxxx}||}_{C(\bar \Omega)}+{||u_{yyyy}||}_{C(\bar \Omega)})$ (\underline{Convergence})
+
+\underline{Nonaxiparallel}: $h_{i+1} = x_{i+1} - x_{i}$, $h_i = x_i - x_{i-1}$, $\hbar_i = \frac{1}{2} (h_{i+1} + h_i)$
+
+\underline{Discrete Max. Principle} Useful for uniqueness, and max norm stability (cts dep on BD).
+
+$-D_x^+ D_x^- U_{i,j} - D_y^+ D_y^- U_{i,j} = f_{i,j}$ \& $U_{i,j} = g_{i,j}$ on $\Gamma$, $f \leq 0$
+
+$\Longrightarrow (\cdot) U_{i,j} = (\cdot)U_{i+1,j} + (\cdot)U_{i-1,j} + (\cdot)U_{i,j-1} + (\cdot)U_{i,j+1} + f_{i,j}$
+
+Contradiction: For ($f<0$) Replace RHS $U_{i \pm 1, j \pm 1} \rightarrow U_{i,j}$ then $(\cdot) < (\cdot)$ (without $f$), but the expr on both sides are equal.
+
+For $f \leq 0$, $V_{i,j} \coloneqq U_{i,j} + \frac{\epsilon}{4}({x_i}^2 + {y_j}^2)$, consider $\max_{(x_i,y_j)\in\Gamma_h} U_{i,j}$
+
+\underline{Tip}: $\psi_{i,j} = (x_i - \frac{1}{2})^{2} + (y_j - \frac{1}{2})^{2} \Longrightarrow \mathcal{L}_h \psi_{i,j} = -4 (=-2n) \Longrightarrow \mathcal{L}_h e_{i,j} = \tau_{i,j}$. Let $\tau \coloneqq \max |\tau_{i,j}|$. Then $\phi_{i,j} = e_{i,j} \mp \frac{\tau}{2n} \psi_{i,j}$, $\mathcal{L}_h (\phi_{i,j}) \geq (\leq) 0$. Use min/max principle with $e = 0$ on $\Gamma$. (\underline{Convergence})
+
+\rule{6cm}{0.4pt}
+
+Eigen 1D: $-D_x^+D_x^- U_i + cU_i = \Lambda U_i$ with $U_0=0=U_N$
+
+$\Longrightarrow U_i = \sin{k\pi x_i}$ with $c+8 \leq \Lambda = c+\frac{4}{h^2}\sin^2 {\frac{k\pi h}{2}} \leq c + \frac{4}{h^2}$
+(Symm 3diag $A\in \mathcal{M}_{n\times n}$ s.t. $AU=F$)
+
+Eigen 2D: $-D_x^+D_x^- U_{i,j} -D_y^+D_y^- U_{i,j}  + cU_{i,j} = \Lambda U_{i,j}$ with homogen BC.
+
+$\Longrightarrow U_{i,j} = \sin{k\pi x_i}+\sin{l\pi y_j}$ with $\Lambda = c+\frac{4}{h^2}(\sin^2 {\frac{k\pi h}{2}} + (\sin^2 {\frac{l\pi h}{2}}) \in [c+16,c+\frac{8}{h^2}]$
+
+	Iter Method: $U^{(j+1)} \coloneqq U^{(j)} - \tau (A U^{(j)} - F)$ with lim sol $U$ s.t. $U = U-\tau (AU-F)$ (A sym, + eigval)
+
+$\Longrightarrow U - U^{(j+1)} \coloneqq (I-\tau A)(U-U^{(j)}) \Longrightarrow U-U^{(j)} = (I-\tau A)^{j} (U-U^{(0)})$
+
+To ensure convergence $||I-\tau A|| \leq \min_{\tau > 0} \max \{|1-\tau\beta|,|1-\tau\alpha|\} < 1 \Longrightarrow \tau = \frac{2}{\alpha + \beta}$ for best convergence.
+
+\rule{6cm}{0.4pt}
+
+\textbf{Parabolic} $u_t = u_{xx} + f$ on $\left\{ (x,t) \in (-\infty,\infty) \times [0,T] \right\}$
+
+$\theta$-scheme: $\frac{U_{j}^{m+1} - U_{j}^{m}}{\Delta t} = (1-\theta) \frac{U_{j+1}^{m} - 2U_{j}^{m} + U_{j-1}^{m}}{(\Delta x)^{2}} + \theta \frac{U_{j+1}^{m+1} - 2U_{j}^{m+1} + U_{j-1}^{m+1}}{(\Delta x)^{2}}$ \hspace{0.5cm} $\theta=0$,$1$ (expl,impl resp)
+
+\underline{Consistency Error}:
+
+$T_{j}^{m} = \frac{u_{j}^{m+1} - u_{j}^{m}}{\Delta t} - (1-\theta) \frac{u_{j+1}^{m} - 2u_{j}^{m} + u_{j-1}^{m}}{(\Delta x)^{2}} - \theta \frac{u_{j+1}^{m+1} - 2u_{j}^{m+1} + u_{j-1}^{m+1}}{(\Delta x)^{2}}$ for $j=0,\pm1,\pm2$, $m=0,\cdots,M-1$
+
+
+$
+T_j^m = \begin{cases}
+	O({\Delta x}^{2} + {\Delta t}^{2}), & \theta=\frac{1}{2} \\
+	O({\Delta x}^{2} + \Delta t), & \theta\neq\frac{1}{2} 
+\end{cases}
+$ from Taylor expansion around $x_j$, $t_{m+\frac{1}{2}}$
+
+\underline{Practical Stability}: ${||U^m||}_{l_2} \leq {||U^0||}_{l_2}$ \hspace{0.5cm} where ${||U^{m}||}_{l_2} = (\Delta x \sum_{j=-\infty}^{\infty} {|U_j^m|^2})^{\frac{1}{2}}$
+
+\underline{Semidiscrete FT}: $\hat U (k) = \Delta x \sum_{j=-\infty}^\infty U_j e^{-i k x_j}$ for $k \in \left[ -\pi/\Delta x, \pi / \Delta x \right]$
+
+\underline{Semidiscrete IFT}: $U_j = \frac{1}{2\pi} \int_{-\pi/\Delta x}^{\pi/\Delta x} \hat U(k) e^{ikj\Delta x} dk$ 
+
+\underline{Discrete Parseval}: ${||U||}_{l_2} = \frac{1}{\sqrt{2\pi}} {||\hat U||}_{L_2}$ \hspace{0.2cm}
+Pf: ${||\hat U||}_{L_2}^2 = 
+\int \hat U(k) \overline{\hat U(k)} dk = 
+\int \hat U(k) \Delta x \sum U_j e^{ikj \Delta x} dk = 
+\sum U_j \Delta x 2\pi \frac{1}{2\pi} \int \hat U(k) e^{ikj\Delta x} dk = 
+\sum U_j \Delta x 2\pi U_j = {||U||}_{l_2}^2 2\pi$ 
+
+\underline{Stability Analysis}: $U_j^m = \frac{1}{2\pi}\int_{-\pi/\Delta x}^{\pi / \Delta x} e^{ikj\Delta x} \hat U^m(k) dk$ \hspace{0.5cm} Tip: $1-\cos{\varphi} = 2 \sin^2 {\frac{\varphi}{2}}$,
+$e^{ik\Delta x} + e^{-ik\Delta x} - 2 = 2(-1 + \cos{k \Delta x}) = -4 \sin^2 {\frac{k \Delta x}{2}}$
+
+$\hat U_j^m (k) = \lambda (k) \hat U^m (k)$, Stable iff $|\lambda(k)| \leq 1$
+
+\underline{Von Neumann}: On $[0,T]$, $\exists C=C(T)$ s.t. ${||U^m||}_{l_2} \leq C {||U^0||}_{l_2}$
+
+Lemma: $\hat U^{m+1}(k) = \lambda (k) \hat U^m (k)$, $|\lambda(k)| \leq 1 + C_0 \Delta t$ for some $C_0$ $\Longrightarrow$ Neumann Stable, \hspace{0.3cm} PT$\Longrightarrow$NS
+
+$\theta$-scheme has $\lambda(k) = \frac{1-4(1-\theta)\mu \sin^2{\frac{k\Delta x}{2}}}{1+4\theta\mu\sin^2{\frac{k\Delta x}{2}}}$ 
+
+$\Longrightarrow$ Uncond. PS if $\theta \in [1/2,1]$ and Cond. PS if $\theta \in [0,1/2)$ where stbl iff $2\left( 1-2\theta \right)\mu \leq 1$
+
+\underline{$\theta$-scheme IBVP} $\theta$-scheme $\Longrightarrow$
+$\left( 1-\theta \mu \delta^2 \right)U_j^{m+1} = \left( 1+\left( 1-\theta \right)\mu \delta^2 \right)U_j^m$
+($\delta^2 U_j\coloneqq U_{j+1} - 2U_j + U_{j-1}$)
+
+$\left( I - \theta \mu A \right)\mathbf{U}_j^{m+1} = \left( I + \left( 1-\theta \right)\mu A \right)\mathbf{U}^m + \theta\mu \mathbf{F}^{m+1} + (1-\theta)\mu \mathbf{F}^m$ ($A\in\mathcal{M}^{(J-1)^2}$ 3diag  $1,-2,1$ entry)
+
+with $\mathbf{U}^m \coloneqq \left( U_1^m,\cdots,U_{J-1}m \right)^T$, $\mathbf{F}^m \coloneqq \left( A(t_m),0,\cdots,0,B(t_m) \right)^T$
+
+\underline{Discrete max. principle} Given $0 \leq \theta \leq 1$, $\mu (1-\theta) \leq \frac{1}{2}$ (More strct cond)
+
+Pf) $\left( 1+2\theta\mu \right)U_J^{m+1} = \theta \mu \left( U_{j+1}^{m+1} + U_{j-1}^{m+1} \right) + \left( 1-\theta \right)\mu \left( U_{j+1}^{m} + U_{j-1}^{m} \right) + \left( 1 - 2 \left( 1-\theta \right)\mu \right) U_j^m (\dagger)$
+
+Suppose max at $U_j^{m+1}$.
+For $U^* = \max \left( U_{j\pm 1}^{m+1/2 \pm 1/2 }, U_j^m \right)$,  replace $U_{j\pm 1}^{m\pm 1} \rightarrow U^*$, then $ \leq $
+$\Longrightarrow U_j^{m+1} \leq U^*$, but $U^* \leq U_j^{m+1}$
+
+\underline{Convergence in max norm}: $(\dagger) \Longrightarrow (\dagger \dagger) \text{RHS} - \text{LHS} = 0$ \hspace{1cm}
+Replace $U \rightarrow u \Longrightarrow (\cdot) = \Delta t T_J^m$
+
+$\left( 1+2\theta\mu \right)e_J^{m+1} = \theta \mu \left( e_{j+1}^{m+1} + e_{j-1}^{m+1} \right) + \left( 1-\theta \right)\mu \left( e_{j+1}^{m} + e_{j-1}^{m} \right) + \left( 1 - 2 \left( 1-\theta \right)\mu \right) e_j^m + \Delta t T_j^m$
+
+$E^m \coloneqq \max_{0 \leq j \leq J} |e_j^m|$ (Analog $T_j^m$) $\Longrightarrow E^{m+1} \leq E^{m} + \Delta t T^m$
+
+$\xRightarrow{Telescope} E^m \leq T \max_{0 \leq m \leq M-1} \max_{1\leq j \leq J-1} |T_j^m|$ (Noting $E^0 = 0$)
+
+$\max_{0 \leq m \leq M} \max_{0\leq j \leq J} | u_j^m - U_j^m| \leq T \max_{0 \leq m \leq M-1} \max_{1\leq j \leq J-1} |T_j^m|$ (Use consistency error)
+
+\rule{6cm}{0.4pt}
+
+\textbf{Hypberbolic} $u_{tt} -c^2 u_{xx} = f(x,t)$ on $(x,t)\in(a,b) \times (0,T]$;
+
+$u(x,0) = u_0 (x)$, $u_t(x,0)=u_1(x)$; $u(a,t)=u(b,t)=0$ \hspace{1cm}
+Energy inequality for analysis. $(\cdot,u_t)$
+
+\textbf{Implicit}: $\frac{U_{j}^{m+1} - 2 U_{j}^{m} + U_{j}^{m-1}}{\left( \Delta t \right)^2} - c^2 \frac{U_{j+1}^{m+1} - 2 U_{j}^{m+1} + U_{j-1}^{m+1}}{\left( \Delta t \right)^2} = f(x_j , t_{m+1})$ for $j=1,\cdots,J-1$, $m=1,\cdots,M-1$
+
+$U_j^0 = u_0 (x_j)$ \hspace{0.5cm}
+$U_j^1 = U_j^0 + \Delta t u_1 (x_j)$ \hspace{0.5cm}
+$U_0^m = 0 = U_J^m$
+
+Note $(A-B,A) = \frac{1}{2} ({||A||}^2 - {||B||}^2) + \frac{1}{2} {||A-B||}^2$ (Analog $(A-B,A]$)
+
+Take inner product of scheme with $\frac{U^{m+1} - U^m}{\Delta t}$, and define $\mathcal{M}^2 (U^m) \coloneqq {||\frac{U^{m+1} - U^m}{\Delta t}||}^2 + c^2 {||D_x^- U^{m+1}]|}^2$
+
+\underline{Unconditional Stability}: $\mathcal{M}^2 (U^m) \leq e^2 \mathcal{M} (U^0) + 2e^2 T \sum_{k=1}^m \Delta t {||f(\cdot,t_{k+1})||}^2$
+
+\underline{Consistency}: $T_j^{m+1} \coloneqq \frac{{u}_j^{m+1} - 2u_j^m + u_j^{m-1}}{(\Delta t)^2} - c^2 \frac{{u}_{j+1}^{m+1} - 2u_j^{m+1} + u_{j-1}^{m+1}}{(\Delta x)^2} $ \hspace{0.5cm}
+$T_j^1 \coloneqq \frac{u_j^1 - u_j^0}{\Delta t} - u_1 (x_j)$
+
+
+$\Longrightarrow |T_j^{m+1}| \leq \frac{1}{12}c^2(\Delta x)^2 M_{4x} + \frac{5}{3} \Delta t M_{3t}$ where $M_{nx} \coloneqq \max_{(x,t)\in[a,b]\times[0,T]} |\frac{\partial^n u}{{\partial x}^n} (x,t)|$ (Analog $M_{nt}$)
+
+\underline{Global Error} $e_j^m \coloneqq u(x_j, t_m) - U_j^m \Longrightarrow \frac{e_j^{m+1} - 2e_j^m + e_j^{m-1}} {(\Delta t)} - c^2 \frac{e_{j+1}^{m+1} - 2e_j^{m+1} + e_{j-1}^{m+1}}{(\Delta x)^2} = T_j^{m+1}$, $e_j^1 = e_j^0 + \Delta t T_j^1$
+
+\textbf{Explicit}
+
+\underline{Conditionally stable}: $c \frac{\Delta t} {\Delta x} \leq c_0 <1$
+
+\rule{6cm}{0.4pt}
+
+\textbf{1st Hyperbolic} $u_t + b(x) u_x + c(x,t)u = f(x,t)$ \hspace{0.5cm} $u(x,t) = 0$ (inflow) \hspace{0.5cm} $u(x,0) = u_0(x)$
+
+\textbf{Explicit}: $u_t + bu_x = f(x,t)$ on $x\in(0,1)$, $t\in(0,T]$ \hspace{0.5cm} $b>0 \Longrightarrow u(0,t) = 0$ with $t\in(0,T]$
+
+$\frac{U_j^{m+1} - U_j^m}{\Delta t} + b D_x^- U_j^m = f(x_j,t_m) \Longleftrightarrow U_j^{m+1} = (1-\mu) U_j^m + \mu U_{j-1}^m + \Delta t f_j^m$ with $0 \leq \mu = \frac{b \Delta t}{\Delta x} \leq 1$
+
+\underline{Stability}: $|U_j^{m+1}| \leq \max_{0\leq j \leq J} |U_j^m| + \Delta t \max_{0 \leq j \leq J} |f_j^m|
+\Longrightarrow {||U^{m+1}|}_\infty \leq {||U^m||}_\infty + \Delta t {f(\cdot,t_m)}_\infty$
+
+$\Longrightarrow \max_{1 \leq k \leq M} {||U^k||}_\infty \leq {||U^0||}_\infty + \sum_{m = 0}^{M-1} \Delta t {||f(\cdot, t_m)||}_\infty$
+
+\rule{6cm}{0.4pt}
+
+\textbf{Nonlinear Hyperbolic} $u_t + (f(u))_x = 0$ $\mathbb{R} \times (0,\infty)$, $f(0)=f'(0) = 0$, $f''(s) \geq 0$, $|f'(s)| \leq f'(|s|)$
+
+Use $f'(u) = [f'(u)]_+ + [f'(u)]_- \Longrightarrow u_t + [f'(u)]_+ u_x + [f'(u)]_- u_x = 0$
+
+\underline{Scheme}: $\frac{U_j^{m+1} - U_j^m}{\Delta t} + [f'(U_j^m)]_+ D_x^- U_j^m + [f'(U_j^m)]_- D_x^-U_j^m = 0$
+
+\underline{Stability}: CFL $\frac{f'({||U^k||}_\infty)\Delta t}{\Delta x} \leq 1 \Longrightarrow {||U^{m+1}||}_\infty \leq {||U^m||}_\infty$
+
+If $u$ has cts bdd 2nd derivatives w.r.t $x$ and $t$, then $\max_{1\leq m \leq M} {||u^m - U^m||}_\infty = O(\Delta x + \Delta t)$
+
+\end{document}

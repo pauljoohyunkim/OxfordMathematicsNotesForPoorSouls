@@ -1,0 +1,225 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,showframe]{geometry}
+\usepackage{xcolor,fancyhdr}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{stmaryrd}
+
+\usepackage{lineno}
+\linenumbers
+\setpagewiselinenumbers
+
+%%%%%%%%%%%%%  PLEASE DO NOT EDIT ANY OF THE LINES ABOVE %%%%%%%%%%%%%%%
+% Insert your text between "\begin{document}" and "\end{document}" below. 
+% The total length of your summary notes should not exceed 2 sides of a
+% single sheet of A4, with maximum 58 lines of text per page.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{mathtools}
+
+\newcommand{\px}{p_X (x)}
+\newcommand{\py}{p_y (y)}
+\newcommand{\pxy}{p_{X,Y}(x,y)}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\tab}{\hspace{0.5cm}}
+\newcommand{\Parsep}{\rule{6cm}{0.4pt}}
+\newcommand{\pX}{p_{X_1, \cdots, X_n}}
+
+\begin{document}
+
+\include{stylefile}
+
+\textbf{\S 1. Entropy, Divergence, and Mutual Information}
+
+$H(X) \coloneqq -\sum_x \px \log \px = -\E(\log \px)$ \tab
+$D(p||q) \coloneqq \sum_x p(x) \frac{p(x)}{q(x)} = \E(\log{\frac{1}{q(X)}}) - H(X)$
+
+$I(X;Y) \coloneqq \sum_{x,y} \pxy \log{\frac{\pxy}{\px \py}} = D(p_{X,Y}||p_X p_Y) = H(X) + H(Y) - H(X,Y) = H(X) - H(X|Y) = H(Y) - H(Y|X)$
+
+$H(Y|X) = -\sum_{x,y} \pxy \log{p_{Y|X=x}(y)} = -\sum_{x} \px \E (\log{p_{Y|X=x} (Y)}) = 
+-\E(\log p_{Y|X}(Y)) = \sum_x H(Y|X=x) \mathbb{P}(X=x) = H(X,Y) - H(X)$
+
+$I(X;Y|Z) \coloneqq H(X|Z) - H(X|Y,Z)$
+
+
+\Parsep
+
+\textbf{Gibb's Inequality}
+$H(X) = -\sum_x p(x) \log{p(x)} \leq -\sum_x p(x) \log{q(x)}$ \tab
+(= iff $p=q$) \tab
+
+$D(p_{X,Y} || p_{\hat{X}, \hat{Y}}) = D(p_{Y|X} || p_{\hat{Y}|\hat{X}} | p_X) + D(p_X || p_{\hat{X}})$
+
+$D(p_{Y|X}||p_{\hat{X},\hat{Y}} | p_X) = D(p_X p_{Y|X} || p_X p_{\hat{Y}|\hat{X}})$
+
+$D(p_{Y|X} || q_{Y|X} | p_X) = \sum_x \px D\left( p_{Y_1 | X=x} || q_{Y_2 | X=x} \right)$
+
+
+Logsum: $a_i, b_i \geq 0 \Longrightarrow \sum_{i=1}^{n} a_i \log{\left( \frac{a_i}{b_i} \right)} \geq \left( \sum_{i=1}^n \log{\left( \frac{\sum_{i=1}^{n} a_i}{\sum_{i=1}^n b_i} \right)} \right)$ Pf) $q_i = a_i / \sum_{i=1}^n a_i$ and Gibbs
+
+$D(\lambda p_1 + (1-\lambda) p_2 || \lambda q_1 + (1-\lambda) q_2) \leq \lambda D\left( p_1 || q_1 \right) + \left( 1-\lambda \right)D\left( p_2 || q_2 \right)$ for $\lambda \in \left[ 0,1 \right]$ (Pf: logsum)
+
+$I(X;Y) \geq 0$ \tab (= iff $X \perp Y$) \tab \tab
+$I(X;Y) = H(X) - H(X|Y)$
+
+$H(X,Y) = H(X) + H(Y|X)$ \tab \tab
+$I(X_1,\cdots,X_n ; Y) = \sum_{i=1}^{n} I(X_i;Y | X_{i-1},\cdots,X_1)$ (Chain)
+
+\textbf{Data Processing} $(X\perp Z) | Y \Longrightarrow I(X;Y) \geq I(X;Z)$ Pf) Chain $I(Y,Z;X)$ and $I(Z,Y;X)$
+
+$f:\mathcal{X} \rightarrow \mathcal{Y} \Longrightarrow I(X;Y) \geq I(X;f(Y))$
+
+\Parsep
+
+$0\leq H(X) \leq \log\left( |\mathcal{X}| \right)$ \tab (= iff $X$ const, $X$ uniform respectively)
+
+$0 \leq H(X|Y) \leq H(X)$ \tab (2\textsuperscript{nd} = iff $X \perp Y$ iff $X=f(Y)$)
+
+$H(f(X)) \leq H(X)$ \tab (= iff $f$ bijective)
+
+$H(X_1, \cdots, X_n) = \sum_{i=1}^n H(X_i | X_{i-1},\cdots,X_1) \leq \sum_{i=1}^{n} H(X_i)$ \tab (= iff $X_i$ indep)
+
+$X$, $Y$ iid $\Longrightarrow \mathbb{P}(X=Y) \geq 2^{-H(X)}$ \tab (= iff uniform, proof by Jensen)
+
+\textbf{Fano's Inequality} $H(X|Y) \leq H(\mathbf{1}_{X \neq Y}) + \mathbb{P}(X \neq Y) \log\left( |\mathcal{X}| - 1 \right)$ \tab
+(Proof by defining $Z=\mathbf{1}_{X \neq Y}$ and $H(Z|X,Y)=0$, so that $H(X|Y) = H(Z|Y)+H(X|Y,Z)$)
+
+Cor: $H(X|Y) \leq 1 + \mathbb{P}(X \neq Y) \log{\left( |\mathcal{X}| - 1 \right)}$
+
+\Parsep
+
+Max Entropy Tip: Use Gibb's to bound $H(q)$, and equality iff $p=q$ where $p$ specified as:
+
+For $\E (X) = const.$ on $\left\{ 1,\cdots \right\}$, $X \sim \text{geom}(p) \in \left\{ 1,\cdots \right\}$, $\E (X) = \frac{1}{p}$, $H(X) = \frac{-\left( 1-p \right) \log{1-p}-p \log{p}}{p}$
+
+For $\E(X) = const.$ on $\left\{ 0, \cdots \right\}$, $X \sim \text{geom}(p) \in \left\{ 0,\cdots \right\}$, $\E (X) = \frac{1-p}{p}$, $H(X) = \frac{-\left( 1-p \right)\log{1-p} - p\log{p}}{p}$
+
+Max Entropy for $\E (f(X)) = C$, $X \sim \px = \frac{e^{-\lambda f(x)}}{\sum_x e^{-\lambda f(x)}}$ where $\lambda$ chosen s.t. $\E (f(X)) = C$
+
+\Parsep
+
+\textbf{\S2. AEP}
+WLLN: $\bar{X_n} \stackrel{P}{\rightarrow} \mu$ (ie: $\lim_{n\rightarrow \infty} \mathbb{P}\left( |\bar{X_n} - \mu| < \epsilon \right) = 1$ for any $\epsilon > 0$)
+
+Weak AEP 1: $-\frac{1}{n} \log{p_{X_1, \cdots,X_n}(X_1,\cdots,X_n)} \stackrel{P}{\longrightarrow} H(X)$
+
+$\mathcal{T}_n^\epsilon \coloneqq \left\{ (x_1,\cdots,x_n) \in \mathcal{X}^n : |-\frac{1}{n}\log{p_{X_1,\cdots,X_n}(x_1,\cdots,x_n)} - H(X)| \leq \epsilon \right\}$
+
+$\forall  \epsilon > 0 \text{, } \exists N \text{ s.t. } \forall n \geq N$,
+
+(i) $\pX (x_1, \cdots, x_n) \in [2^{-n (H(X) + \epsilon)},2^{-n(H(X)-\epsilon)}]$ for any $(x_1, \cdots, x_n) \in \mathcal{T}_n^\epsilon$
+
+(ii) $\mathbb{P}( (X_1,\cdots,X_n) \in \mathcal{T}_n^\epsilon) \geq 1 - \epsilon$ (From weak AEP 1)
+
+(iii) $|\mathcal{T}_n^\epsilon| \in \left[ (1-\epsilon) 2^{n(H(X)-\epsilon}, 2^{n(H(X)) + \epsilon} \right]$ \tab
+Pf) $1 = \sum_x p_{\mathbf{X}}(\mathbf{x}) \geq \sum_{\mathcal{T}_n^\epsilon} p_{\mathbf{X}}\mathbf{x} \geq \sum_{\mathcal{T}_n^\epsilon}2^{-n(H(X)+\epsilon)}$ and
+$1-\epsilon \leq \mathbb{P}\left( \left( X_1, \cdots, X_n \right) \in \mathcal{T}_n^\epsilon \right) \leq \sum_{\mathcal{T}_n^\epsilon} 2^{-n(H(X) - \epsilon)} = 2^{-n\left( H(X)-\epsilon \right)}|\mathcal{T}_n^\epsilon|$
+
+\textbf{Shannon's 1st Thrm}: $\forall \epsilon>0$, $\exists n\in \mathbb{Z}$ and $c:\mathcal{X}^* \rightarrow \left\{ 0,1 \right\}^*$ s.t. $\cup_{k \geq 0} \mathcal{X}^{nk} \rightarrow \left\{ 0,1 \right\}^*$, $(x_1,\cdots,x_k) \rightarrow c(x_1)\cdots c(x_k) \in \left\{ 0,1 \right\}^{*}$ injective and $\frac{1}{n} \E\left( |c\left( X_1,\cdots,X_n \right)| \right) \leq H(X) + \epsilon$
+
+\Parsep
+
+\textbf{\S3. Optimal Codes}
+
+$\lceil A \rceil - 1 < A \leq \lceil A \rceil$ \tab \tab $A \leq \lceil A \rceil < A + 1$
+
+\textbf{Kraft-McMillan}: (i) $c:\mathcal{X} \rightarrow \mathcal{Y}^*$ uniquely decodable and $l_x \coloneqq |c(x)|$ $\rightarrow \sum_{x\in\mathcal{X}}|\mathcal{Y}|^{-l_x}\leq 1$
+
+Pf) $(\sum_x d^{-|c(x)|})^{n} = \sum_{k=n l_{\text{min}}} ^{n l_{\text{max}}}a(k) d^{-k}$, $a(k) < d^k$ by uniq decod. Take $n$\textsuperscript{th} root and $n\rightarrow \infty$.
+
+(ii) Given $(l_x)_{x\in\mathcal{X}} \subset \mathbb{N}$ and $\sum_{x\in\mathcal{X}}|\mathcal{Y}|^{-l_x}\leq 1$, then $\exists$ prefix code $c:\mathcal{X} \rightarrow \mathcal{Y}^*$ s.t. $|c(x)| = l_x$
+
+Pf) Relabel $\mathcal{X}=\left\{ 1,\cdots, |\mathcal{X}| \right\}$, $l_1 \leq \cdots \leq l_{|\mathcal{X}|}$. $r_m \coloneqq \sum_{i=1}^{m-1} {|\mathcal{Y}|}^{-l_i}$. $c(m)$: first $m$ digits of $r_m$
+
+$X$ be RV in finite $\mathcal{X}$ and $c$ (uniq decod., $d$-ary), then $H_d (X) \leq \E(|c(X)|)$ (= iff $|c(x)| = -\log_x{\px}$, Lower bd on length) \tab
+Pf) Let $l_x = c(x)$, $q(x) = \frac{d^{-l_x}}{\sum_{x\in\mathcal{X}}d^{-l_x}}$, consider $\E(|c(X)|) - H_d(X)$
+
+\underline{Existence of Optimal Code} $H_d(X) \leq \E(|c^* (X)|) < H_d (X) + 1$ \tab
+Pf) $l_x = \lceil -\log_d (p(x)) \rceil$ Kraft-McMillan
+
+\textbf{Shannon's Code} (i) Order $p_1 \geq \cdots \geq p_m$. (ii) $c(x_r) = \text{first } l_r \coloneqq \lceil -\log_{|\mathcal{Y}|} (p_r) \rceil$ digits of $\sum_{i=1}^{r-1} p_i$
+
+\underline{Shannon with distrib. estimation} $p$, $q$ (estimation) pmf on $\mathcal{X}$,
+
+$H_d (X) + D_d (p||q) \leq \E(|c_q (X)|) < H_d (X) + D_d (p||q) + 1$ 
+
+Pf: Bound $\E(|c_q (X)|) = \sum_x p(x) \lceil -\log_d \left( q(x) \right) \rceil$
+
+\textbf{Elias' code} First $\lceil -\log_d (p_i) \rceil + 1$ digits of $\sum_{i < r}p_i + \frac{p_r}{2} \Longrightarrow H_d (X) + 1 \leq \E(|c_E (X)|) \leq H_d(X) + 2$
+
+\Parsep
+
+Bijection between $d$-ary prefix codes and $d$-ary rooted trees.
+
+\textbf{Huffman code is optimal}
+Pf) if $p_1 \geq \cdots \geq p_m$, (i) $p_j > p_k \Longrightarrow |c(x_j)| \leq |c(x_k)|$, (ii) two longest codewords have same len (iii) two longest codewords only differ in last digit. $p$,$p' \Longrightarrow L(c^p) - L(c^{p'}) = p_{m-1} + p_m$
+Also for $e^p$,$e^{p'}$, $L(e^p) - L(e^{p'}) = p_{m-1}+p_m$. Subtract each other, $L(e^p) = L(c^p)$
+
+\Parsep
+
+\textbf{\S4 Channel Coding} DMC $(\mathcal{X}, M, \mathcal{Y})$ where $\mathcal{X}$ (input alphabet), $\mathcal{Y}$ (output alphabet), $M$ ($|\mathcal{X}| \times |\mathcal{Y}|$ stochastic matrix).
+
+\underline{Channel Capacity}: $C \coloneqq \sup I(x;y) = H(Y) - H(Y|X)$ 
+
+Tip: $H(Y|X) = \sum_x H(Y|X=x) \px$, Use $I(X,Y) = H(Y) - H(Y|X)$
+
+
+
+$(m,n)$-channel code for DMC $(\mathcal{X}, M, \mathcal{Y})$: tuple $(c,d)$ where $c:\left\{ 1,\cdots, m \right\} \rightarrow \mathcal{X}^n$ (Encoder) and $d:\mathcal{Y}^n \rightarrow \left\{ 1,\cdots,m \right\}$ (Decoder)
+
+\underline{Rate of $(m,n)$-code $(c,d)$}: $\rho (c,d) \coloneqq \frac{1}{n} \log_{|\mathcal{X}|} (m)$
+
+$\epsilon_i = \mathbb{P}\left( d(\mathbf{Y} \neq i | c(i) = \mathbf{X} \right)$ for $i=1,\cdots,m$, $\epsilon_{\text{max}} \coloneqq \max_{i \in \left\{ 1,\cdots,m \right\}} \epsilon_i$, $\bar \epsilon \coloneqq \frac{1}{m} \sum_{i=1}^m \epsilon_i$
+
+	Rate $R$ achievable if $\forall \epsilon > 0$, $\exists$ suff. large. $m$,$n$ and $(m,n)$-channel code $(c,d)$ with $\rho (c,d) > R-\epsilon$ and $\epsilon_{\text{max}} < \epsilon$
+
+\underline{Shannon's 2\textsuperscript{nd} theorem} DMC $(\mathcal{X},M,\mathcal{Y})$ with capacity $C$, then $R>0$ achievable iff $R \leq C$
+
+Pf)
+
+$\mathcal{J}_\epsilon^{(n)} = $
+
+$\left\{ (x,y) \in \mathcal{X}^n \times \mathcal{Y}^n: \max \left( |\frac{-\log p_{\mathbf{X},\mathbf{Y}}(x,y)}{n} - H(X,Y)|,|\frac{-\log(p_{\mathbf{X}}(x))}{n}-H(X)|, |\frac{-\log(p_{\mathbf{Y}}(y))}{n}-H(Y)| \right) \right\}$
+
+\underline{Joint AEP}: $\mathbf{X} = (X_1, \cdots, X_n)$, $\mathbf{Y} = (Y_1, \cdots, Y_n)$
+
+(i) $\lim_{n\rightarrow \infty}\mathbb{P}\left( \left( \mathbf{X},\mathbf{Y} \right) \in \mathcal{J}_\epsilon^{(n)} \right) = 1$ \tab
+(ii) $|\mathcal{J}_\epsilon^{(n)}| \leq 2^{n\left( H(X,Y) + \epsilon \right)}$
+
+(iii) $\exists n_0$ s.t. $\forall n \geq n_0$, $(1-\epsilon) 2^{-n\left( I(X;Y) + 3\epsilon \right)} \leq \mathbb{P} \left( \left( \mathbf{X}', \mathbf{Y}' \right)\in \mathcal{J}_{\epsilon}^{(n)} \right) \leq 2^{-n\left( I\left( X;Y \right)-3\epsilon \right)}$
+
+\Parsep
+
+\textbf{Channel Coding w/ non-iid Input}
+
+\underline{Stationary stochastic process}: $\mathbb{P}(X_1=x_1,\cdots,X_n=x_n) = \mathbb{P}(X_{1+j}=x_1,\cdots,X_{n+j} = x_n)$ for all $n,j\in\mathbb{Z}$
+
+\underline{Entropy rate of stochastic process}: $\mathcal{H}(X) = \lim_{n \rightarrow \infty} \frac{1}{n} H(X_1,\cdots,X_n)$
+
+Lemma (1): Stationary Stochastic process $X$, $n\rightarrow H(X_n | X_{n-1},\cdots , X_1)$ is non-increasing and $\lim_{n\rightarrow \infty}H(X_n | X_{n-1},\cdots,X_1)$ exists.
+
+Lemma (2): $\lim_{n\rightarrow \infty}a_n = a \Longrightarrow \frac{1}{n}\sum_{i=1}^n a_i = a$
+
+Thrm: Stationary stoch. process $X\Longrightarrow \mathcal{H}(X) = \lim_{n\rightarrow \infty} H(X_n | X_{n-1},\cdots,X_1)$ PF) Lemma (i),(ii)
+
+Lemma (3): $H(Y_n | Y_{n-1},\cdots,Y_1)$
+
+Lemma (4): $H(Y_n|Y_{n-1},\cdots,Y_2,Y_1) \leq \lim_{k} H(Y_{n+k+1}| Y_{n+k},\cdots,Y_1) = \mathcal{H}(Y)$
+
+Thrm: $X(X_i)_{i \geq 1}$ stationary Markov. $\phi : \mathcal{X} \rightarrow \mathcal{Y}$, $Y_i \coloneqq \phi(X_i)$, then
+$H(Y_n|Y_{n-1},\cdots,Y_1,X_1) \leq \mathcal{H}(Y) \leq H(Y_n|Y_{n-1},\cdots,Y_1)$,
+$\mathcal{H}(Y) = \lim_{n\rightarrow\infty} H(Y_n | Y_{n-1},\cdots,Y_1,X_1)=\lim_{n\rightarrow\infty}H(Y_n | Y_{n-1},\cdots, Y_1)$
+
+PF) Lemma (3),(4)
+
+\Parsep
+
+\textbf{\S Appendix}
+
+\underline{Markov Inequality}: $\mathbb{P}(X\geq x) \leq \frac{\E(X)}{x}$ for all $x>0$
+
+\underline{Chebyshev Inequality}: $\mathbb{P}(|X-\mu| > \epsilon) \leq \frac{\sigma^2}{\epsilon^2}$
+
+\underline{Optimal $\neq$ Huffman}: $0.3=00, 0.3=10, 0.2=01, 0.2=11$
+
+\end{document}

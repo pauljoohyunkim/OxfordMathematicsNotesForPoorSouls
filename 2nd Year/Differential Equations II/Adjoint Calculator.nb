@@ -1,0 +1,130 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3835,        122]
+NotebookOptionsPosition[      3551,        108]
+NotebookOutlinePosition[      3898,        123]
+CellTagsIndexPosition[      3855,        120]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Adjoint", " ", "for", " ", "2", "nd", " ", "order"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"P2", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P1", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P0", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"intervalL", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"intervalR", "=", 
+     FractionBox["Pi", "2"]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.833541601377825*^9, 3.8335416311555877`*^9}, {
+  3.833541820937194*^9, 3.83354183399562*^9}, {3.83354200810728*^9, 
+  3.833542076998717*^9}, {3.8335421236973724`*^9, 3.833542125057088*^9}},
+ Background->RGBColor[1, 0.85, 0.85]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Adjoint", " ", "Operator", " ", "and", " ", "Boundary", " ", 
+    "Condition"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"adj", "=", 
+    RowBox[{
+     RowBox[{"D", "[", 
+      RowBox[{
+       RowBox[{"P2", "*", 
+        RowBox[{"w", "[", "x", "]"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "2"}], "}"}]}], "]"}], "-", 
+     RowBox[{"D", "[", 
+      RowBox[{
+       RowBox[{"P1", "*", 
+        RowBox[{"w", "[", "x", "]"}]}], ",", "x"}], "]"}], "+", 
+     RowBox[{"P0", "*", 
+      RowBox[{"w", "[", "x", "]"}]}]}]}], "\[IndentingNewLine]", 
+   RowBox[{"bc", "=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"P2", "*", 
+          RowBox[{"w", "[", "x", "]"}], "*", 
+          RowBox[{"D", "[", 
+           RowBox[{
+            RowBox[{"y", "[", "x", "]"}], ",", "x"}], "]"}]}], "-", 
+         RowBox[{
+          RowBox[{"D", "[", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"P2", "*", 
+              RowBox[{"w", "[", "x", "]"}]}], ")"}], ",", "x"}], "]"}], "*", 
+          RowBox[{"y", "[", "x", "]"}]}], "+", 
+         RowBox[{"P1", "*", 
+          RowBox[{"w", "[", "x", "]"}], "*", 
+          RowBox[{"y", "[", "x", "]"}]}]}], ")"}], "/.", 
+       RowBox[{"x", "\[Rule]", "intervalR"}]}], ")"}], "-", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"P2", "*", 
+          RowBox[{"w", "[", "x", "]"}], "*", 
+          RowBox[{"D", "[", 
+           RowBox[{
+            RowBox[{"y", "[", "x", "]"}], ",", "x"}], "]"}]}], "-", 
+         RowBox[{
+          RowBox[{"D", "[", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"P2", "*", 
+              RowBox[{"w", "[", "x", "]"}]}], ")"}], ",", "x"}], "]"}], "*", 
+          RowBox[{"y", "[", "x", "]"}]}], "+", 
+         RowBox[{"P1", "*", 
+          RowBox[{"w", "[", "x", "]"}], "*", 
+          RowBox[{"y", "[", "x", "]"}]}]}], ")"}], "/.", 
+       RowBox[{"x", "\[Rule]", "intervalL"}]}], ")"}]}]}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.833541640185152*^9, 3.833541858862266*^9}}]
+},
+WindowSize->{759, 697},
+WindowMargins->{{3, Automatic}, {-33, Automatic}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 796, 20, 161, "Input"],
+Cell[1357, 42, 2190, 64, 107, "Input"]
+}
+]
+*)
+

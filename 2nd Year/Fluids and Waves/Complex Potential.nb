@@ -1,0 +1,145 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3879,        137]
+NotebookOptionsPosition[      3422,        117]
+NotebookOutlinePosition[      3771,        132]
+CellTagsIndexPosition[      3728,        129]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Uniform", " ", "flow"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"wunif", "[", "z_", "]"}], "=", 
+     RowBox[{"U", "*", 
+      SuperscriptBox["E", 
+       RowBox[{
+        RowBox[{"-", "I"}], "*", "\[Alpha]"}]], "z"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Line", " ", "Source"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"wline", "[", 
+      RowBox[{"z_", ",", "c_"}], "]"}], "=", 
+     RowBox[{
+      FractionBox["Q", 
+       RowBox[{"2", "\[Pi]"}]], 
+      RowBox[{"Log", "[", 
+       RowBox[{"z", "-", "c"}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Line", " ", "Vortex"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"wvortex", "[", 
+      RowBox[{"z_", ",", "c_"}], "]"}], "=", 
+     RowBox[{
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"I", "*", "\[CapitalGamma]"}], 
+        RowBox[{"2", "\[Pi]"}]]}], 
+      RowBox[{"Log", "[", 
+       RowBox[{"z", "-", "c"}], "]"}]}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.832996469532834*^9, 3.832996498923126*^9}, {
+  3.832996551699348*^9, 3.8329966790183945`*^9}}],
+
+Cell["", "PageBreak",
+ PageBreakBelow->True],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"w", "[", "z_", "]"}], "=", 
+  RowBox[{
+   RowBox[{
+    FractionBox["Q", 
+     RowBox[{"2", "\[Pi]"}]], 
+    RowBox[{"Log", "[", 
+     RowBox[{"z", "-", "d"}], "]"}]}], "+", 
+   RowBox[{
+    FractionBox["Q", 
+     RowBox[{"2", "\[Pi]"}]], 
+    RowBox[{"Log", "[", 
+     RowBox[{"z", "+", "d"}], "]"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.8329967018871975`*^9, 3.832996727352103*^9}, {
+  3.832996762615423*^9, 3.8329967646971316`*^9}, {3.8329968121034193`*^9, 
+  3.8329968188102465`*^9}, {3.832996990044639*^9, 3.832996994731138*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox[
+   RowBox[{"Q", " ", 
+    RowBox[{"Log", "[", 
+     RowBox[{
+      RowBox[{"-", "d"}], "+", "z"}], "]"}]}], 
+   RowBox[{"2", " ", "\[Pi]"}]], "+", 
+  FractionBox[
+   RowBox[{"Q", " ", 
+    RowBox[{"Log", "[", 
+     RowBox[{"d", "+", "z"}], "]"}]}], 
+   RowBox[{"2", " ", "\[Pi]"}]]}]], "Output",
+ CellChangeTimes->{3.8329969958384523`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"u", "-", "vI"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"D", "[", 
+    RowBox[{
+     RowBox[{"w", "[", "z", "]"}], ",", "z"}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"D", "[", 
+     RowBox[{
+      RowBox[{"w", "[", "z", "]"}], ",", "z"}], "]"}], "/.", 
+    RowBox[{"z", "\[Rule]", 
+     RowBox[{"x", "+", 
+      RowBox[{"y", "*", "I"}]}]}]}]}]}]], "Input",
+ CellChangeTimes->{{3.8329968228891783`*^9, 3.8329969523104973`*^9}, {
+   3.832997028185294*^9, 3.832997071887514*^9}, 3.83299710817927*^9}]
+},
+WindowSize->{775, 657},
+WindowMargins->{{Automatic, 48}, {-161, Automatic}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1242, 38, 166, "Input"],
+Cell[1803, 60, 44, 1, 4, "PageBreak",
+ PageBreakBelow->True],
+Cell[CellGroupData[{
+Cell[1872, 65, 569, 16, 50, "Input"],
+Cell[2444, 83, 378, 13, 47, "Output"]
+}, Open  ]],
+Cell[2837, 99, 581, 16, 69, "Input"]
+}
+]
+*)
+

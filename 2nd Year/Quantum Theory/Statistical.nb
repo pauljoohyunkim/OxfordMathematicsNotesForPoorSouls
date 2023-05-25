@@ -1,0 +1,133 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3815,        125]
+NotebookOptionsPosition[      3530,        111]
+NotebookOutlinePosition[      3878,        126]
+CellTagsIndexPosition[      3835,        123]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Complex", " ", "Inner", " ", "Product", " ", "and", " ", "Other", " ", 
+    "Functions"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"inner", "=", 
+     RowBox[{
+      RowBox[{"Dot", "[", 
+       RowBox[{
+        RowBox[{"Conjugate", "[", 
+         RowBox[{
+          RowBox[{"Transpose", "[", "#1", "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"Transpose", "[", "#2", "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "&"}]}], ";"}], "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Expectation", "[", 
+     RowBox[{"operator", ",", "state"}], "]"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"expectation", "=", 
+     RowBox[{
+      RowBox[{"inner", "[", 
+       RowBox[{"#2", ",", 
+        RowBox[{"#1", ".", "#2"}]}], "]"}], "&"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Dispersion", "[", 
+     RowBox[{"operator", ",", "state"}], "]"}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"dispersion", "=", 
+     RowBox[{
+      SqrtBox[
+       RowBox[{
+        RowBox[{"inner", "[", 
+         RowBox[{"#2", ",", 
+          RowBox[{
+           RowBox[{"MatrixPower", "[", 
+            RowBox[{"#1", ",", "2"}], "]"}], ".", "#2"}]}], "]"}], "-", 
+        SuperscriptBox[
+         RowBox[{"expectation", "[", 
+          RowBox[{"#2", ",", 
+           RowBox[{"#1", ".", "#2"}]}], "]"}], "2"]}]], "&"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Spectrum", " ", "and", " ", "States"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"eig", "=", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Eigenvectors", "[", "#1", "]"}], ",", 
+        RowBox[{"Eigenvalues", "[", "#1", "]"}]}], "}"}], "&"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Vector", " ", "Template"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", "a", "}"}], ",", 
+     RowBox[{"{", "b", "}"}]}], "}"}]}]}]], "Input",
+ CellChangeTimes->{{3.8328313671789017`*^9, 3.832831398809862*^9}, 
+   3.832831749302541*^9, {3.8328319949976697`*^9, 3.832832022197298*^9}, 
+   3.8328323385909615`*^9, {3.8328335752450085`*^9, 3.83283363541539*^9}, {
+   3.8328336799843283`*^9, 3.832833683111195*^9}, {3.8328376189179153`*^9, 
+   3.832837634054123*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "Operators", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"H", "=", 
+     RowBox[{"h", "*", "w", 
+      RowBox[{"(", GridBox[{
+         {"1", "a"},
+         {"a", "1"}
+        }], ")"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"A", "=", 
+     RowBox[{"(", GridBox[{
+        {
+         RowBox[{"-", "1"}], "0"},
+        {"0", "1"}
+       }], ")"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.8328334922119455`*^9, 3.8328335684241705`*^9}, {
+  3.83283370858603*^9, 3.832833726319033*^9}}]
+},
+WindowSize->{775, 657},
+WindowMargins->{{327, Automatic}, {-3, Automatic}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 2396, 68, 214, "Input"],
+Cell[2957, 90, 569, 19, 103, "Input"]
+}
+]
+*)
+

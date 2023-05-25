@@ -1,0 +1,78 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      1903,         70]
+NotebookOptionsPosition[      1620,         56]
+NotebookOutlinePosition[      1968,         71]
+CellTagsIndexPosition[      1925,         68]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"f", "=", 
+   FractionBox["z", 
+    RowBox[{
+     RowBox[{"4", 
+      SuperscriptBox["z", "4"]}], "+", 
+     RowBox[{"17", 
+      SuperscriptBox["z", "2"]}], "+", "4"}]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"r", "[", "t_", "]"}], "=", 
+   SuperscriptBox["E", 
+    RowBox[{"I", "*", "t"}]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tmin", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tmax", "=", 
+   RowBox[{"2", "Pi"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8325754441600695`*^9, 3.8325755394995008`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Integrate", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"f", "/.", 
+      RowBox[{"z", "\[Rule]", 
+       RowBox[{"r", "[", "t", "]"}]}]}], ")"}], "*", 
+    RowBox[{"D", "[", 
+     RowBox[{
+      RowBox[{"r", "[", "t", "]"}], ",", "t"}], "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "tmin", ",", "tmax"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8325754809376793`*^9, 3.8325755163142166`*^9}}]
+},
+WindowSize->{775, 657},
+WindowMargins->{{372, Automatic}, {Automatic, 54}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 605, 19, 108, "Input"],
+Cell[1166, 41, 450, 13, 30, "Input"]
+}
+]
+*)
+
