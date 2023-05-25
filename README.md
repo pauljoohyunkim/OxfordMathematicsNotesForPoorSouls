@@ -12,3 +12,11 @@ You can do so by issuing the following command:
 ```
 git clone https://github.com/pauljoohyunkim/OxfordMathematicsNotesForPoorSouls.git
 ```
+
+# Updating the Repo
+If you've cloned the repository, and you wish to update to the most recent version,
+issue the following command:
+```
+git fetch
+git merge
+```
