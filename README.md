@@ -20,3 +20,7 @@ issue the following command:
 git fetch
 git merge
 ```
+
+# Donation
+I've paid too much for uni tuition, so plz help me:
+https://www.paypal.com/donate/?hosted_button_id=CAWE3CL8AK87N
