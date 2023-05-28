@@ -1,0 +1,259 @@
+% arara: pdflatex
+%        File: continuous-optimisation-theorems.tex
+%     Created: Sun May 28 01:00 AM 2023 B
+% Last Change: Sun May 28 01:00 AM 2023 B
+%
+\documentclass[a4paper]{article}
+\usepackage[]{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\Lagrangian}{\mathcal{L}}
+\newcommand{\st}{\text{ s.t. }}
+\newcommand{\norm}[1]{\lvert \lvert #1 \rvert \rvert}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{definition*}{Definition}
+
+\title{Continuous Optimisation Theorems}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+% Lemma 1
+\begin{lemma}
+    Let $f \in \C$, $x \in \R^n$, and $s \in \R^n$ with $s \neq 0$. Then
+    \begin{equation*}
+        \nabla f(x)^T s < 0 \implies f (x + \alpha s) < f(x) \hspace{1cm} \forall \alpha>0 \text{ suff. small}
+    \end{equation*}
+\end{lemma}
+
+% Exact liensearch for quadratics
+\begin{lemma*}[Exact linesearch for quadratics]
+    For $q(x) = g^T x + \frac{1}{2} x^T H x$, $\phi (\alpha) \coloneqq q ( x + \alpha s )$,
+   \begin{equation*}
+       \alpha = - \frac{\nabla f(x)^T s}{s^T H s}
+   \end{equation*}
+\end{lemma*}
+
+% Armijo Condition
+\begin{definition*}[Armijo Condition]
+    Choose $\beta \in \left( 0, 1 \right)$.
+    \begin{equation*}
+        f\left( x^k + \alpha^k s^k \right) \leq f\left( x^k \right) + \beta \alpha^k \nabla f\left( x^k \right)^T s^k
+    \end{equation*}
+\end{definition*}
+
+% Lemma 2
+\begin{lemma}
+    Let $f \in \C^1 \left( \R^n \right)$ with $\nabla f$ Lipschitz continuous with $L$, then Armijo condition at $k$\textsuperscript{th} satisfied for all $\alpha \in \left[ 0, \alpha_{\max}^k \right]$ where
+    \begin{equation*}
+        \alpha_{\max}^{k} = \frac{\left( \beta - 1 \right) \nabla f \left( x^k \right)^T s^k}{L \norm{s^k}^2}
+    \end{equation*}
+\end{lemma}
+
+% Lemma 3
+\begin{lemma}
+    Let $f \in \C^1 \left( \R^n \right)$ with $\nabla f$ Lipschitz continuous with $L$, then at $k$\textsuperscript{th} iteration,
+    \begin{equation*}
+        \alpha^k \geq \min \left\{ \alpha_{(0)}, \tau \alpha_{\max}^k \right\}
+    \end{equation*}
+\end{lemma}
+
+\setcounter{theorem}{3}
+% Lemma 4
+\begin{theorem}[Convergence of GLM]
+    Let $f \in \C^1 \left( \R^n \right)$ bounded below by $f_{\text{low}}$,
+    and $\nabla f$ Lipschitz continuous.
+    Then either
+    \begin{equation*}
+        \exists l \geq 0 \st \nabla f \left( x^l \right) = 0
+    \end{equation*}
+    or
+    \begin{equation*}
+        \lim_{k \rightarrow \infty} \min \left\{ \frac{|\nabla f \left( x^k \right)^T s^k|}{\norm{s^k}}, |\nabla f \left( x^k \right)^T s^k| \right\} = 0
+    \end{equation*}
+\end{theorem}
+
+\setcounter{theorem}{5}
+% Lemma 6
+\begin{theorem}[Exact Linesearch Convergence]
+    $f \in \C^2$, $x^*$ local minimizer of $f$ with $\nabla^2 f\left( x^* \right)$ positive definite between $\lambda_{\max}^*$ and $\lambda_{\min}^{*}$.
+    With SD-e, if $x^k \rightarrow x^*$ as $k \rightarrow \infty$, then $x^k$ converges linearly to $x^*$:
+    \begin{equation*}
+        \rho \leq \frac{\kappa \left( x^* \right) - 1}{\kappa \left( x^* + 1 \right)}
+    \end{equation*}
+\end{theorem}
+
+\begin{definition*}[Newton's Method]
+    \begin{equation*}
+        s^k \coloneqq - \left( \nabla^2 f \left( x^k \right) \right)^{-1} \nabla f \left( x^k \right)
+    \end{equation*}
+\end{definition*}
+
+% Theorem 9 Global Convergence of Newton
+\setcounter{theorem}{8}
+\begin{theorem}[Convergence of Newton bArmijo]
+    \begin{itemize}
+        \item $f \in \C^2 \left( \R^n \right)$ bounded below.
+        \item $\nabla f$ Lipschitz continuous.
+        \item Newton's method + bArmijo linesearch.
+        \item For all $k \geq 0$, eigenvalues of $\nabla^2 f\left( x^k \right)$ at iterates by positive and uniformly bounded below, away from zero, independently of $k$.
+    \end{itemize}
+    Then either
+    \begin{equation*}
+        \exists l \geq 0 \st \nabla f \left( x^l \right) = 0
+    \end{equation*}
+    or
+    \begin{equation*}
+        \norm{\nabla f \left( x^k \right)} \rightarrow 0
+    \end{equation*}
+    as $k \rightarrow \infty$
+\end{theorem}
+
+\begin{definition*}[Secant Approximation]
+    $B^k \approx \nabla^2 f \left( x^k \right)$ where
+    \begin{equation*}
+        \underbrace{\nabla f \left( x^{k+1} \right) - \nabla f \left( x^k \right)}_{\gamma^k} = B^{k+1} \underbrace{\left( x^{k+1} - x^k \right)}_{\delta^k}
+    \end{equation*}
+\end{definition*}
+
+\begin{definition*}[SR1]
+    $B^{k+1} \coloneqq B^k + u^k \left( u^k \right)^T$ where
+    \begin{equation*}
+        u^k = \frac{\gamma^k - B^k \delta^k}{\rho^k}
+    \end{equation*}
+    where $\left( \rho^k \right)^2 \coloneqq \left( \gamma^k - B^k \delta^k \right)^T \delta^k > 0$
+\end{definition*}
+
+\begin{definition*}[BFGS]
+    See Lecture Note.
+\end{definition*}
+
+\begin{definition*}[Gauss-Newton]
+    $\nabla^{2} f (x) = J(x)^T J(x) + \underbrace{\sum_{j=1}^m r_j (x) \nabla^{2} r_j (x)}_{\text{Negligible}}$ suggests
+    \begin{equation*}
+        J \left( x^k \right)^T J\left( x^k \right) s^k = -J\left( x^k \right)^T r\left( x^k \right)
+    \end{equation*}
+\end{definition*}
+
+% Trust Region Method
+% Decrease Parameter:
+\begin{definition*}[TR Decrease Param]
+    $\rho^k \coloneqq \frac{f\left( x^k \right) - f\left( x^k + s^k \right)}{f\left( x^k \right) - m_k \left( s^k \right)}$
+\end{definition*}
+
+\begin{definition*}[Cauchy Point]
+    $\alpha_c^k \coloneqq \arg \min_{\alpha > 0} m_{k} \left( -\alpha \nabla f \left( x^k \right) \right)$ subject to $\norm{\alpha \nabla f \left( x^k \right)} \leq \Delta_k$
+\end{definition*}
+
+\setcounter{theorem}{10}
+\begin{theorem}[GTR Global Convergence]
+    \phantom \\
+    \begin{itemize}
+        \item $f \in \C^2 \left( \R^n \right)$ bounded below.
+        \item $\nabla f$ Lipschitz continuous.
+        \item $m_k \left( s^k \right) \leq m_k \left( s_c^k \right)$ for all $k$.
+    \end{itemize}
+    Then either
+    \begin{equation*}
+        \exists k \geq 0 \st \nabla f \left( x^k \right) = 0
+    \end{equation*}
+    or
+    \begin{equation*}
+        \lim_{k \rightarrow \infty} \norm{\nabla f \left( x^k \right)} = 0
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}[Cauchy Model Decrease]
+    GTR with Cauchy decrease $m_k \left( s^k \right) \leq m_k \left( s_c^k \right)$ for all $k$,
+    \begin{equation*}
+    f\left( x^k \right) - m_k \left( s^k \right) \geq f \left( x^k \right) - m_k \left( s_c^k \right) \geq \frac{1}{2} \norm{\nabla f \left( x^k \right)} \min \left\{ \Delta_k, \frac{\norm{\nabla f \left( x^k \right)}}{\nabla^2 f \left( x^k \right)} \right\}
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}[Lower bound on TR radius]
+    $f \in \C^2 \left( \R^n \right)$, $\nabla f$ Lipschitz, Cauchy decrease.
+    Suppose $\exists \epsilon > 0$ such that $\norm{\nabla f \left( x^k \right)} \geq \epsilon$ for all $k$, then
+    \begin{equation*}
+        \exists c \in \left( 0, 1 \right) \text{ indep of } k \st \Delta_k \geq \frac{c}{L} \epsilon
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}[At least one limit point is stationary]
+    $f \in \C^2 \left( \R^n \right)$, $\nabla f$ Lipschitz, Cauchy decrease.
+    Then either $\exists k \geq 0 \st \nabla f \left( x^k \right) = 0$ or
+    \begin{equation*}
+        {\lim \inf}_{k \rightarrow \infty} \norm{\nabla f \left( x^k \right)} = 0
+    \end{equation*}
+\end{theorem}
+
+\begin{theorem}[Global Minimizer of TR Subproblem]
+    \begin{equation*}
+        \underbrace{\left( H + \lambda^* I \right)}_{\text{positive semidef}} s^{*} = -g
+    \end{equation*}
+    with $\lambda^* \geq 0$, $\lambda^* \left( \norm{s^*} - \Delta \right) = 0$, and $\norm{s^*} \leq \Delta$
+\end{theorem}
+
+% Constrained Problem
+\begin{definition*}[KKT of (CP)]
+    \begin{align*}
+        \nabla f \left( \hat x \right) &= J_E (x)^T \hat y + J_{I}(x)^T \hat \lambda \\
+        c_E \left( \hat x \right) &= 0 \\
+        c_I \left( \hat x \right) &\geq 0 \\
+        \hat \lambda_i &\geq 0 \\
+        \hat \lambda_i c_i \left( \hat x \right) &= 0
+    \end{align*}
+\end{definition*}
+
+\begin{definition*}[Lagrangian of (CP)]
+    \begin{align*}
+        \Lagrangian \left( x, y, \lambda \right) &\coloneqq f(x) - y^T c_E (x) - \lambda^T c_I (x) \\
+        \nabla_x \Lagrangian \left( x,y, \lambda \right) &= \nabla f(x) - J_E (x)^T y - J_I(x)^T \lambda
+    \end{align*}
+    so KKT implies $\nabla_{x} \Lagrangian \left( \hat x, \hat y, \hat \lambda \right) = 0$
+\end{definition*}
+
+\begin{theorem}[First Order Necessary Condition for (CP)]
+    $x^*$ local minimizer implies $x^*$ KKT under one of the conditions:
+    \begin{itemize}
+        \item Slater: $\exists x \st c_E(x) = Ax - b = 0$ and $c_I(x) > 0$
+        \item LICQ: $\nabla c_i (x)$ linearly indep.
+    \end{itemize}
+\end{theorem}
+
+\begin{theorem}[Sufficient Optimality Conditions for Convex Problem]
+    (CP) be convex programming problem, then KKT implies global minimizer.
+\end{theorem}
+
+\textbf{See notes for second order conditions}
+
+% Penalty Method
+\begin{definition*}[Quadratic Penalty Function]
+    \begin{equation*}
+        \Phi_\sigma (x) = f(x) + \frac{1}{2\sigma} \norm{c(x)}^2
+    \end{equation*}
+\end{definition*}
+
+\setcounter{theorem}{20}
+\begin{theorem}[Global Convergence of Penalty Method]
+    Apply basic quadratic penalty method.
+    Assume $f,c \in \C^1$, $y_i^k \coloneqq -c_i \left( x^k \right) / \sigma^k$ for $i = 1, 2, \cdots, m$, and
+    \begin{equation*}
+        \norm{\nabla \Phi_{\sigma^k} \left( x^k \right)} \leq \epsilon^k
+    \end{equation*}
+    where $\epsilon^k \rightarrow 0$.
+
+    Then,
+    $x^*$ is KKT, and $y^k \rightarrow y^*$, the vector of Lagrange multipliers of constraints.
+\end{theorem}
+
+\end{document}
+
+
