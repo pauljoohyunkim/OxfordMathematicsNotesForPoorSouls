@@ -87,7 +87,7 @@
     $f \in \C^2$, $x^*$ local minimizer of $f$ with $\nabla^2 f\left( x^* \right)$ positive definite between $\lambda_{\max}^*$ and $\lambda_{\min}^{*}$.
     With SD-e, if $x^k \rightarrow x^*$ as $k \rightarrow \infty$, then $x^k$ converges linearly to $x^*$:
     \begin{equation*}
-        \rho \leq \frac{\kappa \left( x^* \right) - 1}{\kappa \left( x^* + 1 \right)}
+        \rho \leq \frac{\kappa \left( x^* \right) - 1}{\kappa \left( x^* \right) + 1}
     \end{equation*}
 \end{theorem}
 
@@ -137,6 +137,12 @@
 \end{definition*}
 
 \begin{definition*}[Gauss-Newton]
+    For nonlinear least-squares (NLS):
+    \begin{equation*}
+        f(x) \coloneqq \frac{1}{2} \sum_{j=1}^m \left( r_j (x) \right)^2 = \frac{1}{2} \norm{r(x)}^2
+    \end{equation*}
+    where $r:\R^n \rightarrow \R^m$,
+
     $\nabla^{2} f (x) = J(x)^T J(x) + \underbrace{\sum_{j=1}^m r_j (x) \nabla^{2} r_j (x)}_{\text{Negligible}}$ suggests
     \begin{equation*}
         J \left( x^k \right)^T J\left( x^k \right) s^k = -J\left( x^k \right)^T r\left( x^k \right)
