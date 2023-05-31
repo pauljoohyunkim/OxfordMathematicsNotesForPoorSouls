@@ -134,7 +134,12 @@
 \end{definition*}
 
 \begin{definition*}[BFGS]
-    See Lecture Note.
+    $B^{k+1} \coloneqq B^k + u^k \left( u^k \right)^T + v^k \left( v^k \right)^T$ where
+    \begin{align*}
+        u^k \left( u^k \right)^T &=  \frac{1}{\gamma^T \delta^k}\gamma^k \left( \gamma^k \right)^T \\
+        v^k \left( v^k \right)^T &=  - \frac{B^k \delta^k \left( B^k \delta^k \right)^T}{\left( \delta^k \right)^T B^k \delta^k}
+    \end{align*}
+    where $\left( \rho^k \right)^2 \coloneqq \left( \gamma^k - B^k \delta^k \right)^T \delta^k > 0$
 \end{definition*}
 
 \begin{definition*}[Gauss-Newton]
