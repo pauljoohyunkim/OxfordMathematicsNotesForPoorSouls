@@ -232,7 +232,17 @@
     (CP) be convex programming problem, then KKT implies global minimizer.
 \end{theorem}
 
-\textbf{See notes for second order conditions}
+\begin{theorem}[Second-order Necessary Conditions]
+    (CP) satisfies some CQ. Let $x^*$ be a local minimizer,
+    and $\left( y^*, \lambda^* \right)$ are Lagrange multipliers of KKT at $x^*$.
+
+    Then,
+    \begin{equation*}
+        s^T \nabla_{xx}^2 \mathcal{L} \left( x^*, y^*, \lambda^* \right) s \geq 0 \hspace{1cm} \forall s \in F \left( \lambda^* \right)
+    \end{equation*}
+\end{theorem}
+
+%\textbf{See notes for second order conditions}
 
 % Penalty Method
 \begin{definition*}[Quadratic Penalty Function]
