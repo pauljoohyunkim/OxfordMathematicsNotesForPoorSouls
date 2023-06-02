@@ -87,8 +87,9 @@
     $f \in \C^2$, $x^*$ local minimizer of $f$ with $\nabla^2 f\left( x^* \right)$ positive definite between $\lambda_{\max}^*$ and $\lambda_{\min}^{*}$.
     With SD-e, if $x^k \rightarrow x^*$ as $k \rightarrow \infty$, then $x^k$ converges linearly to $x^*$:
     \begin{equation*}
-        \rho \leq \frac{\kappa \left( x^* \right) - 1}{\kappa \left( x^* + 1 \right)}
+        \rho \leq \frac{\kappa \left( x^* \right) - 1}{\kappa \left( x^* \right) + 1} \eqqcolon \rho_{SD}
     \end{equation*}
+    where $\kappa\left( x^* \right) = \frac{\lambda_{\max}^*}{\lambda_{\min}^*} = \kappa \left( \nabla^2 f\left( x^* \right) \right)$.
 \end{theorem}
 
 \begin{definition*}[Newton's Method]
@@ -133,10 +134,21 @@
 \end{definition*}
 
 \begin{definition*}[BFGS]
-    See Lecture Note.
+    $B^{k+1} \coloneqq B^k + u^k \left( u^k \right)^T + v^k \left( v^k \right)^T$ where
+    \begin{align*}
+        u^k \left( u^k \right)^T &=  \frac{1}{\gamma^T \delta^k}\gamma^k \left( \gamma^k \right)^T \\
+        v^k \left( v^k \right)^T &=  - \frac{B^k \delta^k \left( B^k \delta^k \right)^T}{\left( \delta^k \right)^T B^k \delta^k}
+    \end{align*}
+    where $\left( \rho^k \right)^2 \coloneqq \left( \gamma^k - B^k \delta^k \right)^T \delta^k > 0$
 \end{definition*}
 
 \begin{definition*}[Gauss-Newton]
+    For nonlinear least-squares (NLS):
+    \begin{equation*}
+        f(x) \coloneqq \frac{1}{2} \sum_{j=1}^m \left( r_j (x) \right)^2 = \frac{1}{2} \norm{r(x)}^2
+    \end{equation*}
+    where $r:\R^n \rightarrow \R^m$,
+
     $\nabla^{2} f (x) = J(x)^T J(x) + \underbrace{\sum_{j=1}^m r_j (x) \nabla^{2} r_j (x)}_{\text{Negligible}}$ suggests
     \begin{equation*}
         J \left( x^k \right)^T J\left( x^k \right) s^k = -J\left( x^k \right)^T r\left( x^k \right)
@@ -174,7 +186,7 @@
 \begin{theorem}[Cauchy Model Decrease]
     GTR with Cauchy decrease $m_k \left( s^k \right) \leq m_k \left( s_c^k \right)$ for all $k$,
     \begin{equation*}
-    f\left( x^k \right) - m_k \left( s^k \right) \geq f \left( x^k \right) - m_k \left( s_c^k \right) \geq \frac{1}{2} \norm{\nabla f \left( x^k \right)} \min \left\{ \Delta_k, \frac{\norm{\nabla f \left( x^k \right)}}{\nabla^2 f \left( x^k \right)} \right\}
+        f\left( x^k \right) - m_k \left( s^k \right) \geq f \left( x^k \right) - m_k \left( s_c^k \right) \geq \frac{1}{2} \norm{\nabla f \left( x^k \right)} \min \left\{ \Delta_k, \frac{\norm{\nabla f \left( x^k \right)}}{\norm{\nabla^2 f \left( x^k \right)}} \right\}
     \end{equation*}
 \end{theorem}
 
@@ -228,6 +240,12 @@
     \end{itemize}
 \end{theorem}
 
+\begin{definition*}[Convex Programming Problem]
+    $f(x)$ is a convex function, $c_i(x)$ is a concave function for all $i \in I$,
+    and $c_E(x) \coloneqq Ax - b$
+\end{definition*}
+
+\setcounter{theorem}{17}
 \begin{theorem}[Sufficient Optimality Conditions for Convex Problem]
     (CP) be convex programming problem, then KKT implies global minimizer.
 \end{theorem}
