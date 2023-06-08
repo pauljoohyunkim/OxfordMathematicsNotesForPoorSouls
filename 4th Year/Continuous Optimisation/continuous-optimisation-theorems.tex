@@ -282,6 +282,23 @@
     $x^*$ is KKT, and $y^k \rightarrow y^*$, the vector of Lagrange multipliers of constraints.
 \end{theorem}
 
+% Global Convergence of Augmented Lagrangian
+\begin{theorem}[Global Convergence of Augmented Lagrangian]
+    Assuming $f,c \in \C^1$ in \begin{equation*}
+        \min_{x\in\R^n} f(x) \st c(x) = 0
+    \end{equation*}
+    let $y^k = u^k - \frac{c\left( x^k \right)}{\sigma^k}$
+    for some $u^k \in \R^m$,
+    and assume that
+    \begin{equation*}
+        \norm{\nabla \Phi \left( x^k, u^k, \sigma^k \right)} \leq \epsilon^k
+    \end{equation*}
+    where $\epsilon^k \rightarrow 0, k \rightarrow \infty$.
+    Additionally assume $x^k \rightarrow x^*$ where $\nabla c_i \left( x^* \right)$ are linearly independent.
+
+    Then, $y^k \rightarrow y^*$ as $k \rightarrow \infty$ with $y^*$ satisfying $\nabla f\left( x^* \right) - J \left( x^* \right)^T y^* = 0$
+\end{theorem}
+
 \end{document}
 
 
