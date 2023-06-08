@@ -294,6 +294,12 @@
     $x^*$ is KKT, and $y^k \rightarrow y^*$, the vector of Lagrange multipliers of constraints.
 \end{theorem}
 
+\begin{definition*}[Augmented Lagrangian]
+    \begin{equation*}
+        \Phi (x, u, \sigma) = f(x) - u^T c(x) + \frac{1}{2\sigma} \norm{c(x)}^2
+    \end{equation*}
+\end{definition*}
+
 % Global Convergence of Augmented Lagrangian
 \begin{theorem}[Global Convergence of Augmented Lagrangian]
     Assuming $f,c \in \C^1$ in \begin{equation*}
