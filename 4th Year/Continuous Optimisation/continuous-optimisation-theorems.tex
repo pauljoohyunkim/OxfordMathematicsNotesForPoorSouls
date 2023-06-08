@@ -98,6 +98,18 @@
     \end{equation*}
 \end{definition*}
 
+% Theorem 7 Newton Convergence
+\begin{theorem}[Local Convergence of (Pure) Newton's Method]
+    \begin{itemize}
+        \item $f \in \C^2 \left( \R^n \right)$
+        \item $\nabla f \left( x^* \right) = 0$
+        \item $\nabla^2 f \left( x^* \right)$ nonsingular.
+        \item $\nabla^2 f$ locally Lipschitz continuous at $x^*$
+    \end{itemize}
+    Then,
+    $x^k \rightarrow x^*$ at quadratic rate.
+\end{theorem}
+
 % Theorem 9 Global Convergence of Newton
 \setcounter{theorem}{8}
 \begin{theorem}[Convergence of Newton bArmijo]
