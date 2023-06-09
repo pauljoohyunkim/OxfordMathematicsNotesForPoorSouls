@@ -5,8 +5,33 @@
 %
 \documentclass[a4paper]{article}
 
+\usepackage[]{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
 \usepackage[]{hyperref}
 
+% Augmented Matrix (Argument is one less than the number of columns)
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\newcommand{\R}{\mathbb{R}}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+
+\numberwithin{equation}{section}
+\numberwithin{definition}{section}
+\numberwithin{example}{section}
+\numberwithin{exercise}{section}
+\numberwithin{remark}{section}
 \title{Linear Algebra I \& II Summary}
 \author{Paul Kim}
 \begin{document}
@@ -21,11 +46,317 @@ you are at the right place.
 This document is based on 2019 linear algebra I and 2018 linear algebra II lecture notes by Vicky Neale and Ulrike Tillmann.
 You can check them out at \url{https://courses.maths.ox.ac.uk/} in the Archive tab.
 
+Most examples here will include the ones from these lecture notes.
+
+Note that this summary note will gloss over quite many of the proofs, but will try to give geometric intuition behind them.
+
 \newpage
 \part{Linear Algebra I}
 \newpage
 
 \section{Linear Equations and Matrices}
+You've probably already seen linear system of equations like the following:
+\begin{align}
+    &
+    \begin{cases}
+        3x + 5y = -1 \\
+        4x - y = 10
+    \end{cases}
+    \label{equ: Linear Equation 1}
+    \\
+    &
+    \begin{cases}
+        2x + y = 0 \\
+        4x + 2y = 1
+    \end{cases}
+    \label{equ: Linear Equation 2}
+    \\
+    &
+    \begin{cases}
+        8x - 7y + 6z = 59 \\
+        x + 2z = 9 \\
+        3x + 2y - z = 11
+    \end{cases}
+    \label{equ: Linear Equation 3}
+\end{align}
+Note that (\ref{equ: Linear Equation 1}) and (\ref{equ: Linear Equation 3}) are uniquely solvable, but (\ref{equ: Linear Equation 2}) does not have solution.
+
+You've probably also seen examples of ones with infinite solutions (because for example, you have more variables than ``effective'' equations).
+
+You can analyze them by hand, but is there a systematic approach to analyzing them?
+Say, you are telling a computer to solve these. What are your options?
+
+\begin{definition}[Matrix]
+    For $m,n \geq 1$, an \underline{$m \times n$ matrix} is a rectangular array with $m$ rows and $n$ columns with entries from $\R$ (or $\mathbb{C}$ or other fields).
+\end{definition}
+\begin{remark}
+    \textbf{Always count the number of rows, then number of columns}.
+\end{remark}
+\begin{remark}
+    Notation: For matrix $A \in \R^{m \times n}$, $A_{i,j}$ represents the entry at row $i$ and column $j$.
+\end{remark}
+\begin{example}[Matrices]
+    Here are examples of $3 \times 2$ matrices:
+    \begin{align*}
+        &
+        \begin{pmatrix}
+            3 & 2 & 1 \\
+            1 & -2/3 & 0
+        \end{pmatrix} \\
+        &
+        \begin{pmatrix}
+            0 & 0 & 0 \\
+            i & 0 & 0
+        \end{pmatrix}
+    \end{align*}
+\end{example}
+\begin{definition}[Vector]
+    An $n \times 1$ matrix is called a \textbf{column vector}.
+    A $1 \times n$ matrix is called a \textbf{row vector}.
+\end{definition}
+\begin{example}[Vector]
+    Here are examples of a column vector and a row vector respectively:
+    \begin{align*}
+        &
+    \begin{pmatrix}
+        1 \\
+        0 \\
+        -1
+    \end{pmatrix}
+    \\
+    &
+    \begin{pmatrix}
+        1 & 3 & 2 & 5
+    \end{pmatrix}
+    \end{align*}
+\end{example}
+\begin{remark}
+    \textbf{I highly recommend using variables for denoting column vectors by default}.
+    For example $v = 
+    \begin{pmatrix}
+        1 \\ 2
+    \end{pmatrix}
+    $
+    If you get a row vector, always denote it with a transpose: $ v^T =
+    \begin{pmatrix}
+        1 & 2
+    \end{pmatrix}
+    $
+    This is because by convention, we will use left multiplication by a matrix far more often then right multiplication.
+\end{remark}
+\begin{definition}[Square Matrices]
+    A matrix with the same number of rows and columns is called a \textbf{square matrix}.
+\end{definition}
+
+\subsection{Matrix Multiplication and Transpose}
+Addition and subtractions: $A + B$ are defined naturally by their entry-wise operation. (Note that $A$ and $B$ have to have the same dimensions!)
+Multiplication of matrices $A$ and $B$ are defined for $A \in \R^{m \times n}$, $B \in \R^{n \times \ell}$ as the following
+\begin{definition}[Matrix Multiplication]
+    \begin{equation*}
+        \left( A B \right)_{i, j} = \sum_{k = 1}^{n} \left( A_{i,k} \right) \left( B_{k,j} \right)
+    \end{equation*}
+    Note that the resulting $AB$ has dimension $m \times \ell$.
+\end{definition}
+\begin{example}[Matrix Multiplication]
+    Consider the following two matrices:
+    \begin{align*}
+        A &=
+        \underbrace{
+        \begin{pmatrix}
+            3 & 1 & 2 \\
+            4 & 5 & -1
+    \end{pmatrix}}_{2 \times 3} \\
+        B &=
+        \underbrace{
+        \begin{pmatrix}
+            10 \\
+            15 \\
+            -5
+        \end{pmatrix}
+    }_{3 \times 1}
+    \end{align*}
+    Then:
+    \begin{equation*}
+        AB = 
+        \underbrace{
+        \begin{pmatrix}
+            3 & 1 & 2 \\
+            4 & 5 & -1
+    \end{pmatrix}}_{2 \times 3}
+        \underbrace{
+        \begin{pmatrix}
+            10 \\
+            15 \\
+            -5
+        \end{pmatrix}
+    }_{3 \times 1}
+    =
+    \underbrace{
+    \begin{pmatrix}
+        3 \times 10 + 1 \times 15 + 2 \times (-5) \\
+        4 \times 10 + 5 \times 15 + (-1) \times (-5)
+    \end{pmatrix}
+}_{2 \times 1}
+    \end{equation*}
+\end{example}
+\begin{remark}
+    One way to remember if matrix multiplication is well-defined is to note that:
+    $m \times$ \underline{$n$} and \underline{$n$} $\times \ell$ results in $m \times \ell$.
+\end{remark}
+\begin{remark}
+    The way matrix multiplication is defined may not be intuitive.
+    However, it is a natural way to capture \textit{linear transforms}.
+\end{remark}
+\begin{exercise}[Associativity of Matrix Multiplication]
+    Show that for $A \in \R^{m \times n}$, $B \in \R^{n \times \ell}$, and $C \in \R^{\ell \times p}$, then $(AB)C = A(BC)$. Is it true that $AB=BA$ in general?
+\end{exercise}
+\begin{exercise}[Diagonal matrices form a ring]
+    Show that for \textbf{diagonal matrices} $A \in \R^{n \times n}$ and $B \in \R^{n \times n}$ such that $A_{i,j} = B_{i,j} = 0$ for $i \neq j$, $AB$ should also be a diagonal matrix.
+\end{exercise}
+\begin{exercise}[Triangular matrices form a ring]
+    Show that for \textbf{upper triangular} $A \in \R^{n \times n}$ and $B \in \R^{n \times n}$ such that $A_{i,j} = B_{i,j} = 0$ for $i > j$, $AB$ should also be an upper triangular matrix.
+\end{exercise}
+\begin{exercise}
+    How many diagonal $A \in \R^{n \times n}$ are there such that
+    \begin{equation*}
+        A^2 = I
+    \end{equation*}
+    where $I$ is the \textbf{identity matrix}, a diagonal matrix with only 1s in the diagonal entry.
+\end{exercise}<++>
+\begin{definition}[Transpose]
+    For $A \in \R^{m \times n}$, \textbf{transpose} $A^T \in \R^{n \times m}$ is defined as
+    \begin{equation*}
+        \left( A^T \right)_{i,j} = A_{j,i}
+    \end{equation*}
+\end{definition}
+\begin{example}[Transpose]
+    \begin{equation*}
+        \begin{pmatrix}
+            3 & 0 & 1 \\
+            4 & 2 & 5
+        \end{pmatrix}^T
+        =
+        \begin{pmatrix}
+            3 & 4 \\
+            0 & 2 \\
+            1 & 5
+        \end{pmatrix}
+    \end{equation*}
+\end{example}
+\begin{remark}
+    \begin{itemize}
+            \item Taking transpose of a row vector turns it into a column vector.
+            \item Taking a transpose of a column vector turns it into a row vector.
+            \item For any $A \in \R^{m \times n}$, $\left( A^T \right)^T = A$
+    \end{itemize}
+\end{remark}
+\begin{exercise}[Symmetric Triangular Matrix is Diagonal]
+    Show that if an upper triangular matrix $A \in \R^{n \times n}$ satisfies $A^T = A$, then it must be a diagonal matrix.
+\end{exercise}
+\begin{exercise}[Antisymmetric Matrix Does Not Have Diagonal Entries]
+    Show that if $A \in \R^{n \times n}$ satisfies $A^T = -A$, then $A_{i,i} = 0$ for all $i = 1, \cdots n$.
+\end{exercise}
+\begin{exercise}[Transpose of Product of Matrix]
+    Show that for any $A \in \R^{m \times n}$ and $B \in \R^{n \times \ell}$,
+    \begin{equation*}
+        \left( AB \right)^T = B^T A^T
+    \end{equation*}
+    Using this result, show that product of two symmetric matrices ($A^T = A$) is also a symmetric matrix.
+\end{exercise}
+
+\section{System of Simultaneous Linear Equations to Matrix Equations}
+We've seen a system like (\ref{equ: Linear Equation 1}), (\ref{equ: Linear Equation 2}), and (\ref{equ: Linear Equation 3}).
+
+We can turn the three examples of linear system of equations to the following \textbf{matrix equations} of the form $\underbrace{A}_{\text{Matrix}}\underbrace{x}_{\text{Column Vector}} = \underbrace{b}_{\text{Column Vector}}$:
+\begin{align}
+    &
+    \begin{pmatrix}
+        3 & 5 \\
+        4 & -1
+    \end{pmatrix}
+    \begin{pmatrix}
+        x \\ y
+    \end{pmatrix}
+    &=
+    \begin{pmatrix}
+        -1 \\ 10
+    \end{pmatrix}
+    \\
+    &
+    \begin{pmatrix}
+        2 & 1 \\
+        4 & 2
+    \end{pmatrix}
+    \begin{pmatrix}
+        x \\ y
+    \end{pmatrix}
+    &= 
+    \begin{pmatrix}
+        0 \\ 1
+    \end{pmatrix}
+    \\
+    &
+    \begin{pmatrix}
+        8 & -7 & 6 \\
+        1 & 0 & 2 \\
+        3 & 2 & -1
+    \end{pmatrix}
+    \begin{pmatrix}
+        x \\ y \\ z
+    \end{pmatrix}
+    &=
+    \begin{pmatrix}
+        59 \\ 9 \\ 11
+    \end{pmatrix}
+\end{align}
+
+One could do even better and skip writing the name of the variables:
+\begin{align}
+    &
+    \begin{amatrix}{2}
+        3 & 5 & -1 \\
+        4 & -1 & 10
+    \end{amatrix}
+    \\
+    &
+    \begin{amatrix}{2}
+        2 & 1 & 0 \\
+        4 & 2 & 1
+    \end{amatrix}
+    \\
+    &
+    \begin{amatrix}{3}
+        8 & -7 & 6 & 59 \\
+        1 & 0 & 2 & 9 \\
+        3 & 2 & -1 & 11
+    \end{amatrix}
+\end{align}
+(the bar is decorative to show that the system is augmented.)
+
+Our task is to solve it, that is, we wish to put $\left( A \middle| b \right)$ into the form $\left( I \middle| \tilde b \right)$.
+This is unfortunately not possible to do\footnote{
+A colloquial saying is that with $n$ variables to solve, you need $n$ independent equations.}.
+
+For example, the following system is over-determined (more equations\footnote{Conditions} than variables):
+\begin{equation*}
+    \begin{cases}
+    3x + y = -4 \\
+    2x - 5y = 3 \\
+    x + 2y = 8
+    \end{cases}
+\end{equation*}
+and the following is under-determined (less equations than variables):
+\begin{equation*}
+    \begin{cases}
+        x + 2y = 5
+    \end{cases}
+\end{equation*}
+Also (\ref{equ: Linear Equation 2}) is an inconsistent system, as the two equations violate each other.
+As you could see, \underline{there are many ways things can go wrong}.
+
+A systematic approach to make analysis easier by performing ``row operations'' is the \textbf{Gaussian elimination}.
+
+\section{EROs and Gaussian Elimination}
 
 \end{document}
 
