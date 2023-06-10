@@ -21,6 +21,7 @@
 }
 
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\spantext}{\text{span}}
 
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}
@@ -579,6 +580,39 @@ $\left( I \middle| A^{-1} \right)$.
         \caption{$x + 2y + z = 0$}
     \end{figure}
 \end{example}
+\begin{definition}[Sum Space]
+    For $A,B \subset V$ where $V$ is a vector space, define $A + B \coloneqq \left\{ a + b \middle| a\in A, b \in B \right\}$
+\end{definition}
+\begin{exercise}[Sum Space and Intersection are Subspaces]
+    For $V$ vector space, and $U,W \leq V$, show that
+    \begin{itemize}
+        \item $U + W$ is a subspace of $V$.
+        \item $U \cap W$ is a subspace of $V$.
+    \end{itemize}
+    Construct an example where $U \cup W$ is not a subspace.
+\end{exercise}
+
+\section{Bases}
+\begin{definition}[Span]
+    \textbf{Span} of vectors $v_1, v_2, \cdots, v_k$ is defined as $\spantext \left( \left\{ v_1, \cdots, v_k \right\} \right) \coloneqq  \left\{ \sum_{i=1}^k a_iv_i \middle| a_i \in \mathbb{F} \right\}$.
+\end{definition}
+\begin{example}[Span]
+    Span of $\left\{ e_1, e_2 \right\}$ is $\R^2$, where $e_i$ are $i$\textsuperscript{th} canonical vector.
+    Span of $\left\{ 
+        \begin{pmatrix}
+            1 \\ 1
+        \end{pmatrix},
+        \begin{pmatrix}
+            1 \\ -1
+        \end{pmatrix}
+    \right\}$ is also $\R^2$.
+\end{example}
+\begin{exercise}[Span is Subspace]
+    Show that span of finite number of vectors is a subspace.
+\end{exercise}
+\begin{definition}[Linear Combination]
+    $u$ is a \textbf{linear combination} of $v_1, \cdots, v_k$ if $u \in \spantext \left( \left\{ v_1, \cdots, v_k \right\} \right)$
+\end{definition}
 \end{document}
 
 
