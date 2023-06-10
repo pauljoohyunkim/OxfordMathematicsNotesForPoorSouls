@@ -3,13 +3,15 @@
 %     Created: Fri Jun 09 06:00 PM 2023 B
 % Last Change: Fri Jun 09 06:00 PM 2023 B
 %
-\documentclass[a4paper]{article}
+\documentclass[12pt, a4paper]{article}
 
 \usepackage[]{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{mathtools}
 \usepackage[]{hyperref}
+\usepackage[]{graphicx}
+\graphicspath{ {./imgs/} }
 
 % Augmented Matrix (Argument is one less than the number of columns)
 \newenvironment{amatrix}[1]{%
@@ -32,6 +34,7 @@
 \numberwithin{example}{section}
 \numberwithin{exercise}{section}
 \numberwithin{remark}{section}
+\numberwithin{figure}{section}
 \title{Linear Algebra I \& II Summary}
 \author{Paul Kim}
 \begin{document}
@@ -222,7 +225,7 @@ Multiplication of matrices $A$ and $B$ are defined for $A \in \R^{m \times n}$, 
         A^2 = I
     \end{equation*}
     where $I$ is the \textbf{identity matrix}, a diagonal matrix with only 1s in the diagonal entry.
-\end{exercise}<++>
+\end{exercise}
 \begin{definition}[Transpose]
     For $A \in \R^{m \times n}$, \textbf{transpose} $A^T \in \R^{n \times m}$ is defined as
     \begin{equation*}
@@ -263,6 +266,12 @@ Multiplication of matrices $A$ and $B$ are defined for $A \in \R^{m \times n}$, 
     \end{equation*}
     Using this result, show that product of two symmetric matrices ($A^T = A$) is also a symmetric matrix.
 \end{exercise}
+\begin{remark}
+    For two column vectors $v_1$ and $v_2$, the dot product can be written as $v_1^T v_2$.
+    This becomes a useful notation for dot product, in factf
+    \footnote{
+    Technically $1 \times 1$ matrix, but there is no problem in taking that as just a scalar.}
+\end{remark}
 
 \section{System of Simultaneous Linear Equations to Matrix Equations}
 We've seen a system like (\ref{equ: Linear Equation 1}), (\ref{equ: Linear Equation 2}), and (\ref{equ: Linear Equation 3}).
@@ -357,7 +366,219 @@ As you could see, \underline{there are many ways things can go wrong}.
 A systematic approach to make analysis easier by performing ``row operations'' is the \textbf{Gaussian elimination}.
 
 \section{EROs and Gaussian Elimination}
-
+\begin{definition}[Elementary Row Operations (ERO)]
+    For a matrix $A \in \R^{m \times n}$, following are the three elementary row operations.
+    \begin{itemize}
+        \item For $1 \leq r < s \leq m$, $R_s \leftrightarrow R_r$ (Exchange row $r$ and row $s$)
+        \item For $1 \leq r \leq m$ and $\lambda \neq 0$, $R_r \rightarrow \lambda R_r$ (Multiply row $r$ by $\lambda$)
+        \item For $1 \leq r, s \leq m$ where $r \neq s$ and $\lambda \in \mathbb{F}$, $R_s \rightarrow R_s + \lambda R_r$ (Add to row $s$ the row $r$ multiplied by $\lambda$)
+    \end{itemize}
+\end{definition}
+\begin{remark}
+    It is \textbf{paramount} that each operation is reversible.
+\end{remark}
+\begin{remark}
+    It is \textbf{recommended} that you do not compose bunch of EROs as one ERO, as tempting as it is.
+    Using pure EROs is useful for determinant analysis later.
+\end{remark}
+Now we need the notion of ``simplified'' matrix under these operations.
+\begin{definition}[Echelon Form]
+    $M \R^{m \times n}$ is in \textbf{echelon form} if
+    \begin{itemize}
+        \item If row $r$ of $M$ has any nonzero entries, the first of these is 1.
+        \item If $1 \leq r < s \leq m$, and row $r$ and row $s$ contain nonzero entries ($M_{r,j}$ and $M_{s, k}$ respectively), then $j < k$.
+            \begin{itemize}
+                \item ``Leading entry of lower rows should come to the right of the ones on the higher rows.''
+            \end{itemize}
+        \item If row $r$ of $M$ contains nonzero entries and row $s$ does not, then $r < s$
+            \begin{itemize}
+                \item ``Zero rows are below all nonzero rows.''
+            \end{itemize}
+    \end{itemize}
+\end{definition}
+\begin{example}[Echelon Form]
+    The following matrix in echelon form:
+    \begin{equation*}
+        \begin{pmatrix}
+            1 & 2 & 3 & 4 & 2 \\
+            0 & 1 & 2 & 3 & 0 \\
+            0 & 0 & 0 & 0 & 1
+        \end{pmatrix}
+    \end{equation*}
+\end{example}
+\subsection{Gaussian Elimination}
+Now we need an algorithm to perform Gaussian elimination to reduce matrix.
+The idea is to take a matrix $A$, and eliminate the leading order entries one by one to echelon form.
+\begin{example}[Gaussian Elimination]
+    \begin{align*}
+        \begin{amatrix}{2}
+            3 & 5 & -1 \\
+            4 & -1 & 10
+        \end{amatrix}
+        & \xrightarrow{\substack{R_1 \rightarrow \frac{1}{3} R_1 \\ R_2 \rightarrow \frac{1}{4} R_2}}
+        \begin{amatrix}{2}
+            1 & \frac{5}{3} & -\frac{1}{3} \\
+            1 & -\frac{1}{4} & \frac{5}{2}
+        \end{amatrix}
+        \\
+        & \xrightarrow{R_2 \rightarrow R_2 - R1}
+        \begin{amatrix}{2}
+            1 & \frac{5}{3} & -\frac{1}{3} \\
+            0 & -\frac{23}{12} & \frac{17}{6}
+        \end{amatrix} \\
+        & \xrightarrow{R_2 \rightarrow -\frac{12}{23}R_2}
+        \underbrace{
+        \begin{amatrix}{2}
+            1 & \frac{5}{3} & -\frac{1}{3} \\
+            0 & 1 & -\frac{34}{23}
+    \end{amatrix}}_{\text{echelon}}
+    \end{align*}
+\end{example}
+\begin{remark}
+    If there was a zero in the leading entry of the first column, one could swap the rows.
+\end{remark}
+\begin{example}[Gaussian Elimination (Cont'd)]
+    We could take it even further and get \textbf{reduced row echelon (RRE) form}.
+    \begin{align*}
+        \begin{amatrix}{2}
+            1 & \frac{5}{3} & -\frac{1}{3} \\
+            0 & 1 & -\frac{34}{23}
+        \end{amatrix}
+        & \xrightarrow{R_1 \rightarrow R_1 - \frac{5}{3}R_2}
+        \underbrace{
+        \begin{amatrix}{2}
+            1 & 0 & -\frac{49}{23} \\
+            0 & 1 & \frac{34}{23}
+    \end{amatrix}}_{\text{RRE}}
+    \end{align*}
+    So $x = -\frac{49}{23}$ and $y = \frac{34}{23}$ for (\ref{equ: Linear Equation 1}).
+\end{example}
+\begin{exercise}
+    Given $A \in \R^{n \times n}$, show that it can be reduced to RRE within $n^2$ EROs.
+\end{exercise}
+\subsection{Inverse Matrix}
+\begin{definition}[Inverse Matrix]
+    Note that if it is possible to identify $B \in \R^{n \times n}$ such that $AB = BA = I$, then we call this $B$ the \textbf{inverse matrix} of $A$, and write $A^{-1} \coloneqq B$.
+    We also say that $A$ is invertible in this case.
+\end{definition}
+\begin{remark}
+    For a well-posed matrix equation $Ax = b$ where $A \in \R^{n \times n}$ being an invertible matrix,
+    one could write the solution as $x = A^{-1} b$.
+\end{remark}
+\begin{exercise}[Inverse is Unique]
+    If $A \in \R^{n \times n}$ is invertible, show that the inverse $A^{-1}$ is well-defined.
+\end{exercise}
+\begin{exercise}[Inverse of Product]
+    If $A,B \in \R^{n \times n}$ are both invertible matrices, then show that
+    \begin{equation*}
+        \left( AB \right)^{-1} = B^{-1}A^{-1}
+    \end{equation*}
+\end{exercise}
+\begin{exercise}[Inverse Transpose]
+    If $A \in \R^{n \times n}$ is invertible, then show that $A^{T}$ is also invertible,
+    and that:
+    \begin{equation*}
+        \left( A^T \right)^{-1} = \left( A^{-1} \right)^T
+    \end{equation*}
+\end{exercise}
+\begin{remark}
+    The above exercise shows that one could write $A^{-T}$ as a shorthand for inverse transpose of $A$.
+\end{remark}
+It is possible to compute the inverse matrix (should it exist) via Gaussian elimination.
+Consider $A \in \R^{n \times n}$, an invertible matrix.
+Perform Gaussian elimination on $\left( A \middle| I \right) \in \R^{n \times 2n}$, then we should end up with:
+$\left( I \middle| A^{-1} \right)$.
+\begin{remark}
+    For the proof, refer to the actual lecture note. Try showing that if $A \in \R^{n \times n}$ is invertible, then RRE is the identity matrix.
+\end{remark}
+\begin{remark}
+    In practice, computing the inverse matrix is in fact not a feasible thing to do (considering data sets are enormous, and we are often only interested in solution to one single solution to a matrix equation).
+\end{remark}
+\section{Vector Spaces}
+\begin{definition}[Vector Space]
+    Let $\mathbb{F}$ be a field. A \textbf{vector space} over $\mathbb{F}$ is a non-empty set $V$ with
+    addition and scalar multiplication operation defined, satisfying the vector space axioms:
+    \begin{itemize}
+        \item Addition is commutative.
+            \begin{itemize}
+                \item $u + v = v + u$.
+            \end{itemize}
+        \item Addition is associative.
+            \begin{itemize}
+                \item $\left( u + v \right) + w = u + \left( v + w \right)$
+            \end{itemize}
+        \item There exists an additive identity.
+            \begin{itemize}
+                \item $0 \in V$
+            \end{itemize}
+        \item There exists additive inverse for every element.
+            \begin{itemize}
+                \item $\forall v \in V: \exists (-v) \in V$
+            \end{itemize}
+        \item Scalar multiplication is distributive over vector addition.
+            \begin{itemize}
+                \item $\lambda \left( u + v \right) = \lambda u + \lambda v$
+            \end{itemize}
+        \item Scalar multiplication is distributive over scalar multiplication.
+            \begin{itemize}
+                \item $\left( \lambda + \mu \right) v = \lambda v + \mu v$
+            \end{itemize}
+        \item Scalar multiplication interacts well with field multiplication.
+            \begin{itemize}
+                \item $\left( \lambda \mu \right) v = \lambda \left( \mu v \right)$
+            \end{itemize}
+        \item Identity for scalar multiplication.
+            \begin{itemize}
+                \item $1v = v$
+            \end{itemize}
+    \end{itemize}
+\end{definition}
+\begin{example}[Vector Space: $\R^n$]
+    $\R^n$ is a vector space.
+    Honestly, this is the most important vector space, so I suggest you get used to working in here.
+    Note that often you can restrict your attention to $\R^3$, and most of your intuition also applies in higher dimensions.
+\end{example}
+\begin{example}[Other Vector Spaces]
+    Other vector spaces include:
+    \begin{itemize}
+        \item $\mathbb{C}$ is a vector space over field $\R$ (essentially $\mathbb{C}$ is the same thing as $\R^2$).
+        \item $\mathcal{P}_n$, the space of polynomials of degree $n$ or less is a vector space over $\R$.
+    \end{itemize}
+\end{example}
+\begin{exercise}[Uniqueness of Additive Identity and Inverse]
+    For vector space $V$, 
+    \begin{itemize}
+            \item show that the additive identity element is unique.
+            \item show that for any $v \in V$, the additive inverse $(-v)$ is well-defined.
+    \end{itemize}
+\end{exercise}
+\begin{definition}[Subspaces]
+    Let $V$ be a vector space over $\mathbb{F}$. $U \subset V$ is a \textbf{subspace} of $V$ if it is nonempty, closed under addition and scalar multiplication.
+\end{definition}
+\begin{exercise}[Subspace Test]
+    Let $V$ be a vector space over $\mathbb{F}$.
+    Let $U$ be a subset of $V$.
+    Show that $U$ is a subspace of $V$ if and only if $0 \in U$ and $\lambda u_1 + u_2 \in U$ for all $u_1, u_2 \in U$ and $\lambda \in \mathbb{F}$.
+\end{exercise}
+\begin{remark}
+    If you think about subspace test for a long time, it kinda becomes obvious; the fact that $\lambda u_1 + u_2 \in U$ captures the idea of closure under both addition and scalar multiplication.
+\end{remark}
+\begin{exercise}[Subspace is also a Vector Space]
+    If $V$ is a vector space and $U$ is a subspace of $V$,
+    show that
+    \begin{itemize}
+        \item $U$ is a vector space.
+        \item If $W$ is a subspace of $U$, then $W$ is a subspace of $V$.
+    \end{itemize}
+\end{exercise}
+\begin{example}[Hyperplane is a Subspace of $\R^n$]
+    $U \coloneqq \left\{ \left( x,y,z \right) \in \R^3 \middle| x + 2y + z = 0\right\} \leq \R^3$.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.2]{hyperplane121}
+        \caption{$x + 2y + z = 0$}
+    \end{figure}
+\end{example}
 \end{document}
 
 
