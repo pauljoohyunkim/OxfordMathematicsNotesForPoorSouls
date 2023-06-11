@@ -497,6 +497,17 @@ $\left( I \middle| A^{-1} \right)$.
 \begin{remark}
     In practice, computing the inverse matrix is in fact not a feasible thing to do (considering data sets are enormous, and we are often only interested in solution to one single solution to a matrix equation).
 \end{remark}
+\subsection{Special Square Matrices}
+Here is a list of some notable matrices, some of which are already mentioned:
+\begin{itemize}
+    \item $I \in \R^{n \times n}$ such that $I_{ij} = \delta_{i,j}$ is an identity matrix.
+    \item $T \in \R^{n \times n}$ such that $T_{i,j} = 0$ for $i > j$ is an upper triangular matrix.
+    \item $T \in \R^{n \times n}$ such that $T_{i,j} = 0$ for $i < j$ is a lower triangular matrix.
+    \item $Q \in \R^{n \times n}$ such that $Q^T Q = I = Q Q^T$ is an orthogonal matrix.
+    \item $A \in \R^{n \times n}$ such that $A^T = A$ is a symmetric matrix.
+    \item $B \in \R^{n \times n}$ such that $B^T = -B$ is an antisymmetric matrix.
+    \item $U \in \mathbb{C}^{n \times n}$ such that $U^* U = I = U U^*$ is a unitary matrix\footnote{The star denotes conjugate transpose}.
+\end{itemize}
 \section{Vector Spaces}
 \begin{definition}[Vector Space]
     Let $\mathbb{F}$ be a field. A \textbf{vector space} over $\mathbb{F}$ is a non-empty set $V$ with
