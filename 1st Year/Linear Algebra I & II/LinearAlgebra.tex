@@ -978,8 +978,12 @@ Since the kernel and image are subspaces, we are interested in their dimensions.
 
 \section{Change of Basis}
 It was already mentioned at remark \ref{rmk: Matrix Multiplication and Linear Transform} that
-matrix describes a linear map (in a given basis, meaning, basis needed to be provided, often implicitly
-assumed to be canonical although it can be any basis).
+matrix can be used to describe a linear map 
+\textbf{Note that in the discussion we were implicitly assuming that we were using canonical basis}\footnote{
+    The use of canonical basis seems like a natural choice, but from the POV of mathematics,
+    it is an arbitrary choice\dots, like we use canonical basis only because they are easy to compute,
+    most of the times.
+}.
 Now we want to see the relationship between two matrices describing the same linear tranform,
 but in different basis.
 \begin{example}
@@ -1034,7 +1038,90 @@ but in different basis.
         \end{pmatrix}
     \end{equation*}
 
+    These two matrices describe the \textit{same} linear transform, just in different basis.
+    We can actually explicitly construct how they are related.
+
+    \textbf{Idea}: Change basis from one to the other, perform the transform in the new basis, and turn it back to the original basis.
+    Because of the relation of the two bases:
+    \begin{align*}
+        f_1 &= e_1 - 2e_2 \\
+        f_2 &= -2e_1 + 5e_2
+    \end{align*}
+    Construct the change of basis matrix $P$, ``used for mapping from $f_i$ coordinates to $e_i$ coordinates:
+    \begin{equation*}
+        P =
+        \begin{pmatrix}
+            1 & -2 \\ -2 & 5
+        \end{pmatrix}
+    \end{equation*}
+    The inverse matrix describes the mapping from $e_i$ coordinates to $f_i$ coordinates.
+    \begin{equation*}
+        P^{-1} =
+        \begin{pmatrix}
+            5 & 2 \\ 2 & 1
+        \end{pmatrix}
+    \end{equation*}
+    Then it must be that $P^{-1}AP$ describes the linear transformation in $f_i$ coordinates\footnote{
+        In more detail, $P$ first maps from $f_i$ coordinates to $e_i$ coordinates.
+        Then $A$ does the actual linear map in $e_i$ coordinates.
+        Finally $P^{-1}$ maps the coordinates in $e_i$ to ones in $f_i$.
+    },
+    hence $P^{-1}AP = B$.
+    (Indeed you can verify this.)
 \end{example}
+\begin{remark}
+    Explicit construction of $A = P^{-1}BP$ is not really the highlight of the course,
+    but it is worth understanding the process.
+\end{remark}
+\begin{definition}[Similarity]
+    If there exists invertible $P\in\R^{n \times n}$ such that $A,B \in \R^{n \times n}$,
+    then we say $A$ and $B$ are \textbf{similar}.
+\end{definition}
+\begin{exercise}[Similarity is an Equivalence Relation]
+    Verify that similarity is an equivalence relation by checking the three conditions of equivalence relation.
+\end{exercise}
+
+\section{Matrix and Rank}
+We've seen that matrix and linear transforms are very much related.
+In fact, we might as well start abusing the notion of ``rank'' of a matrix!
+We do need to check if the definition of rank for a matrix is well-defineded and natural\footnote{
+    Intuition may say well-defined, since change of basis does not change the actual span of them\dots
+}
+
+To do so, it helps to show one result:
+\begin{exercise}
+    For $A \in \R^{m \times n}$, there exists invertible $P \in \R^{n \times n}$ and $Q \in \R^{m \times m}$ 
+    such that $Q^{-1}AP$ can be written as:
+    \begin{equation}
+        Q^{-1}AP =
+        \begin{pmatrix}
+            I_{r} & 0_{r \times s} \\ 0_{t \times r} & 0_{t \times s}
+        \end{pmatrix}
+        \label{equ: RRE/RCE}
+    \end{equation}
+    (Hint: The simplest argument is to note that elementary row operations are simply left multiplication by invertible matrices.
+    Similarly one could consider elementary column operations, which must be right multiplication by invertible matrices.
+    Then we consider the RRE/RCE\footnote{Reduce column echelon} form.
+)
+\end{exercise}
+Using this, one could argue now the following result:
+\begin{exercise}[Column Rank is Equal to Row Rank]
+    Deduce from (\ref{equ: RRE/RCE}) that the column rank and the row rank of $A \times \R^{m \times n}$ are the same.
+    (Hint: You can read off $r$ to be both the column rank and the row rank.)
+\end{exercise}
+So finally we have rank of a matrix.
+\begin{definition}[Rank of a Matrix]
+    \textbf{Rank of matrix} $A \in \R^{m \times n}$, denoted by $\Rank (A)$,
+    is the column rank (or row rank) of $A$.
+\end{definition}
+\begin{remark}
+    Thinking of rank of a matrix as its column rank should reminisce you of the fact that
+    matrices describe linear maps. 
+    (Since the image of the map by left multiplication by the matrix is the column space.)
+\end{remark}
+
+\section{Bilinear Forms and Inner Product Space}
+
 \end{document}
 
 
