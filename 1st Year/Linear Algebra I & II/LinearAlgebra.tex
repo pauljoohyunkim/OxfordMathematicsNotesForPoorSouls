@@ -24,6 +24,9 @@
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\spantext}{\text{span}}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\norm}[1]{\lvert \lvert #1 \rvert \rvert}
+\newcommand{\intd}{\,\text{d}}
 
 \DeclareMathOperator{\im}{Im}
 \DeclareMathOperator{\Null}{null}
@@ -1121,6 +1124,92 @@ So finally we have rank of a matrix.
 \end{remark}
 
 \section{Bilinear Forms and Inner Product Space}
+\begin{definition}[Bilinear Form]
+    Given a vector space $V$ over $\mathbb{F}$,
+    a \textbf{bilinear form} on $V$ is a function $\inner{\cdot, \cdot} : V \times V \rightarrow \mathbb{F}$
+    such that
+    \begin{itemize}
+        \item $\inner{\alpha_1 v_1 + \alpha_2 v_2, v_3} = \alpha_1 \inner{v_1, v_3} + \alpha_2 \inner{v_2, v_3}$
+        \item $\inner{v_1, \alpha_2 v_2 + \alpha_3 v_3} = \alpha_2 \inner{v_1, v_2} + \alpha_3 \inner{v_1, v_3}$
+    \end{itemize}
+    for all $v_1, v_2, v_3 \in V$ and $\alpha_1, \alpha_2, \alpha_3 \in \mathbb{F}$
+\end{definition}
+\begin{remark}
+    Bilinear form is a generalization of dot product in a way.
+    In fact, $\inner{x, y} = x^T y$ (usual dot product) for $x, y \in \R^n$ over $\R$ is indeed a bilinear form.
+\end{remark}
+\begin{example}
+    Given $A \in \mathbb{F}^{n \times n}$, $\inner{x, y} \coloneqq x^T A y$ is a bilinear form over $\mathbb{F}$.
+\end{example}
+\begin{definition}[Inner Product Space]
+    Bilinear form $\inner{\cdot, \cdot} : V \times V \rightarrow \mathbb{R}$ is
+    \begin{itemize}
+        \item \textbf{symmetric} if
+            $\inner{v_1, v_2} = \inner{v_2, v_1}$ for all $v_1, v_2 \in V$.
+        \item 
+            \textbf{positive definite} if
+            $\inner{v, v} \geq 0$ for all $v \in V$ where equality if and only if $v = 0$.
+    \end{itemize}
+    \textbf{Inner product space} is a positive definite symmetric bilinear form on $V$.
+\end{definition}
+\begin{remark}
+    Dot product is still an inner product over $\mathbb{R}^n$.
+\end{remark}
+\begin{definition}
+    For real inner product space $V$, define \textbf{norm} of $v \in V$ is
+    \begin{equation*}
+        \norm{v} \coloneqq \sqrt{\inner{v,v}}
+    \end{equation*}
+\end{definition}
+\begin{exercise}
+    \label{ex: Polynomial Inner Product}
+    Consider $V = \R_n \left[ x \right]$, a space of polynomials of degree $n$ with real coefficients.
+    Show that $\inner{f, g} \coloneqq \int_{-1}^1 f(x) g(x) \intd x$ is an inner product over $V$.
+\end{exercise}
+Often we are interested in orthonormal set, as it makes the computation much easier.
+\begin{definition}[Orthonormal Set]
+    Given $V$ an inner product space, $\left\{ v_1, \cdots, v_n \right\} \subset V$ is an \textbf{orthonormal set}
+    if for all $i,j$,
+    \begin{equation*}
+        \inner{v_i, v_j} = \delta_{i,j}
+    \end{equation*}
+\end{definition}
+\begin{exercise}
+    $\left\{ v_1, \cdots, v_n \right\}$ be an orthonormal set in an inner product space $V$.
+    Then show that $v_1, \cdots, v_n$ are linear independent.
+\end{exercise}
+\begin{exercise}
+    Show that canonical basis of $\R^n$ is an orthonormal set.
+\end{exercise}
+\begin{exercise}[Legendre Polynomials]
+    Construct an orthonormal set of basis for the inner product space for $\mathbb{R}_2 \left[ x \right]$.
+\end{exercise}
+\begin{exercise}[Orthogonality in Fourier Series]
+    For what $k>0$ is the set $\left\{ \cos{(nx)} \middle| n = 1, 2, \cdots \right\}$ an orthonormal set
+    under inner product $\inner{f,g} \coloneqq \int_{-\pi}^\pi f(x) g(x) \intd x$?
+\end{exercise}
+
+\subsection{Orthogonal Matrices}
+\begin{definition}[Orthogonal Matrix]
+    $Q \in \R^{n \times n}$ is an \textbf{orthogonal matrix} if $Q^T Q = Q Q^T = I$.
+    In other words, $Q^T = Q^{-1}$.
+\end{definition}
+\begin{exercise}[Characterization of Orthogonal Matrices]
+    Show that orthogonal matrices can be characterized in any of the following ways:
+    \begin{itemize}
+        \item $Q Q^T = I$
+        \item $Q^T Q = I$
+        \item Rows of $Q$ form an orthonormal basis of $\R^n$.
+        \item Columns of $Q$ form an orthonormal basis of $\R^n$.
+        \item $\left( Q x \right)^T \left( Q y \right) = x^T y$ for all $x, y \in \R^n$
+    \end{itemize}
+\end{exercise}
+\begin{exercise}
+    Deduce that the Euclidean norms of each row and column are 1.
+\end{exercise}
+\begin{exercise}
+    If $U,V \in \R^{n \times n}$ are both orthogonal matrices, show that $UV$ is also an orthogonal matrix.
+\end{exercise}
 
 \end{document}
 
