@@ -10,6 +10,8 @@
 \usepackage{amsthm}
 \usepackage{mathtools}
 \usepackage[]{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage[]{graphicx}
 \graphicspath{ {./imgs/} }
 
@@ -613,6 +615,191 @@ $\left( I \middle| A^{-1} \right)$.
 \begin{definition}[Linear Combination]
     $u$ is a \textbf{linear combination} of $v_1, \cdots, v_k$ if $u \in \spantext \left( \left\{ v_1, \cdots, v_k \right\} \right)$
 \end{definition}
+\begin{remark}
+    Note that linear combination only refers to sum of \textbf{finitely many} elements.
+\end{remark}
+\begin{definition}[Linear Independence]
+    Let $V$ be vector space over $\mathbb{F}$.
+    $v_1, \cdots, v_m \in V$ are \textbf{linearly independent} if
+    $\sum_{i=1}^m \alpha_i v_i = 0$ implies $\alpha_1=\cdots=\alpha_m = 0$.
+    Otherwise \textbf{linearly dependent}.
+    \begin{figure}[tbp]
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{LinearIndependence}
+            \caption{These three vectors are linearly independent, and they span $\R^3$.}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{LinearDependence}
+            \subcaption{Because $e_1$ and $e_2$ can be linearly combined to produce $e_1+e_2$, linearly dependent.They span $\left\{ \left( x, y, 0 \right)^T \middle| x, y \in \R \right\}$ in this case.}
+        \end{subfigure}
+        \caption{Linear Independence \& Linear Dependence}
+        \label{fig: Linear Independence and Linear Dependence}
+    \end{figure}
+\end{definition}
+\begin{remark}
+    Might be jumping the gun a bit, but intuitionistically,
+    if there are the minimal number of vectors needed to describe their span,
+    they are linearly independent.
+    (See Figure \ref{fig: Linear Independence and Linear Dependence})
+\end{remark}
+\begin{exercise}[Additional ``Nonparallel'' Vector Preserves Linear Independence]
+    Suppose $v_1, \cdots, v_m$ are linearly independent in vector space $V$ over $\mathbb{F}$.
+    Let $v_{m+1} \in V$ be such that $v_{m+1} \not\in \spantext \left( \left\{ v_1, \cdots, v_m \right\} \right)$.
+    Show that $v_1, \cdots, v_m, v_{m+1}$ are also linearly independent.
+\end{exercise}
+\begin{remark}
+    General strategy to showing linear independence is to assume $\sum_{i=1}^m \alpha_i v_i = 0$,
+    and show that $\alpha_1 = \cdots = \alpha_{m} = 0$
+\end{remark}
+\begin{definition}[Bases]
+    Let $V$ be a vector space. A basis of $V$ is a set of linearly independent spanning set.
+\end{definition}
+\begin{remark}[Basis is Nonunique]
+    For $\R^3$, $\left\{ e_1, e_2, e_3 \right\}$ is a basis, but $\left\{ e_1, e_2, e_1 + e_2 + e_3 \right\}$ is also a basis.
+\end{remark}
+\begin{exercise}[Basis = Any Vector Has Unique Representation]
+    Show that
+    $\left\{ v_1, \cdots, v_n \right\} \subset V$, then
+    $\left\{ v_1, \cdots, v_n \right\}$ is a basis of $V$ if and only if
+    for any $v \in V$, there exists unique linear combination representation $v = \sum_{i=1}^n a_i v_i$
+\end{exercise}
+\begin{example}
+    Suppose $v = \left( 1, 2, 3 \right)^T \in \R^3$.
+    In $\left\{ e_1, e_2, e_3 \right\}$ basis, $v = 1e_1 + 2 e_2 + 3 e_3$.
+    In $\left\{ \underbrace{e_1 + 2e_3}_{v_1}, \underbrace{e_2}_{v_2}, \underbrace{e_3}_{v_3} \right\}$ basis,
+    $v = 1v_1 + 0v_2 + v_3$.
+\end{example}
+\begin{remark}[Coordinate]
+    Think of the coefficients ($\alpha_i$) in the linear combination expansion $v = \sum_{i = 1}^n \alpha_i v_i$ as coordinates.
+\end{remark}
+\begin{exercise}[Finite Spanning Set Implies Existence of Basis]
+    Show that if $V$ has finite spanning set $S$, then $S$ contains a linearly independent spanning set.
+    (Hint: Let $T \subset S$ be the largest linearly independent set. Then show that $T$ spans $V$)
+\end{exercise}
+\begin{exercise}[Steinitz Exchange Lemma]
+    Let $V$ be vector space over $\mathbb{F}$. Take $X \subset V$. Suppose $u \in \spantext \left( X \right)$,
+    but $u \not\in \spantext \left( X \setminus \left\{ v \right\} \right)$ for some $V \in X$.
+    Let $Y = \left( X \setminus \left\{ v \right\} \right) \cup \left\{ u \right\}$ 
+    (``exchange $u$ for $v$''). Then $\spantext \left( Y \right) = \spantext \left( X \right)$.
+\end{exercise}
+\begin{example}
+    While mouthful to state, it is in fact an obvious statement.
+    Consider $\R^2$. Let $X = \left\{ e_1, e_2 \right\}$.
+    Take $u = e_1 + e_2 \not\in \spantext \left( X \setminus \left\{ \underbrace{e_2}_{v} \right\} \right)$.
+    Then $Y = \left( X \setminus \left\{ v \right\} \right) \cap \left\{ u \right\} = \left\{ e_1, e_1 + e_2 \right\}$, which has the same span as $X$.
+    \begin{figure}[h]
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Steinitz1}
+            \caption{$X$}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{Steinitz2}
+            \subcaption{$Y$}
+        \end{subfigure}
+        \caption{Steinitz exchange lemma says you can swap a vector in a basis so long as it preserves the span.}
+        \label{fig: Steinitz Exchange Lemma}
+    \end{figure}
+\end{example}
+Steinitz exchange lemma gives justification as to well-definededness of the notion of dimension.
+\begin{definition}[Dimension]
+    For finite dimensional vector space $V$,
+    \textbf{dimension} of $V$, denoted as $\dim V$ is the size of any basis of $V$.
+\end{definition}
+\begin{exercise}
+    Show that
+    \begin{itemize}
+        \item $\R^n$ has dimension $n$.
+        \item space of polynomial of degree upto $n$ has dimension $n+1$.
+        \item space of matrices $\R^{m \times n}$ has dimension $mn$.
+    \end{itemize}
+\end{exercise}
+\begin{definition}[Row Space and Rank]
+    Given $A \in \R^{m \times n}$, 
+    the span of the rows of $A$ is \textbf{row space}, and
+    \textbf{row rank} is defined as the dimension of the row space.
+\end{definition}
+\begin{exercise}
+    Show that the row rank of the following matrix is 3:
+    \begin{equation*}
+        \begin{pmatrix}
+            3 & 1 & 2 \\
+            1 & 2 & 1 \\
+            4 & 2 & 1 \\
+            1 & 0 & -3 \\
+            -2 & -3 & 0
+        \end{pmatrix}
+    \end{equation*}
+    (Hint: EROs do not change the row space by Steinitz exchange lemma!)
+\end{exercise}
+\begin{exercise}
+    Show that if $U \leq V$ where $V$ is finite dimensional, then
+    \begin{itemize}
+        \item $\dim U \leq \dim V$
+        \item If $\dim U = \dim V$, then $U = V$.
+    \end{itemize}
+\end{exercise}
+\begin{exercise}[Extension of Subspace Basis to Vector Space Basis]
+    Show that if $V$ is finite dimensional and $U \leq V$, then
+    any basis of $U$ can be extended to the basis of $V$.
+    
+    Show by an example that $U \leq V$ does not imply that basis of $V$  includes a basis of $U$.
+\end{exercise}
+\begin{exercise}[Dimension Formula]
+    Show that $U,W \leq V$ ($V$ finite dimensional vector space), then
+    $\dim \left( U+W \right) + \dim \left( U \cap W \right) = \dim U + \dim W$
+\end{exercise}
+\begin{example}[Dimension Formula]
+    Consider $U = \spantext \left( \left\{ e_1 \right\} \right)$ and $W = \spantext \left( \left\{ e_1, e_1 + e_2 \right\} \right)$.
+    Then $U + W = \R^2$, so $\dim \left( U + W \right) = 2$,
+    and $U \cap V = U$, so $\dim \left( U \cap V \right) = 1$.
+    This satisfies the dimension formula.
+\end{example}
+\begin{exercise}
+    Using dimension formula or otherwise\footnote{Another way to argue is to consider the bases of the two subspaces, put them in a matrix, and note that the matrix is ``fat'', meaning it must have free variable in a matrix equation.},
+    show that given $V_1, V_2 \leq V$, $\dim V_1 + \dim V_2 > \dim V$,
+    $\dim \left( V_1 \cap V_2 \right) \geq 1$.
+\end{exercise}
+\begin{definition}[Diricet Sum]
+    If $U,W \leq V$ where $V$ is finite dimensional vector space,
+    and $U+W = V$, then $V$ is a \textbf{direct sum} of $U$ and $W$, and
+    we write $V = U \oplus W$.
+    (See Figure \ref{fig: Direct Sum})
+\end{definition}
+\begin{example}[Direct Sum]
+    Let $V = \R^3$.
+    Take $U = \spantext \left( \left\{ \left( 1, 1, 0 \right)^T \right\} \right)$,
+    and $W = \spantext \left( \left\{ \left( 1, 1, 1 \right)^T, \left( 0, 1, 0 \right)^T \right\} \right)$.
+    Then $V = U \oplus W$.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.4]{DirectSum}
+        \caption{$U$ and $W$ form direct sum of $V$ as the only intersection is the origin.}
+        \label{fig: Direct Sum}
+    \end{figure}
+\end{example}
+\begin{exercise}[Characterization of Direct Sum]
+    Show that the following are equivalent:
+    \begin{itemize}
+        \item $V = U \oplus W$
+        \item Every $v \in V$ has unique expression $v = u+w$ where $u \in U$ and $w \in W$.
+        \item $\dim V = \dim U + \dim W$ and $V = U + W$
+        \item $\dim V = \dim U + \dim W$ and $U \cap W = \left\{ 0_V \right\}$
+        \item Given bases $\mathcal{B}_U$ of $U$ and $\mathcal{B}_W$ of $W$, $\mathcal{B}_U \cap \mathcal{B}_W$ is a basis of $V$.
+    \end{itemize}
+\end{exercise}
+\begin{exercise}
+    Find an example that shows $V = U \oplus W$ does not imply every basis of $V$ is a union of basis of $U$ and a basis of $W$.
+\end{exercise}
+
+\section{Linear Transformation}
 \end{document}
 
 
