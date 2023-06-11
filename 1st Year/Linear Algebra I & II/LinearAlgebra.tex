@@ -25,6 +25,10 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\spantext}{\text{span}}
 
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\Null}{null}
+\DeclareMathOperator{\Rank}{rank}
+
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}
 \theoremstyle{definition}
@@ -923,6 +927,47 @@ Linear transformation is the reason why we define matrix multiplication in such 
 \end{example}
 \begin{exercise}
     Construct a linear map in $\R^3$ that describes $\frac{2\pi}{3}$ rotation around the axis $\left( 1,1,1 \right)^T$.
+\end{exercise}
+\subsection{Rank and Nullity}
+\begin{definition}[Kernel and Image]
+    Given $V, W$ to be vector spaces and $T:V \rightarrow W$ is linear,
+    \textbf{kernel} (null space) of $T$ is
+    \begin{equation*}
+        \ker T \coloneqq \left\{ v \in V \middle| T(v) = 0_W \right\}
+    \end{equation*}
+    and \textbf{image} of $T$ is
+    \begin{equation*}
+        \im T \coloneqq \left\{ T(v) \middle| v \in V \right\}
+    \end{equation*}
+\end{definition}
+\begin{remark}
+    Kernel is the set of vectors that map to zero.
+    Image is the set of vectors that end up being mapped to from $V$.
+\end{remark}
+\begin{exercise}
+    For $V, W$ vector spaces and $T:V \rightarrow W$ linear,
+    $T$ is injective if and only if $\ker T = \left\{ 0_V \right\}$.
+\end{exercise}
+\begin{exercise}[Kernel and Image are Subspaces]
+    For $V, W$ vector spaces and $T:V \rightarrow W$ linear, show
+    \begin{itemize}
+        \item $\ker T \leq V$ and $\im T \leq W$
+        \item if $\left\{ v_1, \cdots, v_m \right\}$ spans $V$, then $T(\left\{ v_1, \cdots, v_m \right\})$ spans $\im T$
+    \end{itemize}
+\end{exercise}
+Since the kernel and image are subspaces, we are interested in their dimensions.
+\begin{definition}[Rank and Nullity]
+    $V, W$ being vector spaces with $V$ finite dimensional.
+    $T: V \rightarrow W$ linear.
+    \begin{itemize}
+        \item \textbf{Nullity} of $T$ is $\Null T \coloneqq \dim \left( \ker T \right)$
+        \item \textbf{Rank} of $T$ is $\Rank T \coloneqq \dim \left( \im T \right)$
+    \end{itemize}
+\end{definition}
+\begin{exercise}[Rank-Nullity Theorem]
+    Given $V, W$ being vector spaces with $V$ finite dimensional, and
+    $T: V \rightarrow W$ linear,
+    show that $\dim V = \Rank T + \Null T$
 \end{exercise}
 \end{document}
 
