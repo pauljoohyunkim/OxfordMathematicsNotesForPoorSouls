@@ -848,6 +848,7 @@ Linear transformation is the reason why we define matrix multiplication in such 
     map is uniquely determined provided the outputs of $T\left( u_i \right)$.
 \end{exercise}
 \begin{remark}[Matrix Multiplication and Linear Transform]
+    \label{rmk: Matrix Multiplication and Linear Transform}
     \textbf{This was a revelation for me when I learned this.}
     Consider matrix
     \begin{equation*}
@@ -928,6 +929,11 @@ Linear transformation is the reason why we define matrix multiplication in such 
 \begin{exercise}
     Construct a linear map in $\R^3$ that describes $\frac{2\pi}{3}$ rotation around the axis $\left( 1,1,1 \right)^T$.
 \end{exercise}
+\begin{remark}
+    While it is helpful to get intuition in terms of canonical basis,
+    left multiplication by matrix describes linear transformation in any given basis in their ``coordinates''.
+    See Example \ref{eg: Change of Basis}.
+\end{remark}
 \subsection{Rank and Nullity}
 \begin{definition}[Kernel and Image]
     Given $V, W$ to be vector spaces and $T:V \rightarrow W$ is linear,
@@ -969,6 +975,66 @@ Since the kernel and image are subspaces, we are interested in their dimensions.
     $T: V \rightarrow W$ linear,
     show that $\dim V = \Rank T + \Null T$
 \end{exercise}
+
+\section{Change of Basis}
+It was already mentioned at remark \ref{rmk: Matrix Multiplication and Linear Transform} that
+matrix describes a linear map (in a given basis, meaning, basis needed to be provided, often implicitly
+assumed to be canonical although it can be any basis).
+Now we want to see the relationship between two matrices describing the same linear tranform,
+but in different basis.
+\begin{example}
+    \label{eg: Change of Basis}
+    Consider linear map $T:\R^2 \rightarrow \R^2$ defined as $T(x,y) = 
+    \begin{pmatrix}
+        2x + y\\
+        3x - 2y
+    \end{pmatrix}
+    $.
+    Note that
+    \begin{align*}
+        T\left( 1,0 \right) = 
+        \begin{pmatrix}
+            2 \\ 3
+        \end{pmatrix}
+        &&
+        T\left( 0,1 \right) = 
+        \begin{pmatrix}
+            1 \\ -2
+        \end{pmatrix}
+    \end{align*}
+    So with respect to basis $e_1, e_2$, the matrix describing this transformation is
+    \begin{equation*}
+        A =
+        \begin{pmatrix}
+            2 & 1\\ 3 & -2
+        \end{pmatrix}
+    \end{equation*}
+    On the other hand, consider another basis $f_1 = \left( 1, -2 \right)^T, f_2 = \left( -2, 5 \right)^T$ of $\R^2$.
+    Then
+    \begin{align*}
+        T\left( f_1 \right) = 
+        \begin{pmatrix}
+            0 \\ 7
+        \end{pmatrix}
+        =
+        14 f_1 + 7 f_2
+        &&
+        T\left( f_2 \right) = 
+        \begin{pmatrix}
+            1 \\ -16
+        \end{pmatrix}
+        = -27f_1 - 14f_2
+    \end{align*}
+    So with respect to basis $f_1, f_2$, the matrix describing this transformation is
+    \begin{equation*}
+        B =
+        \begin{pmatrix}
+            14 & -27 \\
+            7 & -14
+        \end{pmatrix}
+    \end{equation*}
+
+\end{example}
 \end{document}
 
 
