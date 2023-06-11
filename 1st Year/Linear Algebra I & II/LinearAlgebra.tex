@@ -137,6 +137,7 @@ Say, you are telling a computer to solve these. What are your options?
     \end{align*}
 \end{example}
 \begin{remark}
+    \label{rmk: Column Vector}
     \textbf{I highly recommend using variables for denoting column vectors by default}.
     For example $v = 
     \begin{pmatrix}
@@ -811,6 +812,118 @@ Steinitz exchange lemma gives justification as to well-definededness of the noti
 \end{exercise}
 
 \section{Linear Transformation}
+Linear transformation is the reason why we define matrix multiplication in such a funky way.
+\begin{definition}[Linear Transformation]
+    Let $V, W$ be vector spaces over $\mathbb{F}$.
+    Map $T: V \rightarrow W$ is a \textbf{linear transformation} if
+    \begin{itemize}
+        \item $T\left( v_1 + v_2 \right) = T\left( v_1 \right) + T\left( v_2 \right)$.
+        \item $T\left( \lambda v \right) = \lambda T\left( v \right)$.
+    \end{itemize}
+\end{definition}
+\begin{remark}
+    It is as if $T$ can be replaced by a matrix\dots Hm\dots
+\end{remark}
+\begin{example}
+    \begin{itemize}
+        \item Identity map $\text{id}_V:V \rightarrow V$ defined by $\text{id}_V (v) = v$ is a linear map.
+        \item Zero map $z:V \rightarrow W$ defined by $z(v) = 0$ is a linear map.
+        \item Given a matrix $A \in \R^{m \times n}$, left multiplication map $L:\R^n \rightarrow \R^m$ defined by $L(v) = Av$ is a linear map.
+        \item Given $V = U \oplus W$, we know we can uniquely write $v = u + w$ where $u \in U$ and $w \in W$. Projection map $P:V \rightarrow V$ defined by $P(v) = w$ is a linear map.
+    \end{itemize}
+\end{example}
+\begin{exercise}
+    Given $U, V, W$ be vector spaces, if $S:U \rightarrow V$ and $T:V \rightarrow W$ are linear,
+    then $TS \coloneqq T \circ S:U \rightarrow W$ is also a linear transformation.
+\end{exercise}
+\begin{exercise}
+    \label{ex: Linear Transform Determined By Image of Basis}
+    Given $U, V$ be vector spaces, show that linear map $T:U \rightarrow V$ is uniquely defined by
+    the image of $T$ for a basis of $U$, that is,
+    if $\left\{ u_1, \cdots, u_m \right\}$ is a basis of $U$, 
+    map is uniquely determined provided the outputs of $T\left( u_i \right)$.
+\end{exercise}
+\begin{remark}[Matrix Multiplication and Linear Transform]
+    \textbf{This was a revelation for me when I learned this.}
+    Consider matrix
+    \begin{equation*}
+        A =
+        \begin{pmatrix}
+            1 & 2 & 3 \\
+            4 & 5 & 6 \\
+            7 & 8 & 9
+        \end{pmatrix}
+    \end{equation*}
+    Then notice that $Ae_1 = \left( 1,4,7 \right)^T$,
+    $Ae_2 = \left( 2,5,8 \right)^T$,
+    and $Ae_3 = \left( 3,6,9 \right)^T$.
+    Note that these are columns of the matrix $A$.
+    Now consider
+    \begin{equation*}
+        A
+        \begin{pmatrix}
+            1 \\ 2 \\ 3
+        \end{pmatrix}
+        = A \left( e_1 + 2 e_2 + 3 e_3 \right)
+        =
+        \begin{pmatrix}
+            1 \\ 4 \\ 7
+        \end{pmatrix}
+        +
+        2
+        \begin{pmatrix}
+            2 \\ 5 \\ 8
+        \end{pmatrix}
+        +
+        3
+        \begin{pmatrix}
+            3 \\ 6 \\ 9
+        \end{pmatrix}
+    \end{equation*}
+    This and Exercise \ref{ex: Linear Transform Determined By Image of Basis} suggests that
+    \textbf{any linear map in a finite dimensional vector space can be written as a left matrix multiplication.}
+    This is also why I stick by remark \ref{rmk: Column Vector},
+    unless you know for sure that you will be working with right multiplication.
+\end{remark}
+\begin{example}
+    To describe a counterclockwise rotation by angle $\theta$ in $\R^2$,
+    note that we can map 
+    $
+    \begin{pmatrix}
+        1 \\ 0
+    \end{pmatrix}
+    \mapsto
+    \begin{pmatrix}
+        \cos \theta \\ \sin\theta
+    \end{pmatrix}
+    $,
+    and
+    $
+    \begin{pmatrix}
+        0 \\ 1
+    \end{pmatrix}
+    \mapsto
+    \begin{pmatrix}
+        -\sin\theta \\ \cos\theta
+    \end{pmatrix}
+    $
+    .
+    This linear transform can be described by a left multiplication by the orthogonal matrix:
+    \begin{equation*}
+        Tv \coloneqq
+        \underbrace{
+        \begin{pmatrix}
+            \cos \theta & -\sin \theta \\
+            \sin \theta & \cos \theta
+        \end{pmatrix}
+    }_{\text{orthogonal}}
+        v
+    \end{equation*}
+    Check again that it maps the basis $e_1, e_2$ to their respective images.
+\end{example}
+\begin{exercise}
+    Construct a linear map in $\R^3$ that describes $\frac{2\pi}{3}$ rotation around the axis $\left( 1,1,1 \right)^T$.
+\end{exercise}
 \end{document}
 
 
