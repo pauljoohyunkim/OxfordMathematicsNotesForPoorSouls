@@ -224,6 +224,51 @@ Multiplication of matrices $A$ and $B$ are defined for $A \in \R^{m \times n}$, 
 \begin{exercise}[Associativity of Matrix Multiplication]
     Show that for $A \in \R^{m \times n}$, $B \in \R^{n \times \ell}$, and $C \in \R^{\ell \times p}$, then $(AB)C = A(BC)$. Is it true that $AB=BA$ in general?
 \end{exercise}
+\begin{remark}[Submatrix Multiplication]
+    \textbf{Pro tip!}
+    If you can identify two matrices in the form of:
+    \begin{align*}
+        A &= 
+        \begin{pmatrix}
+            A_{11} & A_{12} \\ A_{21} & A_{22}
+        \end{pmatrix} \\
+        B &= 
+        \begin{pmatrix}
+            B_{11} & B_{12} \\ B_{21} & B_{22}
+        \end{pmatrix}
+    \end{align*}
+    or otherwise, then you can compute multiplication by performing ``submatrix multiplication'':
+    \begin{equation*}
+        AB = 
+        \begin{pmatrix}
+            A_{11} & A_{12} \\ A_{21} & A_{22}
+        \end{pmatrix} 
+        \begin{pmatrix}
+            B_{11} & B_{12} \\ B_{21} & B_{22}
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            A_{11}B_{11} + A_{12}B_{21} & A_{11} B_{12} + A_{12} B_{22} \\
+            A_{21}B_{11} + A_{22}B_{21} & A_{21} B_{12} + A_{22} B_{22}
+        \end{pmatrix}
+    \end{equation*}
+    \underline{so long as the matrix multiplications are defined}.
+
+    This is useful in situations such as:
+    \begin{equation*}
+        A
+        \underbrace{
+        \begin{pmatrix}
+            b_1 & b_2 & \cdots & b_n
+    \end{pmatrix}}
+    _{B}
+    =
+    \begin{pmatrix}
+        Ab_1 & Ab_2 & \cdots Ab_n
+    \end{pmatrix}
+    \end{equation*}
+    where $b_i$ are the columns of $B$.
+\end{remark}
 \begin{exercise}[Diagonal matrices form a ring]
     Show that for \textbf{diagonal matrices} $A \in \R^{n \times n}$ and $B \in \R^{n \times n}$ such that $A_{i,j} = B_{i,j} = 0$ for $i \neq j$, $AB$ should also be a diagonal matrix.
 \end{exercise}
