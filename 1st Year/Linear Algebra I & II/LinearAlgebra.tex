@@ -1395,6 +1395,19 @@ Note that \textbf{eigenvectors cannot be zero vectors} even though $\lambda$ cou
     \end{equation*}
     (Note that there are infinite eigenvectors since if $v$ is an eigenvector, $kv$ is also an eigenvector of the same eigenvalue for any $k \in \R \setminus \left\{ 0 \right\}$)
 \end{exercise}
+\begin{exercise}[Eigenvalue of Inverse Matrix]
+    Given an invertible matrix $A \in \R^{n \times n}$ and writing the spectrum\footnote{Multiset of eigenvalues} of it as $\lambda_1, \cdots, \lambda_n$,
+    what is the spectrum of $A^{-1}$? What are the corresponding eigenvectors?
+\end{exercise}
+\begin{exercise}[Eigenvalues Shifted]
+    Suppose $A \R^{n \times n}$ has spectrum $\lambda_1, \cdots, \lambda_n$.
+    Show that the spectrum of $A - \mu I$ is $\lambda_1 -\mu, \cdots, \lambda_n - \mu$, where $\mu$ is a constant.
+\end{exercise}
+\begin{exercise}[Modulus of Eigenvalues of Orthogonal Matrices is 1]
+    Suppose $A \in \R^{n \times n}$ is an orthogonal matrix and $\lambda$ is an eigenvalue of $A$.
+    Show that $|\lambda|=1$
+    (Hint: Consider $\left( Av \right)^{*} \left( Av \right)$ where $*$ represents conjugate transpose. Note that while $A$ is a real matrix, $v$ can be complex. You might also find the property $u^* u = \norm{u}^2$ for any $u \in \R^n$ useful.)
+\end{exercise}
 \begin{exercise}
     Show that $\lambda$ is an eigenvalue of linear map $T$, if and only if $\ker {\left( T - \lambda I \right)} \neq \left\{ 0 \right\}$.
     (Hint: This characterization basically says $\left( T - \lambda I \right)v = 0$ must have nontrivial solution $v$.)
@@ -1414,6 +1427,21 @@ To find eigenvalue, one could turn it into a root finding problem:
 \end{definition}
 \begin{exercise}[Roots of Characteristic Polynomials are Eigenvalues]
     Show that $\lambda$ is an eigenvalue of linear map $T$ if and only if it is the root of its polynomial.
+\end{exercise}
+\begin{exercise}[Companion Matrix]
+    Consider the polynomial $p(x) = c_0 + c_1 x + \cdots + c_{n-1} x^{n-1} + x^n$ and the
+    following matrix (called the companion matrix):
+    \begin{equation*}
+        C =
+        \begin{pmatrix}
+            0 & 1 & 0 & \cdots & 0 \\
+            0 & 0 & 1 & \cdots & 0 \\
+            \vdots & \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & 0 & \cdots & 1 \\
+            -c_0 & -c_1 & -c_2 & \cdots & -c_{n-1}
+        \end{pmatrix}
+    \end{equation*}
+    Show that the characteristic polynomial of $C$ is $p(x)$, and hence show that there is no way to express exactly the eigenvalues of general $n \times n$ matrices ($n \geq 5$).
 \end{exercise}
 \begin{exercise}[Characteristic Polynomial Evaluation]
     (Maybe not terribly important, but) show that for linear map $T$ and its characteristic polynomial $\chi (\lambda)$,
@@ -1453,7 +1481,7 @@ To find eigenvalue, one could turn it into a root finding problem:
     $v_1, \cdots, v_m$ is linearly independent.
 \end{exercise}
 
-\section{diagonalization}
+\section{Diagonalization}
 Note that eigenvectors look like something we could use as a basis.
 In fact, using eigenvectors as basis has the benefit of simplfying the computation much easier.
 However we need to worry if we can even have eigenvectors as basis in the first place.
@@ -1564,6 +1592,132 @@ One could subtract off all these vectors out to get a vector that is orthogonal 
     \url{https://stackoverflow.com/questions/76381803/gram-schmidt-algorithm-using-nympy-sympy-for-a-custom-inner-product-space/76385749#76385749}.)
 \end{example}
 
+\subsection{Spectral Theorem for Symmetric Matrix}
+We restrict our attention to symmetric matrices of the form $A^T = A \in \R^{n \times n}$.
+\begin{exercise}
+    Show that all eigenvalues of symmetric matrix $A$ are real.
+\end{exercise}
+Finally we state the spectral theorem for symmetric matrix in the most concise way possible.
+\begin{exercise}[Spectral Theorem for Symmetric Matrix]
+    Prove the following statement.
+    Symmetric matrix $A$ is diagonalizable over $\R^n$, and the eigenvectors form an orthogonal basis (in terms of regular dot product), in fact!
+\end{exercise}
+\begin{remark}
+    From now on, whenever you see symmetric matrix $A$, you should immediately try writing it as the eigendecomposition $A = V \Lambda V^T$.
+\end{remark}
+\begin{exercise}
+    Given orthogonal matrix:
+    \begin{equation*}
+        A =
+        \begin{pmatrix}
+            1 & \mu \\ \mu & 1
+        \end{pmatrix}
+    \end{equation*}
+    where $\mu \in \R \setminus \left\{ 0 \right\}$,
+    express it as $V \Lambda V^T$ where $V$ is orthogonal and $\Lambda$ is diagonal.
+\end{exercise}
+\begin{exercise}[SVD for Symmetric Matrix]
+    For symmetric $A \in \R^{n \times n}$,
+    by using the fact that there is eigendecomposition $A = P \Lambda P^T$,
+    or otherwise,
+    prove that there exists singular value decomposition: $A = U \Sigma V^T$,
+    where $U, V$ are orthogonal matrices and $\Sigma$ is a diagonal matrix of
+    \underline{nonnegative} entries.
+    (Hint: This is actually really easy! Can you decompose $\Lambda$ to
+    $Q \Sigma$ where $Q$ is orthogonal?)
+\end{exercise}
+\begin{exercise}[$A$-inner Product]
+    Consider the bilinear form $\inner{\cdot, \cdot}: \R^n \rightarrow \R$ defined as
+    \begin{equation*}
+        \inner{x, y} \coloneqq x^T A y
+    \end{equation*}
+    where $A$ is a symmetric matrix.
+    Show that this bilinear form is inner product if and only if $A$ only has positive eigenvalues.
+\end{exercise}
+\begin{exercise}[Courant-Fischer for Largest Eigenvalue]
+    Given $A$ is symmetric,
+    show the following:
+    \begin{equation*}
+        \lambda_{1} = \max_{\norm{x} = 1} x^T A x
+    \end{equation*}
+    where $\norm{\cdot}$ is the Euclidean norm and $\lambda_{1}$ is the largest eigenvalue of $A$.
+\end{exercise}
+\begin{exercise}[Gram Matrix is Positive Semidefinite]
+    Given $A \in \R^n$ (not necessarily symmetric),
+    show that $A^T A$ is a symmetric positive-semidefinite\footnote{eigenvalues are nonnegative} matrix.
+\end{exercise}
+\begin{exercise}[Courant-Fischer for Eigenvalue]
+    A more general (and slightly tricky) statement to the previous exercise.
+    Show the following:
+    If $A$ is a symmetric matrix,
+    \begin{equation*}
+        \lambda_i = \max_{\substack{U \leq \R^n \\ \dim U = i}} \min_{\substack{\norm{x} = 1 \\ x \in U}} x^T A x
+    \end{equation*}
+    where $\lambda_i$ is the $i$\textsuperscript{th} largest eigenvalue.
+\end{exercise}
+\begin{exercise}
+    Compute
+    \begin{equation*}
+        \begin{pmatrix}
+            1 & 2 \\ 2 & 1
+        \end{pmatrix}
+        ^{100}
+    \end{equation*}
+\end{exercise}
+\begin{exercise}[Householder Reflector]
+    Take $\norm{\cdot}$ to be the Euclidean norm.
+    Given $v \in \R^n$ such that $\norm{v} = 1$,
+    define Householder reflector matrix as
+    \begin{equation*}
+        H_v \coloneqq I - 2vv^T
+    \end{equation*}
+    Show that
+    \begin{itemize}
+        \item $H_v$ is symmetric.
+        \item $H_v$ is orthogonal matrix.
+        \item if $v = \frac{u - w}{\norm{u - w}}$ for some $u, v \in \R^n$, then $H_{v} u = w$.
+        \item eigenvalues of $H_v$ is $\left\{ \underbrace{+1, +1, \cdots, +1}_{n-1}, -1 \right\}$
+    \end{itemize}
+    Also any geometric intuition behind this? (It is called \underline{reflector} for a reason!)
+\end{exercise}
+\begin{exercise}
+    For $A$ symmetric,
+    express $\tr{(A^T A)}$ in terms of its eigenvalues.
+\end{exercise}
+\subsection{Quadrics}
+This is simply the idea of getting a quadratic expressions into matrix form,
+and defining new variables to analyze them easier.
+\begin{example}
+    Describe the shape of $x^2 + xy + y^2 = 1$.
+
+    One could rewrite the relation as
+    \begin{align*}
+        1 &= 
+        \begin{pmatrix}
+            x & y
+        \end{pmatrix}
+        \underbrace{
+        \begin{pmatrix}
+            1 & \frac{1}{2} \\ \frac{1}{2} & 1
+    \end{pmatrix}}_{\text{Symmetric}}
+        \begin{pmatrix}
+            x \\ y
+        \end{pmatrix} \\
+        &= u^T
+        \begin{pmatrix}
+            \frac{3}{2} & 0 \\ 0 & \frac{1}{2}
+        \end{pmatrix}
+        u
+    \end{align*}
+    where
+        $u = P
+        \begin{pmatrix}
+            x \\ y
+        \end{pmatrix}
+        \in \R^{2 \times 1}$
+        (Note that this is an orthogonal change of variables, so does not stretch the shape in any direction. Only rotates, reflects, etc.)
+        In terms of $u$, we can read off that this is an equation of an ellipse.
+\end{example}
 \end{document}
 
 
