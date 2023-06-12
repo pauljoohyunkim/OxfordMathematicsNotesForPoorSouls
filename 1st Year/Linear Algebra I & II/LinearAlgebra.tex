@@ -1256,6 +1256,29 @@ Often we are interested in orthonormal set, as it makes the computation much eas
     If $U,V \in \R^{n \times n}$ are both orthogonal matrices, show that $UV$ is also an orthogonal matrix.
 \end{exercise}
 
+\section{Cauchy Schwarz Inequality}
+Here is a theorem that is actually used a lot, like for constructing an upper bound.
+\begin{exercise}[Cauchy Schwarz Inequality]
+    Show the following:
+    For $V$ real inner product space, $|\inner{v_1, v_2}| \leq \norm{v_1} \norm{v_2}$
+    with equality if and only if $v_1, and v_2$ are linearly dependent.
+    
+    (Hint: Consider $\inner{tv_1 + v_2, tv_1 + v_2}$, and note that it is nonnegative for all $t \in \R$.)
+\end{exercise}
+\section{Complex Inner Product Space}
+One can generalize the real inner product space to complex inner product by considering
+sesquilinear form.
+\begin{definition}[Sesquilinear Form]
+    Given a vector space $V$ over $\mathbb{C}$,
+    a \textbf{sesquilinear form} on $V$ is a function $\inner{\cdot, \cdot} : V \times V \rightarrow \mathbb{C}$
+    such that
+    \begin{itemize}
+        \item $\inner{\alpha_1 v_1 + \alpha_2 v_2, v_3} = \alpha_1 \inner{v_1, v_3} + \alpha_2 \inner{v_2, v_3}$
+        \item $\inner{v_1, v_2} = \overline{\inner{v_2, v_1}}$.
+    \end{itemize}
+    for all $v_1, v_2, v_3 \in V$ and $\alpha_1, \alpha_2, \alpha_3 \in \mathbb{C}$
+\end{definition}
+
 \end{document}
 
 
