@@ -1314,7 +1314,7 @@ Determinant characterizes the overall ``scalar stretch'' by a square matrix.
                 \item $D \left[ \cdots, \lambda a_i, \cdots \right] = \lambda D \left[ \cdots, a_i, \cdots \right]$
             \end{itemize}
         \item Alternating: $D[\cdots, a_i, a_{i+1}, \cdots] = 0$ if $a_i = a_{i+1}$
-        \item $D\left( I \right) = 0$
+        \item $D\left( I \right) = 1$
     \end{itemize}
     \textbf{Determinant} of matrix $A$ is then $D(A)$.
 \end{definition}
@@ -1642,10 +1642,6 @@ Finally we state the spectral theorem for symmetric matrix in the most concise w
     \end{equation*}
     where $\norm{\cdot}$ is the Euclidean norm and $\lambda_{1}$ is the largest eigenvalue of $A$.
 \end{exercise}
-\begin{exercise}[Gram Matrix is Positive Semidefinite]
-    Given $A \in \R^n$ (not necessarily symmetric),
-    show that $A^T A$ is a symmetric positive-semidefinite\footnote{eigenvalues are nonnegative} matrix.
-\end{exercise}
 \begin{exercise}[Courant-Fischer for Eigenvalue]
     A more general (and slightly tricky) statement to the previous exercise.
     Show the following:
@@ -1654,6 +1650,10 @@ Finally we state the spectral theorem for symmetric matrix in the most concise w
         \lambda_i = \max_{\substack{U \leq \R^n \\ \dim U = i}} \min_{\substack{\norm{x} = 1 \\ x \in U}} x^T A x
     \end{equation*}
     where $\lambda_i$ is the $i$\textsuperscript{th} largest eigenvalue.
+\end{exercise}
+\begin{exercise}[Gram Matrix is Positive Semidefinite]
+    Given $A \in \R^n$ (not necessarily symmetric),
+    show that $A^T A$ is a symmetric positive-semidefinite\footnote{eigenvalues are nonnegative} matrix.
 \end{exercise}
 \begin{exercise}
     Compute
