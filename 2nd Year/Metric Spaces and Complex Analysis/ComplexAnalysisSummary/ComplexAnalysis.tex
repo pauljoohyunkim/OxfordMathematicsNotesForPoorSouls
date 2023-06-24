@@ -7,6 +7,11 @@
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{mathtools}
+\usepackage{soul}
+\usepackage[]{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{caption}
+\usepackage{subcaption}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
@@ -16,6 +21,7 @@
 \numberwithin{definition}{section}
 \numberwithin{exercise}{section}
 \numberwithin{remark}{section}
+\numberwithin{figure}{section}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
@@ -37,34 +43,34 @@ Make sure you study from lecture note!
 \section{Complex Plane and M\"obius Maps}
 \subsection{Complex Plane and Complex Infinity}
 We will be working in what's known as the \textit{extended complex plane}.
-Redefine the symbol $\C \coloneqq \C \cup \left\{ \underbrace{\infty}_{\text{Complex Infinity}} \right\}$;
-that is, whenever I mention $\C$, I refer to the space of complex numbers
+Define the symbol $\C_{\infty} \coloneqq \C \cup \left\{ \underbrace{\infty}_{\text{Complex Infinity}} \right\}$;
+that is, I refer to the space of complex numbers
 and infinity.
 
-Note that in $\C$, $\infty$ is different from infinity in real numbers.
+Note that in $\C_{\infty}$, $\infty$ is different from infinity in real numbers.
 $\infty \coloneqq \frac{1}{0}$ is a value that is not ``larger'' or ``smaller'' than any number
 (since we are talking about complex number\dots), but rather
 a number on a complex plane at a really far distance from origin.
 
 It is \textbf{WRONG} to say:
 \begin{itemize}
-    \item $\infty \geq a$ for any $a \in \C$
-    \item $\infty \leq a$ for any $a \in \C$
+    \item $\infty \geq a$ for any $a \in \C_{\infty}$
+    \item $\infty \leq a$ for any $a \in \C_{\infty}$
 \end{itemize}
 However, it is \textbf{CORRECT}\footnote{
-    Subtlety here: it seems a bit dodgy to say $\infty = \infty$,
+    Subtlety here: it seems a bit dodgy to say $\infty = \infty_{\infty}$,
     but this is matter of definition;
     you won't really encounter this type of ``philosophical'' problem
     in your exam.
 } to say:
 \begin{itemize}
-    \item $|\infty| \geq |a|$ for any $a \in \C$.
+    \item $|\infty| \geq |a|$ for any $a \in \C_{\infty}$.
 \end{itemize}
 $\infty$ is not like a point on $\C$, but rather like a gigantic circle that you can never reach.
 
 \subsection{M\"obius Maps}
 \begin{definition}[M\"obius Map]
-    $\psi : \C \rightarrow \C$ is a \textbf{M\"obius map} if:
+    $\psi : \C_{\infty} \rightarrow \C_{\infty}$ is a \textbf{M\"obius map} if:
     \begin{equation*}
         \psi \left( z \right) \coloneqq \frac{az + b}{cz + d}
     \end{equation*}
@@ -118,6 +124,95 @@ M\"obius maps also has a very convenient property:
     but don't take my word for it.)
 \end{exercise}
 
+\section{Complex Differentiability}
+Complex differentiability is one of the highlights of the complex analysis.
+\begin{definition}[Differentiable Function AKA Holomorphic Function]
+    Take $a \in \C$.
+    Let $f:U \rightarrow \C$ be a function where $U$ is a neighbourhood\footnote{Some open set containing $a$.} of $a$.
+    Then $f$ is \textbf{(complex) differentiable} or \textbf{holomorphic} at $a$ if
+    \begin{equation*}
+        f'(a) = \lim_{z \rightarrow a} \frac{f(z) - f(a)}{z - a}
+    \end{equation*}
+    exists, and call it derivative of $f$ at $a$.
+    If $f$ is differentiable for all points in $U$, then it is said to be
+    differentiable/holomorphic on $U$.
+\end{definition}
+\begin{remark}
+    Note that the definition seems to be have trivially extended from real analysis.
+    \ul{However, there is a subtlety}.
+    The limit does not approach just from positive or negative side,
+    but from any direction. (Figure \ref{fig: Real and Complex Limit})
+    \begin{figure}[tbp]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{realLimit}
+            \caption{Real Limit}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{complexLimit}
+            \caption{Complex Limit}
+        \end{subfigure}
+        \caption{Real limit (former) only concerns the approaching value from left and right side, but complex limit (latter) oncerns the approaching value from all direction.}
+        \label{fig: Real and Complex Limit}
+    \end{figure}
+\end{remark}
+\begin{exercise}[Differentiation Rules]
+    Show that all differentiation rules from real analysis holds
+    with holomorphic functions.
+    \begin{itemize}
+        \item Sum
+        \item Product Rule
+        \item Quotient Rule
+        \item Chain Rule
+    \end{itemize}
+\end{exercise}
+Due to the definition of complex limits being more restrictive,
+a more nontrivial result follows.
+\begin{exercise}[Cauchy-Riemann Equations]
+    Let $a \in \C$ and $U$ be a neighbourhood of $a$.
+    $f : U \rightarrow \C$ be holomorphic $a$.
+    Write $f(z) = u(x,y) + i v(x,y)$ where $u,v$ are real functions
+    and $z = x + iy$ where $x,y \in \R$.
+    Then $\partial_x u, \partial_y u, \partial_x v, \partial_y v$ all exist,
+    and the following \textbf{Cauchy-Riemann equations} hold:
+    \begin{align*}
+        \partial_x u &= \partial_y v \\
+        \partial_x v &= - \partial_y u
+    \end{align*}
+(Hint: Figure \ref{fig: Real and Complex Limit} might give you an insight.)
+\end{exercise}
+\begin{remark}
+    If Cauchy-Riemann does not hold, then it must mean that $f$ is not holomorphic! (Consider $f(z) = \bar{z}$. Cauchy-Riemann does not hold for any point, so it is nowhere holomorphic.)
+\end{remark}
+\begin{exercise}
+    If $f(z) = u(x,y) + i v(x,y)$ is holomorphic on $U$,
+    and $u,v$ are twice differentiable,
+    deduce that $u$ and $v$ are \textit{harmonic}, that is,
+    they satisfy the Laplace equation $\Delta u = \Delta v = 0$.
+\end{exercise}
+\begin{remark}
+    It turns out complex plane reveals a lot about solving Laplace equation!
+\end{remark}
+Here is another kicker:
+\begin{exercise}[Cauchy-Riemann to Holomorphic]
+    If the partial derivatives exist and are continuously differentiable,
+    Cauchy-Riemann implies holomorphicity.
+\end{exercise}
+\begin{remark}
+    This means if you check that Cauchy-Riemann holds, you can immediately assume you can construct an analytic function!
+\end{remark}
+Holomorphic functions also have Taylor expansion:
+\begin{remark}[Holomorphic functions have Taylor expansion]
+    If $f$ is holormorphic at $a$, then
+    in a neighbourhood of $a$, you can write
+    \begin{equation*}
+        f(z) = \sum_{n=0}^{\infty} c_n \left( z-a \right)^n
+    \end{equation*}
+    All the formulae for Taylor expansion holds (term-by-term differentiation, etc.)
+\end{remark}
 \end{document}
 
 
