@@ -245,6 +245,10 @@ Define logarithm function as:
 \end{equation*}
 where $\theta$ is the argument of $z$.
 
+\begin{exercise}
+    Verify that $\exp \left( \log z \right) = z$.
+\end{exercise}
+
 The choice of the interval for $\theta$ changes the behaviour of $\log z$ function.
 For example, one could take the interval to be $\left[ 0, 2\pi \right)$,
 or one could take it to be $\left[ - \pi, \pi \right)$,
@@ -314,10 +318,68 @@ Branch cuts are something that honestly makes more sense once you \textbf{played
     \begin{figure}[tbp]
         \centering
         \includegraphics{logpositiveimaginary}
-        \caption{Logarithm function with branch cut along the positive imaginary axis}
+        \caption{Logarithm function with branch cut along the positive imaginary axis \textbf{Edit:} $\pi$ on the right side should be $\pi i$}
         \label{fig: Log Positive Imaginary}
     \end{figure}
 \end{example}
+
+\begin{exercise}[Square Root]
+    Consider the definition of square root as given:
+    \begin{equation*}
+        z^{1/2} \coloneqq |z|^{1/2} e^{i \theta / 2}
+    \end{equation*}
+    (Note that I've just taken ``half'' as exponent in the polar form.)
+
+    Define the branch cut along the negative real axis and evaluate $i^{1/2}$ in this branch.
+    Define the branch cut along the negative imaginary axis and evaluate it again.
+\end{exercise}
+\begin{remark}
+    In both square roots and logarithms, there was a point which the branch cut naturally starts from.
+    These points are called \textbf{branch point};
+    these are the points that you cannot avoid having a branch cut.
+\end{remark}
+\begin{remark}
+    There is absolutely no need for a branch cut to be a straight line,
+    and in some cases, it is more natural to define the branch cut in some other way (out of scope, however)
+\end{remark}
+\begin{exercise}
+    Try defining some branch cuts of $\left( 1+z \right)^{1/2}$.
+    What is the branch point in this case?
+\end{exercise}
+\begin{example}[Square Root Branch Cut of Elastic Crack]
+    \label{eg: Square Root Branch Cut of Elastic Crack}
+    Suppose you want to define the branch of the function $\left( z^2 - 1 \right)^{1/2}$
+    such that it is holomorphic away from the branch cut $\left[ -1,1 \right]$.
+
+    Consider writing the function in a following way:
+    \begin{equation*}
+        \left( z^2 - 1 \right)^{1/2} = \left( z-1 \right)^{1/2} \left( z+1 \right)^{1/2}
+    \end{equation*}
+    Now note that $\left( z-1 \right)^{1/2}$ and $\left( z+1 \right)^{1/2}$ need branch cuts.
+    One way to define them is through:
+    \begin{align*}
+        \left( z-1 \right)^{1/2} &= r_1^{1/2} e^{i\theta_1 / 2} \\
+        \left( z+1 \right)^{1/2} &= r_2^{1/2} e^{i\theta_2 / 2}
+    \end{align*}
+    where $\theta_1, \theta_2 \in \left[ -\pi, \pi \right)$ (See Figure \ref{fig: Crack Tip 2}\footnote{
+            The angle range is not a mistake, even though it might seem a bit unintuitive.
+    })
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics{crackTip2}
+        \caption{$r_1, r_2, \theta_1, \theta_2$ as shown. The point on the upper right is the $z$.}
+        \label{fig: Crack Tip 2}
+    \end{figure}
+    Hence, we get our branch cut between -1 and 1:
+    \begin{equation*}
+        \left( z^2 - 1 \right)^{1/2} = r_1^{1/2} r_2^{1/2} e^{i \left( \frac{\theta_1 + \theta_2}{2} \right)}
+    \end{equation*}
+\end{example}
+\begin{exercise}
+    Show that the branch cut defined on Example \ref{eg: Square Root Branch Cut of Elastic Crack}
+    has different limiting values across the branch cut.
+    \textbf{Again, the angle range given is not a mistake!}
+\end{exercise}
 
 \end{document}
 
