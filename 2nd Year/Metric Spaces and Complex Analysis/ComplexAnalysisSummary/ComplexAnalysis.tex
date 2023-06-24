@@ -236,19 +236,89 @@ Holomorphic functions also have Taylor expansion:
 \end{exercise}
 \section{Branch Cut}
 Sometimes, there is just no sensible way to define a function that it is holomorphic everywhere\dots
-One of the unfortunate (or fortunate) functions is the logarithm.
-\begin{example}
-    Define logarithm function as:
-    \begin{equation*}
-        \log z \coloneqq \log |z| + i \theta
-    \end{equation*}
-    where $\theta$ is the argument of $z$.
+Two of the unfortunate (or fortunate) functions is the logarithm and square root.
+We will first introduce the logarithm function.
 
-    The choice of the interval for $\theta$ changes the behaviour of $\log z$ function.
-    For example, one could take the interval to be $\left[ 0, 2\pi \right)$,
-    or one could take it to be $\left[ - \pi, \pi \right)$,
-    or even just $\left[a, a + 2\pi\right)$.
+Define logarithm function as:
+\begin{equation*}
+    \log z \coloneqq \log |z| + i \theta
+\end{equation*}
+where $\theta$ is the argument of $z$.
+
+The choice of the interval for $\theta$ changes the behaviour of $\log z$ function.
+For example, one could take the interval to be $\left[ 0, 2\pi \right)$,
+or one could take it to be $\left[ - \pi, \pi \right)$,
+or even just $\left[a, a + 2\pi\right)$ for some $a \in \R$.
+
+The problem is that for given $z$, the argument of $z$ is not unique,
+and if you try to define it continuously around a circle,
+you will find that it is not possible\dots
+(Figure \ref{fig: arg z multivalued}).
+This means there needs to be some sort of contour from 0 that the function is not continuous on.
+This is known as a \textbf{branch cut}, and you have total freedom to choose
+based on what problem you want to solve.
+
+\begin{figure}[tbp]
+    \centering
+    \includegraphics[scale=0.5]{argz}
+    \caption{$\arg z$ being multivalued results in the need to introduce branch cut for logarithm.}
+    \label{fig: arg z multivalued}
+\end{figure}
+
+\begin{example}[Where do we use branch cut?]
+If you want to solve a problem with a fracture in an elastic solid (Figure \ref{fig: Crack Tip}),
+one standard way to solve it is to find some holomorphic function outside of the crack $\left[ -c,c \right]$
+satisfying some condition.
+\begin{figure}[tbp]
+    \centering
+    \includegraphics[scale=.5]{crackTip}
+    \caption{Fracture in elastic material.}
+    \label{fig: Crack Tip}
+\end{figure}
+It turns out that there is no function that is holomorphic everywhere satisfying that,
+so you would define a ``branch cut'' to be the straight line $\left[ -c,c \right]$ to resolve it.
+Then it is possible to define a function that is continuous away from the crack.
 \end{example}
+
+\begin{remark}
+    When I say I am defining a branch cut,
+    it means I am defining the function to be continuous away from the branch cut.
+    \textbf{I am not the value of the function} at the function.
+\end{remark}
+
+Branch cuts are something that honestly makes more sense once you \textbf{played around with it for a while}.
+
+\begin{example}[Logarithm: branch cut along positive real axis]
+    See Figure \ref{fig: Log Positive Real} for the diagram of a branch cut along positive real axis.
+    $\log z \coloneqq \log |z| + \theta i$ where $\theta \in \left[ 0, 2\pi \right)$ has a branch cut along positive real axis.
+    Right above the positive real axis, $\theta$ takes the value 0, so $\left(\log x\right)_{+} = \log |x|$.
+    On the other hand, right below the positive real axis, $\theta$ takes the value $2\pi$, so $\left( \log x \right)_{-} = \log |x| + 2\pi i$
+
+    So you might ask: \textit{What is $\log z$ where $z \in \R^{>0}$?} and the answer is,
+    you are asking the wrong question, because we can only define the ``limiting value'' on each side of the branch cut,
+    NOT on the branch cut.
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics{logpositivereal}
+        \caption{Logarithm function with branch cut along the positive real axis}
+        \label{fig: Log Positive Real}
+    \end{figure}
+\end{example}
+\begin{example}[Logarithm: branch cut along positive real axis]
+    This time take $\theta \in \left[ -\pi, \pi \right)$.
+    On the right side of the branch cut, we have $\theta = \pi$, so
+    $\left( \log \left( yi \right) \right)_{+} = \log{y} + \pi i$,
+    whereas on the left side, we have $\theta = -\pi$, so
+    $\left( \log \left( yi \right) \right)_{-} = \log{y} - \pi$.
+
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics{logpositiveimaginary}
+        \caption{Logarithm function with branch cut along the positive imaginary axis}
+        \label{fig: Log Positive Imaginary}
+    \end{figure}
+\end{example}
+
 \end{document}
 
 
