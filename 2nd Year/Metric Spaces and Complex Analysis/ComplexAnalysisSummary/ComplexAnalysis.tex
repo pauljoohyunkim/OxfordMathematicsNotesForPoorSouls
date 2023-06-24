@@ -1,0 +1,55 @@
+%        File: ComplexAnalysis.tex
+%     Created: Sat Jun 24 03:00 PM 2023 B
+% Last Change: Sat Jun 24 03:00 PM 2023 B
+%
+\documentclass[a4paper, 12pt]{article}
+\usepackage[]{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\title{Complex Analysis Summary}
+\author{Paul Joo-Hyun Kim}
+\begin{document}
+\maketitle
+\setcounter{section}{-1}
+\section{Preface}
+This note is for people studying complex analysis,
+and got lost in the middle with bunch of technical explanations.
+I wil try my best to be succinct as possible,
+stating important results (mostly without proof, but a bit of justification).
+
+\textbf{Warning}: This summary note is not a substitute for the lecture note.
+Make sure you study from lecture note!
+
+\section{Complex Plane and M\"obius Maps}
+We will be working in what's known as the \textit{extended complex plane}.
+Redefine the symbol $\C \coloneqq \C \cup \left\{ \underbrace{\infty}_{\text{Complex Infinity}} \right\}$;
+that is, whenever I mention $\C$, I refer to the space of complex numbers
+and infinity.
+
+Note that in $\C$, $\infty$ is different from infinity in real numbers.
+$\infty \coloneqq \frac{1}{0}$ is a value that is not ``larger'' or ``smaller'' than any number
+(since we are talking about complex number\dots), but rather
+a number on a complex plane at a really far distance from origin.
+
+It is \textbf{WRONG} to say:
+\begin{itemize}
+    \item $\infty \geq a$ for any $a \in \C$
+    \item $\infty \leq a$ for any $a \in \C$
+\end{itemize}
+However, it is \textbf{CORRECT}\footnote{
+    Subtlety here: it seems a bit dodgy to say $\infty = \infty$,
+    but this is matter of definition;
+    you won't really encounter this type of ``philosophical'' problem
+    in your exam.
+} to say:
+\begin{itemize}
+    \item $|\infty| \geq |a|$ for any $a \in \C$.
+\end{itemize}
+\end{document}
+
+
