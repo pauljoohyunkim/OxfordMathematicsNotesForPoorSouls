@@ -1,3 +1,4 @@
+% arara: pdflatex
 %        File: ComplexAnalysis.tex
 %     Created: Sat Jun 24 03:00 PM 2023 B
 % Last Change: Sat Jun 24 03:00 PM 2023 B
@@ -16,12 +17,14 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
 \newtheorem{exercise}{Exercise}
+\newtheorem{example}{Example}
 \newtheorem{remark}{Remark}
 
 \numberwithin{definition}{section}
 \numberwithin{exercise}{section}
 \numberwithin{remark}{section}
 \numberwithin{figure}{section}
+\numberwithin{example}{section}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
@@ -213,6 +216,25 @@ Holomorphic functions also have Taylor expansion:
     \end{equation*}
     All the formulae for Taylor expansion holds (term-by-term differentiation, etc.)
 \end{remark}
+\begin{example}[Common Function Definitions]
+    Here are definitions for some of the functions.
+    \begin{align*}
+        e^z = \exp z &\coloneqq \sum_{n=0}^{\infty} \frac{z^n}{n!} \\
+        \cos{z} &\coloneqq \sum_{n=0}^{\infty} \left( -1 \right)^n \frac{z^{2n}}{\left( 2n \right)!} \\
+        \cos{z} &\coloneqq \sum_{n=0}^{\infty} \left( -1 \right)^n \frac{z^{2n+1}}{\left( 2n + 1\right)!}
+    \end{align*}
+\end{example}
+\begin{exercise}
+    Show that
+    \begin{align*}
+        \cos{z} &= \frac{e^{iz} + e^{-iz}}{2} \\
+        \sin{z} &= \frac{e^{iz} - e^{-iz}}{2i}
+    \end{align*}
+\end{exercise}
+\begin{exercise}
+    Show that $\exp \left( z+w \right) = \exp (z) \exp (w)$
+\end{exercise}
+\section{Branch Cut}
 \end{document}
 
 
