@@ -235,6 +235,20 @@ Holomorphic functions also have Taylor expansion:
     Show that $\exp \left( z+w \right) = \exp (z) \exp (w)$
 \end{exercise}
 \section{Branch Cut}
+Sometimes, there is just no sensible way to define a function that it is holomorphic everywhere\dots
+One of the unfortunate (or fortunate) functions is the logarithm.
+\begin{example}
+    Define logarithm function as:
+    \begin{equation*}
+        \log z \coloneqq \log |z| + i \theta
+    \end{equation*}
+    where $\theta$ is the argument of $z$.
+
+    The choice of the interval for $\theta$ changes the behaviour of $\log z$ function.
+    For example, one could take the interval to be $\left[ 0, 2\pi \right)$,
+    or one could take it to be $\left[ - \pi, \pi \right)$,
+    or even just $\left[a, a + 2\pi\right)$.
+\end{example}
 \end{document}
 
 
