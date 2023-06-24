@@ -8,6 +8,15 @@
 \usepackage{amssymb}
 \usepackage{mathtools}
 
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{exercise}{Exercise}
+\newtheorem{remark}{Remark}
+
+\numberwithin{definition}{section}
+\numberwithin{exercise}{section}
+\numberwithin{remark}{section}
+
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 
@@ -26,6 +35,7 @@ stating important results (mostly without proof, but a bit of justification).
 Make sure you study from lecture note!
 
 \section{Complex Plane and M\"obius Maps}
+\subsection{Complex Plane and Complex Infinity}
 We will be working in what's known as the \textit{extended complex plane}.
 Redefine the symbol $\C \coloneqq \C \cup \left\{ \underbrace{\infty}_{\text{Complex Infinity}} \right\}$;
 that is, whenever I mention $\C$, I refer to the space of complex numbers
@@ -50,6 +60,64 @@ However, it is \textbf{CORRECT}\footnote{
 \begin{itemize}
     \item $|\infty| \geq |a|$ for any $a \in \C$.
 \end{itemize}
+$\infty$ is not like a point on $\C$, but rather like a gigantic circle that you can never reach.
+
+\subsection{M\"obius Maps}
+\begin{definition}[M\"obius Map]
+    $\psi : \C \rightarrow \C$ is a \textbf{M\"obius map} if:
+    \begin{equation*}
+        \psi \left( z \right) \coloneqq \frac{az + b}{cz + d}
+    \end{equation*}
+    where $
+    \begin{pmatrix}
+        a & b \\ c & d
+    \end{pmatrix}
+    $ is a nonsingular matrix.
+    (This restriction removes the possibility of $\frac{0}{0}$,
+    or trivial maps (eg: Constant function).)
+
+    One needs to be careful when defining this function at infinity,
+    but it should be sensible.\footnote{
+    That said, if you are supposed to define what a M\"obius map is,
+    you are \textbf{required} to definitions involving infinity as well.
+    }
+\end{definition}
+\begin{exercise}[Composition of two M\"obius map is a M\"obius map]
+    Show that for two M\"obius maps $\psi_1, \psi_2$,
+    its composition $\psi_1 \circ \psi_2$ is also a M\"obius map.
+\end{exercise}
+\begin{remark}
+    Consider the $2 \times 2$-matrix-to-M\"obius-map map as follows:
+    \begin{equation*}
+        f (A) \coloneqq
+        \begin{pmatrix}
+            a_{11} & a_{12} \\ a_{21} & a_{22}
+        \end{pmatrix}
+        \mapsto
+        \frac{a_{11} z + a_{12}}{a_{21} z + a_{22}}
+    \end{equation*}
+    Then it turns out that
+    $f\left( AB \right) = f(A) f(B)$
+\end{remark}
+\begin{exercise}[Decomposition of M\"obius maps]
+    It turns out that M\"obius maps can be written as composition of
+    \begin{itemize}
+        \item translation
+        \item dialation (``scaling by nonzero constant'')
+        \item inversion ($z \mapsto \frac{1}{z}$)
+    \end{itemize}
+    Prove this. (Hint: You can do a constructive proof.)
+\end{exercise}
+M\"obius maps also has a very convenient property:
+\begin{exercise}[Circline to Circline]
+    Show that M\"obius maps map circlines to circline.
+    (This means a line will either map to a circle or a line,
+    and also a circle will either map to a circle or a line.)
+
+    (Note: This is a boring long tedious proof, that probably won't be asked in exam,
+    but don't take my word for it.)
+\end{exercise}
+
 \end{document}
 
 
