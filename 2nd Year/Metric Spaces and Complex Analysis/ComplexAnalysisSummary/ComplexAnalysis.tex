@@ -14,12 +14,14 @@
 \usepackage{caption}
 \usepackage{subcaption}
 
+\newtheorem{theorem}{Theorem}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
 \newtheorem{exercise}{Exercise}
 \newtheorem{example}{Example}
 \newtheorem{remark}{Remark}
 
+\numberwithin{theorem}{section}
 \numberwithin{definition}{section}
 \numberwithin{exercise}{section}
 \numberwithin{remark}{section}
@@ -28,11 +30,16 @@
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\intd}{\,\text{d}}
+
+\renewcommand{\labelitemi}{$\circ$}
+\renewcommand{\labelitemii}{*}
 
 \title{Complex Analysis Summary}
 \author{Paul Joo-Hyun Kim}
 \begin{document}
 \maketitle
+\tableofcontents
 \setcounter{section}{-1}
 \section{Preface}
 This note is for people studying complex analysis,
@@ -401,6 +408,191 @@ Branch cuts are something that honestly makes more sense once you \textbf{played
         \label{fig: Crack Tip Out}
     \end{figure}
 \end{exercise}
+\begin{exercise}
+    Let $f(z) = \left( k-i \right)^{1/2}$ with the branch cut at $i \left[ 1, \infty \right)$ (positive imaginary axis starting from $i$, the branch point).
+    Show that $f(0) = e^{-i \pi/4}$.
+\end{exercise}
+
+
+\section{Paths and Integration}
+You may have seen paths (AKA curves or lines) and integral along them
+in multivariable calculus.
+The complex analysis version is similar, but from a different perspective.
+\subsection{Paths}
+\begin{definition}[Path]
+    Let $a < b$.
+    $\gamma:[a,b] \rightarrow \C$ is a \textbf{path} if it is a continuous function.
+    It is \textbf{closed} if $\gamma(a) = \gamma(b)$, that is, if the endpoints coincide.
+\end{definition}
+Tangent vector of a curve was an important concept in curves in MVC.
+Similarly, one could define the notion of it in complex analysis by
+introducing the ``derivative''.
+\begin{definition}[Differentiability of Path]
+    Path $\gamma:\left[ a,b \right] \rightarrow \C$ is \textbf{differentiable} at $t_0$ if
+    its real and imaginary parts are differentiable at $t_0$,
+    which is equivalent to saying
+    \begin{equation*}
+        \lim_{t \rightarrow t_0} \frac{\gamma(t) - \gamma(t_0)}{t-t_0}
+    \end{equation*}
+    exists.
+    If so, we write this limit as $\gamma'(t_0)$.
+
+    If $\gamma'(t)$ is continuous, then we say the path is in $C^1$.
+\end{definition}
+\begin{exercise}[``Tangent'']
+    Show that $\gamma'(t)$ (if it exists) characterizes the tangent direction of the path $\gamma$.
+    (Hint: Turn it into an MVC problem!)
+    Explain what happens at $t_0$ if $\gamma'(t_0) = 0$.
+\end{exercise}
+\begin{example}
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics{pathRightAngle}
+        \caption{Path given by piecewise $C^1$ path.}
+        \label{fig: Path Right Angle}
+    \end{figure}
+    Consider
+    \begin{equation*}
+        \gamma(t) \coloneqq
+        \begin{cases}
+            t^2 &-1 \leq t \leq 0 \\
+            it^2& 0 \leq t \leq 1
+        \end{cases}
+    \end{equation*}
+    This is a piecewise $C^1$ path. See Figure \ref{fig: Path Right Angle}
+    Note that $\gamma'(0) = 0$, so there is no ``tangent'' at the sharp corner.
+\end{example}
+\begin{example}[Circle]
+    \textbf{One of the most important paths!}
+    You can parameterize a circle with center $z_0$ and radius $r$ by:
+    \begin{equation*}
+        \gamma(t) = z_0 + r e^{it}
+    \end{equation*}
+    where $t \in \left[ 0, 2\pi \right]$.
+    (You could also do $\gamma(t) = z_0 + r e^{2\pi i t}$ where $t \in \left[ 0, 1 \right]$)
+    
+    Note that the direction is counterclockwise.
+\end{example}
+
+\subsection{Complex Path Integral}
+\begin{definition}[Complex Integral]
+Given a complex function $F(t) = x (t) + i y(t)$,
+one could define the integral over $t\in \left[ a,b \right]$ to be
+\begin{equation*}
+    \int_{a}^b F(t) \intd t \coloneqq \int_a^b x(t) \intd t + i \int_a^b y(t) \intd t
+\end{equation*}
+\end{definition}
+\begin{exercise}
+    Prove that, just like in real analysis, you can bound by the integral of the modulus of integrand; that is:
+    \begin{equation*}
+        \left| \int_a^b F(t) \intd t \right| \leq \int_a^b \left| F(t) \right| \intd t
+    \end{equation*}
+\end{exercise}
+\begin{definition}[Path Integral]
+    Given piecewise $C^1$ path $\gamma:[a,b] \rightarrow \C$ and $f: \C \rightarrow \C$, then
+    \begin{equation*}
+        \int_{\gamma} f(z) \intd z \coloneqq \int_{a}^b f\left( \gamma(t) \right) \gamma'(t) \intd t
+    \end{equation*}
+\end{definition}
+\begin{remark}
+    For remembering the definition,
+    you can treat it as substitution rule in real integral:
+    \begin{align*}
+        z &= \gamma(t) \\
+        \intd z &= \gamma'(t) \intd t
+    \end{align*}
+\end{remark}
+\begin{example}[Terms in Taylor Around a Circle\footnote{Come back to this after you do residue theorem as well!}]
+    Given unit circle around origin (counterclockwise) as the path,
+    let's compute the path integral of $f(z) = z^n$ where $n \in \mathbb{Z}$.
+    \begin{align*}
+        \int_{\gamma} z^n \intd z &= 
+        \int_{0}^{2\pi} \left( e^{it} \right)^n e^{it}i \intd t \\
+        &= \int_{0}^{2\pi} e^{it\left( n+1 \right)}i \intd t \\
+        &= 
+        \begin{cases}
+            \frac{1}{n+1} \left[ e^{it(n+1)}i \right]_{0}^{2\pi} & (n\neq -1) \\
+            \int_{0}^{2\pi} i \intd t & (n = -1)
+        \end{cases}
+        \\
+        &=
+        \begin{cases}
+            0 & (n \neq -1) \\
+            2\pi i & \left( n = -1 \right)
+        \end{cases}
+    \end{align*}
+\end{example}
+\begin{exercise}[Path integral is well-defined]
+    Show that if $\gamma:[a,b]\rightarrow \C$ and $\tilde\gamma:[c,d] \rightarrow \C$ are equivalent paths (of same orientation),
+    then for any continuous function,
+    \begin{equation*}
+        \int_{\gamma} f(z) \intd z = \int_{\tilde\gamma} f(z) \intd z
+    \end{equation*}
+    (Hint: since $\gamma$ and $\tilde\gamma$ are equivalent paths,
+        there exists a bijective $s:[c,d] \rightarrow [a,b]$ with
+    $s'(t) > 0$ such that $s(c) = a, s(d) = b$.)
+\end{exercise}
+\begin{definition}[Length]
+    If $\gamma:[a,b] \rightarrow \C$ is a $C^1$ path, then \textbf{length} of $\gamma$ is defined as
+    \begin{equation*}
+        \ell \left( \gamma \right) \coloneqq \int_{a}^b |\gamma'(t)| \intd t
+    \end{equation*}
+\end{definition}
+\begin{remark}
+    This is very similar to the length defined in MVC\dots
+\end{remark}
+\begin{remark}[Path Integral Properties]
+    Given functions $f,g$ and paths $\gamma, \eta$,
+    \begin{itemize}
+        \item Linearity
+            \begin{itemize}
+                \item $\int_{\gamma} \left( \alpha f(z) + \beta g(z) \right) \intd z = \alpha \int_\gamma f(z) \intd z + \beta \int_\gamma g(z) \intd z$
+            \end{itemize}
+        \item Opposite Orientation: If $\gamma^{-}$ is traversal of $\gamma$ in the opposite direction,
+            \begin{itemize}
+                \item $\int_{\gamma} f(z) \intd z = -\int_{\gamma^{-}} f(z) \intd z$
+            \end{itemize}
+        \item Additivity: If $\gamma \star \eta$ is concatenation of the two paths,
+            \begin{itemize}
+                \item $\int_{\gamma \star \eta} f(z) \intd z = \int_{\gamma} f(z) \intd z + \int_{\eta} f(z) \intd z$
+            \end{itemize}
+        \item Estimation Lemma ($\gamma^*$ is the image of the path)
+            \begin{itemize}
+                \item $\left| \int_{\gamma} f(z) \intd z\right| \leq \sup_{z\in\gamma^*} |f(z)| \ell \left( \gamma \right)$
+                \item Useful for having an upper bound.
+            \end{itemize}
+    \end{itemize}
+\end{remark}
+\begin{exercise}
+    Prove the estimation lemma.
+\end{exercise}
+Here is also a theorem that resembles the FTC
+\begin{exercise}
+    $F(z)$ is called \textbf{primitive} of $f$ if $F'(z) = f(z)$.
+    Suppose $\gamma:[a,b] \rightarrow U$ is a piecewise $C^1$ path in $U$, then prove
+    \begin{equation*}
+        \int_{\gamma} f(z) \intd z = F\left( \gamma(b) \right) - F \left( \gamma(a) \right)
+    \end{equation*}
+\end{exercise}
+Also the fact that zero derivative means constant:
+\begin{exercise}
+    Let $f:U \rightarrow \C$ with $f'(z) = 0$ for all $z \in U$, then show $f$ is constant.
+\end{exercise}
+
+\section{Cauchy's Theorem}
+One awesome theorem by Mr. Cauchy here!
+\begin{theorem}[Cauchy's Theorem]
+    Let $f:U \rightarrow \C$ be a holomorphic function over $U$.
+    Let $\gamma$ be a closed path in $U$ such that interior lies entirely in $U$.
+    Then
+    \begin{equation*}
+        \int_{\gamma} f(z) \intd z = 0
+    \end{equation*}
+\end{theorem}
+The proof of this is quite tedious\dots
+%\begin{exercise}[Deformation Theorem]
+%    
+%\end{exercise}
 
 \end{document}
 
