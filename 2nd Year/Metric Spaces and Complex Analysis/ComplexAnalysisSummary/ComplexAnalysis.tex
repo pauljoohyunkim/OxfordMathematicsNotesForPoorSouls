@@ -68,7 +68,7 @@ It is \textbf{WRONG} to say:
     \item $\infty \leq a$ for any $a \in \C_{\infty}$
 \end{itemize}
 However, it is \textbf{CORRECT}\footnote{
-    Subtlety here: it seems a bit dodgy to say $\infty = \infty_{\infty}$,
+    Subtlety here: it seems a bit dodgy to say $\infty = \infty$,
     but this is matter of definition;
     you won't really encounter this type of ``philosophical'' problem
     in your exam.
@@ -503,6 +503,7 @@ one could define the integral over $t\in \left[ a,b \right]$ to be
     \end{align*}
 \end{remark}
 \begin{example}[Terms in Taylor Around a Circle\footnote{Come back to this after you do residue theorem as well!}]
+    \label{eg: Taylor Term Circle Integral}
     Given unit circle around origin (counterclockwise) as the path,
     let's compute the path integral of $f(z) = z^n$ where $n \in \mathbb{Z}$.
     \begin{align*}
@@ -589,10 +590,169 @@ One awesome theorem by Mr. Cauchy here!
         \int_{\gamma} f(z) \intd z = 0
     \end{equation*}
 \end{theorem}
-The proof of this is quite tedious\dots
-%\begin{exercise}[Deformation Theorem]
-%    
-%\end{exercise}
+The proof of this is quite tedious\dots but the idea is that
+you prove this theorem when $\gamma$ is triangular path,
+then generalize it to star-like domain,
+then generalize it further!
+\begin{exercise}[A Case of Deformation Theorem]
+    Suppose $\gamma$ and $\tilde\gamma$ are two curves with same ends,
+    in the same orientation (so that the starting point of $\gamma$ is also the starting point
+    of $\tilde\gamma$, and same goes for the ending points).
+    If $f(z)$ is holomorphic inside interior region surrounded by $\gamma \cup \tilde\gamma$,
+    then deduce from Cauchy's theorem that
+    \begin{equation*}
+        \int_{\gamma} f(z) \intd z = \int_{\tilde\gamma} f(z) \intd z
+    \end{equation*}
+    (Hint: It helps to draw! It becomes basically a one-line argument by the use of Cauchy's theorem.)
+\end{exercise}
+\begin{example}
+    Take $\gamma$ to be a counterclockwise unit circle around the origin.
+    For any polynomial $f(z)$,
+    \begin{equation*}
+        \int_{\gamma} f(z) \intd z = 0
+    \end{equation*}
+    by Cauchy's theorem, because polynomial is holomorphic inside $\gamma$.
+    (In fact, try verifying this by computing it!)
+\end{example}
+\begin{example}[\textbf{WRONG} Use of Cauchy's Theorem]
+    Again, take $\gamma$ to be a counterclockwise unit circle around the origin.
+    This time take $f(z) = z^{-2}$.
+    You will find that
+    \begin{equation*}
+        \int_{\gamma} f(z) \intd z = 0
+    \end{equation*}
+    but this is NOT by Cauchy's theorem, as $f(z)$ here is not holomorphic inside $\gamma$.
+    (Rather, it is just a consequence of it having a primitive that does not cross a branch cut.)
+
+    In fact, you will get zero integral for $f(z) = \frac{1}{z^n}$ for integer $n \geq 2$,
+    but these are not by Cauchy's theorem.
+
+    What about $f(z) = \frac{1}{z}$ though? (See Example \ref{eg: Taylor Term Circle Integral} which might be relevant;
+    this is, as mentioned before, related to residue calculus which is coming!)
+\end{example}
+
+\begin{theorem}[Cauchy's Integral Formula]
+    Suppose $f:U \rightarrow \C$ is holomorphic on an open set $U$ containing disc $\bar B (a,r)$.
+    Then for all $w \in B \left( a,r \right)$,
+    \begin{equation*}
+        f(w) = \frac{1}{2\pi i} \int_{\gamma} \frac{f(z)}{z-w} \intd z
+    \end{equation*}
+    where $\gamma$ is $\partial B (a,r)$ (counterclockwise).
+\end{theorem}
+\begin{remark}
+    Cauchy's integral formula is also an example of residue theorem (which will be covered later)!!!
+    (If you are only interested in knowing theorems, then it means
+    residue calculus is all you need at the end of the day\dots)
+    Note that integrand is holomorphic in $U \setminus \left\{ w \right\}$.
+\end{remark}
+\begin{exercise}[Cauchy's Integral Formula for Derivatives]
+    If $f:U \rightarrow \C$ is holomorphic on open set $U$, then for any $z_0 \in U$,
+    $f(z)$ is equal to its Taylor series at $z_0$, and it converges on any open disk
+    centered at $z_0$ lying in U,
+    and derivatives are given by
+    \begin{equation*}
+        f^{(n)} (z_0) = \frac{n!}{2\pi i} \int_{\gamma (a,r)} \frac{f(z)}{(z-z_0)^{n+1}} \intd z
+    \end{equation*}
+\end{exercise}
+\begin{remark}
+    This implies that ``analytic = holomorphic''!
+    They can be used interchangeably!
+    This also means \ul{holomorphic functions are infinitely differentiable}.
+\end{remark}
+\begin{exercise}[Liouville's Theorem]
+    Suppose $f:\C \rightarrow \C$ is an entire\footnote{Holomorphic on $\C$} function.
+    If $f$ is bounded, then $f$ is a constant function.
+\end{exercise}
+\begin{remark}
+    A part of fundamental theorem of algebra can be proven using Liouville's theorem!
+\end{remark}
+\begin{example}[Wiener-Hopf Method]
+    \textbf{THIS IS ABSOLUTELY OUT OF SCOPE FOR PART A},
+    but demonstrates how powerful Liouville's theorem can be!
+
+    Suppose you want to solve the following problem for smooth bounded $f(x)$ for $x \in \R$:
+    \begin{equation*}
+        \int_{0}^{\infty} K (x-t) f(t) \intd t = f(x) \hspace{1cm} \text{for } x\geq 0
+    \end{equation*}
+    where $K(x) = e^{-|x|}$ for $x \in \R$.
+
+    \ul{After a bit of trickery\footnote{In a nutshell, one takes (complex) Fourier transform of the entire problem} (in Applied Complex Variables in part C)},
+    you end up needing to solve the following for
+    $\hat f_{+}$ and $\hat h_{-}$ (or at least one of the two unknown functions):
+    \begin{equation*}
+        \frac{1-k^2}{k+i} \hat f_{+} (k) = \left( k-i \right) \hat h_{-}(k) \hspace{1cm} \text{for } 0 < \Im (k) < 1
+    \end{equation*}
+    Wait, you have to solve for $\hat f_{+}$ for $\hat g_{-}$ from a single equation?
+    The magic here is that the LHS is holomorphic on $\Im (k) > 0$,
+    and the RHS is holomorphic on $\Im (k) < 1$.
+    Also from more complicated analysis of the problem, we know that
+    $\hat f_{+}(k) = O\left( k^{-1} \right)$ and $\hat h_{-} (k) = O\left( k^{-1} \right)$.
+
+    Define $E(k)$ as
+    \begin{equation*}
+        E(k) = 
+        \begin{cases}
+            \frac{1-k^2}{k+i} \hat f_{+} (k) & (\Im (k) > 0) \\
+            (k-i) \hat h_{-}(k) & (\Im (k) < 1)
+        \end{cases}
+    \end{equation*}
+    (Note that on the intersection $0 < \Im (k) < 1$, either of the definitions work,
+    due to the given problem.)
+    $E(k)$ is an entire function by construction, and because $\hat f_{+} (k) = O\left( k^{-1} \right)$ and $\hat h_{-} = O\left( k^{-1} \right)$,
+    it is bounded at (complex infinity),
+    so \ul{by Liouville's theorem} $E(k) \equiv C$ for some constant $C$.
+    Hence, (in the definition of Wiener-Hopf method, $f_{+}$ is defined to be $f_{+}(x) = f(x) \mathbb{I}_{x>0}$, where $\mathbb{I}$ is the indicator function.
+    \begin{equation*}
+        \hat f_{+}(k) = \frac{C\left( k+i \right)}{1-k^2}
+    \end{equation*}
+    Taking inverse Fourier transform,
+    \begin{equation*}
+        f(x) = f_{+} (x) = \frac{C}{2\pi} \int_{\Gamma} \frac{\left( k+i \right)e^{-ikx}}{1-k^2} \intd k
+    \end{equation*}
+    where $\Gamma$ is a contour from $-\infty + ci$ to $+\infty + ci$ for any $c \in \left( 0,1 \right)$.
+
+\end{example}
+
+It turns out that in most cases, the region at which a function ceases to be holomorphic
+are isolated most of the time, and sometimes, not even non-holomorphic even if you haven't defined them!
+\begin{exercise}[Riemann's Removable Singularity Theorem]
+    Suppose $f:U \setminus \left\{ z_0 \right\} \rightarrow \C$ is holomorphic and bounded near $z_0$,
+    then show $f$ extends to a holomorphic function on all of $U$.
+\end{exercise}
+\begin{example}
+    Consider $f(z) = \frac{\sin{z}}{z}$.
+    From the definition, it seems like $f(z)$ might not be holomorphic at $z=0$,
+    but $f(z)$ is bounded around $z=0$ (since $\lim_{z\rightarrow 0} f(z) = 1$),
+    and in a neighbourhood away from $z=0$,
+    so by Riemann's removable singularity theorem,
+    $f(z)$ is holomorphic at $z=0$.
+
+    Note that if it is holomorphic at $z=0$, then it also means it is infinitely differentiable at $z=0$.
+\end{example}
+\begin{remark}[General Strategy for Checking Holomorphicity]
+    Given $f(z)$,
+    \begin{enumerate}
+        \item Identify which points might be problematic.
+        \item Check boundedness (often via checking if limit exists).
+        \item If bounded, then it is definitely holomorphic, otherwise not holomorphic at that point.
+    \end{enumerate}
+\end{remark}
+\begin{exercise}
+    \begin{itemize}
+        \item Given $f(z) = \frac{\sin{z}}{\cos{z}}$, is it holomorphic at $z=\frac{\pi}{2}$?
+        \item What about $f(z) = \frac{\left( z-\frac{\pi}{2} \right)\sin{z}}{\cos{z}}$?
+        \item Is $f(z) = \frac{1}{(z+1)^2 (z-1)}$ holomorphic at $z=i$? What about at $z=1$? What about at $z=-1$?
+        \item Define branch cut of $\sqrt{z}$ along the positive real axis.
+            Determine if $f(z) = \frac{\left( z+i \right) \sqrt{z}}{z}$ is holomorphic at $z=-i$ and $z=i$, and if holomorphic, evaluate at those points.
+    \end{itemize}
+\end{exercise}
+
+Here is a kind-of converse to Cauchy's theorem.
+\begin{theorem}[Morera's Theorem]
+    Suppose $f:U \rightarrow \C$ is a continuous function on open $U \subset \C$.
+    If for any closed path $\gamma$ in $U$, $\int_{\gamma} f(z) \intd z$,
+    then $f$ is holomorphic.
+\end{theorem}
 
 \end{document}
 
