@@ -13,6 +13,7 @@
 \graphicspath{ {./images/} }
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{hyperref}
 
 \newtheorem{theorem}{Theorem}
 \theoremstyle{definition}
@@ -34,6 +35,8 @@
 
 \renewcommand{\labelitemi}{$\circ$}
 \renewcommand{\labelitemii}{*}
+
+\DeclareMathOperator{\res}{Res}
 
 \title{Complex Analysis Summary}
 \author{Paul Joo-Hyun Kim}
@@ -753,6 +756,99 @@ Here is a kind-of converse to Cauchy's theorem.
     If for any closed path $\gamma$ in $U$, $\int_{\gamma} f(z) \intd z$,
     then $f$ is holomorphic.
 \end{theorem}
+
+\section{Identity Theorem, Isolated Zeros, and Singularities}
+I've mentioned it before, but we deal with isolated singularities often,
+that is, the isolated points which some function $f$ is not holomorphic.
+\begin{definition}[Pole and Order]
+    Suppose $f(z)$ is holomorphic on $U \setminus \left\{ a \right\}$ for some $a \in \C$.
+    The minimum $n \in \mathbb{Z}^{n \geq 0} \cup \left\{ +\infty \right\}$ such that $\left( z-a \right)^{n} f(z)$ is holomorphic on $U$ is called \textbf{pole} of \textbf{order} $n$ of $f$ at $z=a$.
+    \begin{itemize}
+        \item If $n = 0$, then we say $a$ is a \textbf{removable singularity} as before.
+        \item If $n = 1$, then we say $a$ is a \textbf{simple pole}.
+        \item If $1 \leq n < \infty$, then we say $a$ is a \textbf{pole of order} $n$.
+        \item If $n = \infty$, then we say $a$ is an \textbf{essential singularity}.
+    \end{itemize}
+\end{definition}
+\begin{example}
+    \begin{itemize}
+        \item $\frac{\sin {z}}{z}$ has a removable singularity at $z=0$.
+        \item $\frac{1}{z}$ has a simple pole at $z=0$.
+        \item $\frac{1}{z^2}$ has a pole of order 2 at $z=0$.
+        \item $\frac{1}{\cos{z}}$ has simple poles at $z = \frac{\pi}{2} \pm n \pi$ for $n \in \mathbb{Z}$.
+        \item $e^{\frac{1}{z}}$ has essential singularity at $z = 0$.
+    \end{itemize}
+\end{example}
+\begin{remark}
+    The idea of isolated singularity is also very important to residue calculus.
+\end{remark}
+\begin{theorem}[Identity Theorem]
+    Let $U$ be a domain, and $f_1$ and $f_2$ are holomorphic on $U$.
+    If $S = \left\{ z \in U | f_1(z) = f_2 (z) \right\}$ has a limit point in $U$,
+    then $S = U$, and hence $f_1(z) = f_2 (z)$.
+\end{theorem}
+\begin{remark}
+    In a way, you could think of it as, if two functions $f_1$ and $f_2$ agree on limiting points on a ``dense set'',
+    then they must be equal on the domain.
+
+    One could think intuitionistically by noting that if $f$ is holomorphic at $z_0$, then
+    $f$ is equal to its Taylor series \ul{in a neighbourhood} around that point.
+\end{remark}
+\begin{exercise}
+    Suppose $f$ has a pole of order $m$ at $z_0$.
+    Show that there exists some $r > 0$ such that for all $z \in B\left( z_0, r \right) \setminus\left\{ z_0 \right\}$,
+    \begin{equation*}
+        f(z) = \sum_{n \geq -m} c_n (z-z_0)^n
+    \end{equation*}
+    that is,
+    $f$ is equal to its \textbf{Laurent series} in any sufficiently small annulus around $z_0$.
+    (Hint: What is the definition of a pole of order $m$?)
+\end{exercise}
+\begin{remark}
+    If $f$ has essential singularity at $z_0$, then Laurent series goes from negative infinity to positive infinity:
+    \begin{equation*}
+        f(z) = \sum_{n = -\infty}^{\infty} c_n (z-z_0)^n
+    \end{equation*}
+\end{remark}
+\begin{definition}[Principal Parts and Residue]
+    Given $f$ in its Laurent series around $z_0$,
+    \begin{equation*}
+        f(z) = \sum_{n = -\infty}^{\infty} c_n (z-z_0)^n
+    \end{equation*}
+    (where $c_m = 0$ for $m \leq -k-1$ if pole of order $k$)
+    the \textbf{principal part} of $f$ at $z_0$ is
+    \begin{equation*}
+        \sum_{n = -\infty}^{-1} c_n \left( z-z_0 \right)^n
+    \end{equation*}
+    and \textbf{residue} of $f$ at $z_0$ is
+    \begin{equation*}
+        \res_{z=z_0} f(z) = c_{-1}
+    \end{equation*}
+\end{definition}
+\begin{remark}
+    You might wonder why the principal part and residue are defined this way.
+
+    Principal part is the only part that results in $f$ having a ``singularity'',
+    so for singularity analysis, one only needs to look at the principal part.
+
+    Residue is actually really cool.
+    Consider counterclockwise integral of $f(z)$ (assume holomorphic in the unit circle except at 0) around the unit circle around $0$.
+    \begin{align*}
+        \int_{|z| = 1} f(z) \intd z &= \int_{|z| = 1} \sum_{n=-\infty}^{\infty} c_n z^n \intd z\\
+        &= \int_{|z| = 1} \frac{c_{-1}}{z} \intd z \\
+        &= 2 \pi i \res_{z=0} f(z)
+    \end{align*}
+    where the second equality comes from Exercise \ref{eg: Taylor Term Circle Integral}.
+    This means if you know the residues of $f(z)$ at its singularities,
+    then one could compute closed-curve integrals of $f(z)$ easily,
+    and this is the motivation for the residue calculus.
+\end{remark}
+\begin{example}[Computing Residues]
+    For examples of computing residues step-by-step, refer to \url{https://github.com/pauljoohyunkim/OxfordMathematicsNotesForPoorSouls/blob/main/2nd\%20Year/Metric\%20Spaces\%20and\%20Complex\%20Analysis/Residue\%20Calculus/Computing\_Residue.pdf}
+
+    Conceptually, it is important that you recall that you can write $f(z)$ as its
+    Laurent series around an annulus centered at its singularity.
+\end{example}
 
 \end{document}
 
