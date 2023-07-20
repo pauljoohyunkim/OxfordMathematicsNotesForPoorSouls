@@ -947,7 +947,8 @@ that is, the isolated points which some function $f$ is not holomorphic.
     You can think of simply-connected regions to be regions without holes
     (though I guess it's an oversimplification.)
 \end{exercise}
-\begin{exercise}[Deformation Theorem]
+\begin{exercise}[Deformation Theorem I]
+    \label{ex: Deformation Theorem}
     Let $U$ be simply-connected domain.
     Let $f:U \rightarrow \C$ be holomorphic on $U$.
     If $\gamma, \tilde\gamma$ are paths in $U$ from $a \in \C$ to $b \in \C$,
@@ -956,6 +957,11 @@ that is, the isolated points which some function $f$ is not holomorphic.
         \int_{\gamma} f(z) \intd z = \int_{\tilde\gamma} f(z) \intd z
     \end{equation*}
     (Hint: It helps to draw! It becomes basically a one-line argument by the use of Cauchy's theorem.)
+\end{exercise}
+\begin{exercise}[Deformation Theorem II]
+    \label{ex: Deformation Theorem II}
+    (Nonexaminable? Maybe? idk)
+    For closed curves, there are no ``ends'', so you can deform it how ever you want so long as it does not cross any non-holomorpic region.
 \end{exercise}
 
 \section{Argument Principle}
@@ -1043,8 +1049,8 @@ Here is a very important theorem.
 \end{remark}
 \begin{remark}
     Explicit form of the winding number, Cauchy's integral formula, and the argument principle can be understood as a case of residue theorem!
-    Armed with residue theorem and deformation theorem,
-    you can compute a vast amount of integrals really easily!
+    Armed with \ul{residue theorem and deformation theorem} (Exercise \ref{ex: Deformation Theorem}, \ref{ex: Deformation Theorem II}),
+    you can compute a vast types of integrals really easily!
 \end{remark}
 \begin{remark}
     We could've done Example \ref{eg: Taylor Term Circle Integral} using residue theorem really quickly!
@@ -1093,8 +1099,103 @@ Being able to compute complex integrals very easily means one could now compute 
 \end{example}
 \begin{remark}
     One question you might have is how I came up with the path to be a unit circle.
-    Whenever you see an integral involving trig function such as $\sin z$ or $\cos z$, you know that you can write it as some combination of $z, \bar z$, but it is convenient to take the curve to be unit circle so that $\bar z = \frac{1}{z}$, so that we don't have to worry about the conjugate symbol.
+    Whenever you see an integral involving trig function such as $\sin t$ or $\cos t$, with integration range $\left[ 0,2\pi \right]$ you know that you can write it as some combination of $z, \bar z$, but it is convenient to take the curve to be unit circle so that $\bar z = \frac{1}{z}$, so that we don't have to worry about the conjugate symbol.
+
+    At the end of the day, \ul{it is up to how much you've practiced}.
 \end{remark}
+\begin{remark}[Some Categorized Examples of Residue Calculus]
+    Refer to part C Applied Complex Variables lecture note (\url{https://courses.maths.ox.ac.uk/pluginfile.php/22180/mod_resource/content/1/C5_6LectureNotes.pdf}),
+    section 1.9 for some VERY DOABLE examples.
+    Note that the entire first section is in fact a highly condensed summary of relevant materials from complex analysis!
+\end{remark}
+\begin{example}
+    Suppose we want to compute
+    \begin{equation*}
+        I \coloneqq \int_{0}^{\infty} \frac{1}{1+x^2+x^4} \intd x
+    \end{equation*}
+    Note that I can write this as
+    \begin{equation*}
+        I = \frac{1}{2} \lim_{R \rightarrow \infty} \int_{-R}^{R} \frac{1}{1+x^2+x^4} \intd x
+    \end{equation*}
+    It is difficult (if impossible) to get a simple form for the antiderivative of the integrand.
+    This means we have to use complex integrals.
+
+    Note that the integral is over the range $[-R, R]$, and we see that at infinity,
+    the integrand is like $O\left( z^{-4} \right)$ as $z \rightarrow \infty$ (where $z \in \C$), which seems to indicate that
+    the integrand decays at a sufficient rate (and hence be zero at infinity\dots All of this is hand-wavy, but it will make more sense as you practice)
+
+    Consider the following complex integral:
+    \begin{equation*}
+        \tilde I_R \coloneqq \int_{\gamma_R} \frac{1}{1+z^2+z^4} \intd z 
+        = \underbrace{\int_{y_R} \frac{1}{1+z^2+z^4} \intd z}_{\rightarrow 2I} + \int_{b_R} \frac{1}{1+z^2+z^4} \intd z
+    \end{equation*}
+    where $\gamma_R$ is as shown in Figure \ref{fig: Residue Calculus Contour 1} (concatenation of the yellow and blue contours)
+    \begin{figure}[h]
+        \centering
+        \includegraphics{residueCalculusContour1}
+        \caption{Contour for $\tilde I_R$}
+        \label{fig: Residue Calculus Contour 1}
+    \end{figure}
+    and $y_R, b_R$ are yellow and blue paths respectively of the full contour.
+    (Note that $\int_{y_R} \frac{1}{1+z^2+z^4} \intd z = \int_{-R}^R \frac{1}{1+x^2+x^4} \intd x$)
+
+    By estimation lemma, the contribution from $b_R$ tends to zero as $R \rightarrow 0$:
+    \begin{equation*}
+        \left| \int_{b_R} \frac{1}{1+z^2+z^4} \intd z \right|
+        \leq \sup_{z \in b_R^*} \left|\frac{1}{1+z^2+z^4}\right| \pi R
+        \leq \frac{\pi R}{R^4 - R^2 - 1} \rightarrow 0
+    \end{equation*}
+    where in the last inequality, I used the (reverse) triangle inequality.
+    This implies $\tilde I_R \rightarrow \int_{y_R} \frac{1}{1+z^2+z^4}\intd z$ as $R \rightarrow \infty$.
+    This means all we now have to do is to compute $I_R$ using residue theorem, which turns out to be:
+    \begin{equation*}
+        \tilde I_R = 2 \pi i \left( \res_{z=\omega} \left( \frac{1}{1+z^2+z^4} \right) + \res_{z=\omega^2} \left( \frac{1}{1+z^2+z^4} \right) \right)
+        = \pi/\sqrt{3}
+    \end{equation*}
+    where $\omega\coloneqq e^{i\pi/3}$ 
+
+    Hence, putting it all together,
+    \begin{equation*}
+        \pi/\sqrt{3} = \lim_{R\rightarrow\infty}\int_{\gamma_R}\frac{1}{1+z^2+z^4} \intd z
+    \end{equation*}
+
+    So ultimately,
+    \begin{equation*}
+        I = \frac{\pi}{2\sqrt{3}}
+    \end{equation*}
+\end{example}
+\begin{remark}[PRO TIP: Behaviour at Infinity]
+    If you can infer the behaviour of integral at infinity,
+    the whole process of turning real integral into a complex one
+    might just become more natural.
+    Suppose we have integral $\int_{\Gamma_R} f(z) \intd z$
+    such that $f(z) = O\left( \frac{1}{R^n} \right)$,
+    and $\Gamma_R$ is a circular arc that ``goes to'' infinity\footnote{Just like the semicircle from the example.} as $R \rightarrow \infty$.
+
+    Bounding the contribution:
+    \begin{equation*}
+        \left|\int_{\Gamma_R} f(z) \intd z \right|
+        \leq \sup_{z \in \Gamma_R^*} |f(z)| \ell(\Gamma_R^*)
+        \leq \frac{C_1}{R^n} \left(C_2 R\right)
+        =C R^{1-n}
+    \end{equation*}
+    where
+    \begin{itemize}
+        \item the first inequality is from estimation lemma.
+        \item the second inequality is from the definition of big-O notation and the fact that $\Gamma_R$ is a part of a circle, so we know that $\ell\left( \Gamma_R^* \right) = O\left( R \right)$.
+    \end{itemize}
+    This means if $n>1$, $\int_{\Gamma_R} f(z) \intd z$ vanishes as $R \rightarrow 0$.
+\end{remark}
+\begin{example}[Behaviour at Infinity]
+    For the following $f(z)$, the integral $\int_{\Gamma_R} f(z) \intd z \rightarrow 0$ as $R \rightarrow \infty$ where $\Gamma_R$ is a part of a circle of radius $R$ (it can be the full circle of radius $R$ as well).
+    \begin{itemize}
+        \item $\frac{1}{z+z^2}$
+        \item $\frac{\sin{z}}{z^{3/2}+z^2}$
+            \begin{itemize}
+                \item $\Gamma_R$ here would have to exclude the branch cut!
+            \end{itemize}
+    \end{itemize}
+\end{example}
 
 \end{document}
 
