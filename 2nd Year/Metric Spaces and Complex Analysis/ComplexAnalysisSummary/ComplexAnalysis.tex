@@ -999,6 +999,28 @@ Here is another result proven using argument principle.
     $\bar B (a,r) \subset U$.
     If $|f(z)| > |g(z)|$ for all $z \in \partial B(a,r)$ then $f,f+g$ both have the same change in argument around $\partial B (a,r)$, and hence the same number of zeros in $B(a,r)$ (counted with multiplicities).
 \end{exercise}
+\begin{remark}
+    Apprently Rouch\'e's theorem is useful for counting number of zeros of a function $f$.
+\end{remark}
+\begin{example}
+    (An example from the lecture note)
+    Let $P(z) = z^4 + 5z + 2$. On circle $|z| = 2$, $|z|^4 = 16 > 5.2 + 2 \geq |\underbrace{5z + 2}_{g(z)}|$.
+    Then $P-g = z^4$ and $P$ has the same number of roots in $B(0,2)$,
+    so by Rouch\'e's theorem, all four roots of $P(z)$ fall in $B(0,2)$.
+    Taking $|z|=1$, $|g(z)| \geq 5 - 2 = 3 > |z^4| = 1$, so
+    $P(z)$ and $g(z)$ have the same number of roots in $B(0,1)$, so
+    $P(z)$ has one root of modulus less than 1, and 3 of modulus between 1 and 2.
+\end{example}
+Other theorems that sound quite trivial can now be proven:
+\begin{exercise}[Open Mapping Theorem]
+    Suppose $f:U \rightarrow \C$ is holomorphic and nonconstant on $U$.
+    Then for any open set $V \subset U$, $f(V)$ is also open.
+\end{exercise}
+\begin{exercise}[Inverse Function Theorem]
+    Suppose $f:U \rightarrow \C$ be injective and holomorphic, and $f'(z) \neq 0$ for all $z \in U$.
+    If $g: f(U) \rightarrow U$ is the inverse of $f$, then
+    $g$ is holomorphic, and $g'(w) = \frac{1}{f'(g(w))}$.
+\end{exercise}
 
 
 \end{document}
