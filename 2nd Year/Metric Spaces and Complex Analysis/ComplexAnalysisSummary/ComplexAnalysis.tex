@@ -597,17 +597,6 @@ The proof of this is quite tedious\dots but the idea is that
 you prove this theorem when $\gamma$ is triangular path,
 then generalize it to star-like domain,
 then generalize it further!
-\begin{exercise}[A Case of Deformation Theorem]
-    Suppose $\gamma$ and $\tilde\gamma$ are two curves with same ends,
-    in the same orientation (so that the starting point of $\gamma$ is also the starting point
-    of $\tilde\gamma$, and same goes for the ending points).
-    If $f(z)$ is holomorphic inside interior region surrounded by $\gamma \cup \tilde\gamma$,
-    then deduce from Cauchy's theorem that
-    \begin{equation*}
-        \int_{\gamma} f(z) \intd z = \int_{\tilde\gamma} f(z) \intd z
-    \end{equation*}
-    (Hint: It helps to draw! It becomes basically a one-line argument by the use of Cauchy's theorem.)
-\end{exercise}
 \begin{example}
     Take $\gamma$ to be a counterclockwise unit circle around the origin.
     For any polynomial $f(z)$,
@@ -662,7 +651,7 @@ then generalize it further!
     \end{equation*}
     \begin{figure}[tbp]
         \centering
-        \includegraphics{images/windingNumber}
+        \includegraphics{windingNumber}
         \caption{How to count the winding number}
         \label{fig: Winding Number}
     \end{figure}
@@ -918,6 +907,55 @@ that is, the isolated points which some function $f$ is not holomorphic.
         \res_{z=z_0} (f) = \lim_{z\rightarrow z_0} \frac{1}{\left( m-1 \right)!} \frac{\intd^{m-1}}{\intd z^{m-1}} \left( \left( z-z_0 \right)^m f(z) \right)
     \end{equation*}
     (Hint: Consider Laurent series of $f$.)
+\end{exercise}
+
+\section{Homotopies, Simply-Connected Domains, and Cauchy's Theorem}
+\begin{definition}[Homotopy and Simply-Connectedness]
+    Suppose that $U$ is an open set in $\C$ and $a,b\in U$,
+    and that $\eta:\left[ 0,1 \right] \rightarrow U$,
+    $\gamma:\left[ 0,1 \right] \rightarrow U$ are paths in $U$
+    such that $\gamma(0) = \eta(0) = a$ and $\gamma(1) = \eta(1) = b$.
+
+    $\gamma$ andd $\eta$ are \textbf{homotopic} if there exists a continuous function $h:\left[ 0,1 \right] \times \left[ 0,1 \right] \rightarrow U$ such that,
+    \begin{align*}
+        h(0,s) &= a \\
+        h(1,s) &= b \\
+        h(t,0) &= \gamma(t) \\
+        h(t,1) &= \eta(t)
+    \end{align*}
+    See Figure \ref{fig: Homotopy} for examples of homotopicity and non-homotopicity.
+    \begin{figure}[tbp]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{homotopy1}
+            \caption{These two curves are homotopic in $\C$ as you can continuous deform one to get the other.}
+        \end{subfigure}
+        \hfill
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{homotopy2}
+            \caption{These two curves are not homotopic in the annulus as you cannot continuous deform one to get the other.}
+        \end{subfigure}
+        \caption{To talk about homotopy, one must give the two curves and a region.}
+        \label{fig: Homotopy}
+    \end{figure}
+    We say $U$ is \textbf{simply-connected} if two curves in $U$ are always homotopic.
+\end{definition}
+\begin{exercise}
+    You can think of simply-connected regions to be regions without holes
+    (though I guess it's an oversimplification.)
+\end{exercise}
+\begin{exercise}[Deformation Theorem]
+    Let $U$ be simply-connected domain.
+    Let $f:U \rightarrow \C$ be holomorphic on $U$.
+    If $\gamma, \tilde\gamma$ are paths in $U$ from $a \in \C$ to $b \in \C$,
+    then
+    \begin{equation*}
+        \int_{\gamma} f(z) \intd z = \int_{\tilde\gamma} f(z) \intd z
+    \end{equation*}
+    (Hint: It helps to draw! It becomes basically a one-line argument by the use of Cauchy's theorem.)
 \end{exercise}
 
 \end{document}
