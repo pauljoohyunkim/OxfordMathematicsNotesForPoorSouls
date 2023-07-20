@@ -929,14 +929,14 @@ that is, the isolated points which some function $f$ is not holomorphic.
         \begin{subfigure}[b]{0.5\textwidth}
             \centering
             \includegraphics[width=\textwidth]{homotopy1}
-            \caption{These two curves are homotopic in $\C$ as you can continuous deform one to get the other.}
+            \caption{These two curves are homotopic in $\C$ as you can continuously deform one to get the other.}
         \end{subfigure}
         \hfill
         \centering
         \begin{subfigure}[b]{0.5\textwidth}
             \centering
             \includegraphics[width=\textwidth]{homotopy2}
-            \caption{These two curves are not homotopic in the annulus as you cannot continuous deform one to get the other.}
+            \caption{These two curves are not homotopic in the annulus as you cannot continuously deform one to get the other.}
         \end{subfigure}
         \caption{To talk about homotopy, one must give the two curves and a region.}
         \label{fig: Homotopy}
@@ -957,6 +957,36 @@ that is, the isolated points which some function $f$ is not holomorphic.
     \end{equation*}
     (Hint: It helps to draw! It becomes basically a one-line argument by the use of Cauchy's theorem.)
 \end{exercise}
+
+\section{Argument Principle}
+We say function is \textbf{meromorphic} if it is holomorphic except at a few isolated singularities.
+
+Let's start with a simple (verification) exercise.
+\begin{exercise}
+    Suppose $f:U \rightarrow \C$ is meromorphic and has zero of order $k$ or a pole of order $k$ at $z_0 \in U$.
+    Then show that $\frac{f'(z)}{f(z)}$ has a simple pole at $z_0$ with residue $k$ or $-k$ respectively.
+\end{exercise}
+
+Here is the statement of the argument principle
+\begin{exercise}[Argument Principle]
+    Suppose $f:U \rightarrow \C$ is a meromorphic function on $U$.
+    Assume $B(a,r) \subset U$.
+    Let $N$ denote the number of zeros (counted with multiplicity)
+    and $P$ denote the number of poles (counted again with multiplicity)
+    of $f$ inside $B(a,r)$,
+    and $f$ has neither zeros nor poles on $\partial B(a,r)$, then
+    show that
+    \begin{equation*}
+        N - P = \frac{1}{2\pi i}\int_{\gamma} \frac{f'(z)}{f(z)} \intd z
+    \end{equation*}
+    where $\gamma$ is a path with image $\partial B (a,r)$.
+
+    Moreover, $N-P$ is also the winding number of the path $\Gamma = f \circ \gamma$.
+\end{exercise}
+\begin{remark}
+    You should now be convinced that you can think of pole as a reverse zero if you have not already\dots
+\end{remark}
+
 
 \end{document}
 
