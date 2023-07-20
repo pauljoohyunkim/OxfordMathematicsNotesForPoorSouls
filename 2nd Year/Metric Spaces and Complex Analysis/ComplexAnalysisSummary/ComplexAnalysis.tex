@@ -1023,6 +1023,79 @@ Other theorems that sound quite trivial can now be proven:
 \end{exercise}
 
 
+\section{Residue Theorem}
+You are now at the heart of complex analysis!
+All the buildup for one of the most important results in complex analysis\dots
+I know it's tiring, but this is one of the sections that is almost guaranteed to be on the exam,
+and you can actually prepare for it by practice!
+\begin{exercise}[Residue Theorem]
+    Suppose $U$ is an open set in $\C$ and $\gamma$ is a closed curve whose inside is contained in $U$ (so that $\forall z \not \in U$, $I(\gamma,z) = 0$.)
+\end{exercise}
+Then if $S \subset U$ is a finite set such that $S \cap \gamma^*$ and $f$ is a holomorphic function on $U \setminus S$,
+
+Here is a very important theorem.
+(Don't worry if it looks complicated. In practice, you will be working with very nice functions.)
+\begin{equation*}
+    \frac{1}{2\pi i} \int_{\gamma} f(z) \intd z = \sum_{a \in S} I \left( \gamma, a \right) \res_{z=a} (f)
+\end{equation*}
+\begin{remark}
+    In most cases, winding number $I(\gamma, a)$ will be 1 (or -1 if you go clockwise), so the RHS in most cases becomes $\pm \sum_{a \in S} \res_{z=a} (f)$
+\end{remark}
+\begin{remark}
+    Explicit form of the winding number, Cauchy's integral formula, and the argument principle can be understood as a case of residue theorem!
+    Armed with residue theorem and deformation theorem,
+    you can compute a vast amount of integrals really easily!
+\end{remark}
+\begin{remark}
+    We could've done Example \ref{eg: Taylor Term Circle Integral} using residue theorem really quickly!
+\end{remark}
+\begin{exercise}
+    Verify the following result:
+    \begin{equation*}
+        \int_{\gamma} \frac{\sin{z}}{\cos{z}} \intd z = 2 \pi i
+    \end{equation*}
+    where $\gamma$ is a clockwise circular path of radius 0.2 around $\pi/2$
+    (Note: Beware of the sign!)
+\end{exercise}
+\begin{exercise}
+    Verify the following result:
+    \begin{equation*}
+        \int_{\gamma} \frac{1}{\left( z+1 \right)^2 \left( z-1 \right)} \intd z = -\frac{i \pi}{2}
+    \end{equation*}
+    where $\gamma(t) = -1 + \frac{1}{5} e^{it}$ over $t\in\left[ 0,2\pi \right]$.
+\end{exercise}
+
+\subsection{Residue Calculus}
+Being able to compute complex integrals very easily means one could now compute real integrals that does not have an easy antiderivative.
+\begin{example}
+    Suppose we wish to compute
+    \begin{equation*}
+        \int_{0}^{2\pi} \frac{1}{1+3 \cos^2 (t)} \intd t
+    \end{equation*}
+    If we consider the path $t \mapsto e^{it}$ (a unit circle),
+    and let $z = e^{it}$, and note that
+    \begin{equation*}
+        \cos{t} = \frac{1}{2} \left( z + \frac{1}{z} \right)
+    \end{equation*}
+    (since $z$ is on the unit circle)
+    we can turn the real integral into complex integral by the transforming the integrand
+    \begin{equation*}
+        \frac{1}{1+3 \cos^2 (t)} = \frac{1}{1+3 \times \left( \frac{1}{2}\left( z+\frac{1}{z} \right) \right)^2} = \frac{4z^2}{3 + 10z^2 + 3z^4}
+    \end{equation*}
+    and noting $\intd z = iz \intd t$:
+    \begin{equation*}
+        \int_{0}^{2\pi} \frac{1}{1+3 \cos^2 (t)} \intd t = \int_\gamma \frac{-4iz}{3+10z^2 + 3z^4} \intd z
+    \end{equation*}
+    By residue theorem, the complex integral is simply $\pi$, so
+    \begin{equation*}
+        \int_{0}^{2\pi} \frac{1}{1+3 \cos^2 (t)} \intd t  = \pi
+    \end{equation*}
+\end{example}
+\begin{remark}
+    One question you might have is how I came up with the path to be a unit circle.
+    Whenever you see an integral involving trig function such as $\sin z$ or $\cos z$, you know that you can write it as some combination of $z, \bar z$, but it is convenient to take the curve to be unit circle so that $\bar z = \frac{1}{z}$, so that we don't have to worry about the conjugate symbol.
+\end{remark}
+
 \end{document}
 
 
