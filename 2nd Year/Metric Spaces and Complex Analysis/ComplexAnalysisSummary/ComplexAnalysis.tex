@@ -648,6 +648,46 @@ then generalize it further!
     residue calculus is all you need at the end of the day\dots)
     Note that integrand is holomorphic in $U \setminus \left\{ w \right\}$.
 \end{remark}
+\begin{definition}[Winding Number]
+    Consider a closed curve $\gamma$ and assume $z_0$ is not on the curve.
+    Then it is possible to write the curve function (parameterized over $t \in \left[ 0, 1 \right]$ as $\gamma(t) = z_0 + |\gamma(t) - z_0|e^{2\pi i a(t)}$ for some $a(t)$ real continuous function.\footnote{Writing out a complex number as a polar form centered at $z_0$.}
+        (In fact (for simplicity consider $z_0 = 0$) if $\gamma(t) = |\gamma(t)|e^{2\pi i a(t)} =|\gamma(t)|e^{2\pi i b(t)} $, then $a(t) = b(t) + n$ for some $n \in \mathbb{Z}$.)
+        \textbf{Winding number} of the curve $\gamma$ around $z_0$ is defined as:
+    \begin{equation*}
+        I\left( \gamma, z_0 \right) \coloneqq a(1) - a(0) \in \mathbb{Z}
+    \end{equation*}
+    An explicit form of winding number of the curve, if it is piecewise $C^1$, can be written as the following:
+    \begin{equation*}
+        I\left( \gamma, z_0 \right) \coloneqq \frac{1}{2\pi i} \int_{\gamma} \frac{\intd z}{z - z_0}
+    \end{equation*}
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics{images/windingNumber}
+        \caption{How to count the winding number}
+        \label{fig: Winding Number}
+    \end{figure}
+\end{definition}
+\begin{example}
+    Name says it all, winding number counts how many times a curve winds around a point.
+    (Positive means anticlockwise winding and negative means clockwise winding.)
+    See Figure \ref{fig: Winding Number}.
+    Start from the green point (on the side labeled 1), and follow the curve in the direction of the arrow (anticlockwise).
+    Once you get to the inner point also labeled 1, it means you've counted one winding.
+    Continue from the point inner labeled 2 until you get to the green point (on the side labeled 2).
+    You've now counted the second winding.
+
+    Overall, the winding number around the red point is 2.
+
+    If the direction of the arrow were reversed (so that it is clockwise),
+    you would've ended up with -2 as the winding number.
+\end{example}
+\begin{remark}
+    The explicit integral representation of the winding number is an application of Cauchy's integral formula to $f(z) \equiv 1$,
+    which again I remark is an application of the residue theorem!
+\end{remark}
+\begin{exercise}
+    Prove (or justify) why the explicit form involving the integral should be the winding number (if you are justifying, you could use residue calculus).
+\end{exercise}
 \begin{exercise}[Cauchy's Integral Formula for Derivatives]
     If $f:U \rightarrow \C$ is holomorphic on open set $U$, then for any $z_0 \in U$,
     $f(z)$ is equal to its Taylor series at $z_0$, and it converges on any open disk
@@ -788,6 +828,8 @@ that is, the isolated points which some function $f$ is not holomorphic.
         \item Taylor expand the denominator (and possibly the numerator).
         \item Use the formula $\frac{1}{1-r} = 1 + r + r^2 + \cdots$ for $|r| < 1$ to transform denominator to a multiplication by an infinite series.
     \end{enumerate}
+    What you are basically computing is ``Laurent series'' which gives all the info about the order of the pole and residue,
+    which will be introduced very shortly.
 \end{remark}
 \begin{remark}
     The idea of isolated singularity is also very important to residue calculus.
