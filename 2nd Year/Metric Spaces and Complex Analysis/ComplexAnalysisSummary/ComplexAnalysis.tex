@@ -764,7 +764,7 @@ that is, the isolated points which some function $f$ is not holomorphic.
     Suppose $f(z)$ is holomorphic on $U \setminus \left\{ a \right\}$ for some $a \in \C$.
     The minimum $n \in \mathbb{Z}^{n \geq 0} \cup \left\{ +\infty \right\}$ such that $\left( z-a \right)^{n} f(z)$ is holomorphic on $U$ is called \textbf{pole} of \textbf{order} $n$ of $f$ at $z=a$.
     \begin{itemize}
-        \item If $n = 0$, then we say $a$ is a \textbf{removable singularity} as before.
+        \item If $n = 0$, then we say $a$ is a \textbf{removable singularity}\footnote{You can think of this as not having any singularity at all, in fact; if we have removable singularity, it means we can ``get rid of'' it by analyticity.} as before.
         \item If $n = 1$, then we say $a$ is a \textbf{simple pole}.
         \item If $1 \leq n < \infty$, then we say $a$ is a \textbf{pole of order} $n$.
         \item If $n = \infty$, then we say $a$ is an \textbf{essential singularity}.
@@ -779,6 +779,16 @@ that is, the isolated points which some function $f$ is not holomorphic.
         \item $e^{\frac{1}{z}}$ has essential singularity at $z = 0$.
     \end{itemize}
 \end{example}
+\begin{remark}
+    For \ul{tips on determining the order of a singularity}, refer to \url{https://github.com/pauljoohyunkim/OxfordMathematicsNotesForPoorSouls/blob/main/2nd\%20Year/Metric\%20Spaces\%20and\%20Complex\%20Analysis/Residue\%20Calculus/Computing\_Residue.pdf}.
+
+    But, here are the main points:
+    \begin{enumerate}
+        \item Identify where the singularities are (in most cases, it is the zeros of the denominator of the functions you are given).
+        \item Taylor expand the denominator (and possibly the numerator).
+        \item Use the formula $\frac{1}{1-r} = 1 + r + r^2 + \cdots$ for $|r| < 1$ to transform denominator to a multiplication by an infinite series.
+    \end{enumerate}
+\end{remark}
 \begin{remark}
     The idea of isolated singularity is also very important to residue calculus.
 \end{remark}
