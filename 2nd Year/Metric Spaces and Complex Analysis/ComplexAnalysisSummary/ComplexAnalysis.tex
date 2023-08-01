@@ -1166,6 +1166,10 @@ Being able to compute complex integrals very easily means one could now compute 
     \end{equation*}
 \end{example}
 \begin{remark}[PRO TIP: Behaviour at Infinity]
+    \label{rmk: PRO TIP: Behaviour at Infinity}
+    (\ul{The outlined technique is only for sanity checks!
+    Not to be used in the actual solution!}
+The only technique you are given in lecture and hence can be used is the Jordan's lemma. (See Exercise \ref{ex: Jordan's Lemma}))
     If you can infer the behaviour of integral at infinity,
     the whole process of turning real integral into a complex one
     might just become more natural.
@@ -1188,17 +1192,50 @@ Being able to compute complex integrals very easily means one could now compute 
     This means if $n>1$, $\int_{\Gamma_R} f(z) \intd z$ vanishes as $R \rightarrow 0$.
 \end{remark}
 \begin{example}[Behaviour at Infinity]
-    For the following $f(z)$, the integral $\int_{\Gamma_R} f(z) \intd z \rightarrow 0$ as $R \rightarrow \infty$ where $\Gamma_R$ is a part of a circle of radius $R$ (it can be the full circle of radius $R$ as well).
+    For the following $f(z)$, the integral $\int_{\Gamma_R} f(z) \intd z \rightarrow 0$ as $R \rightarrow \infty$ where $\Gamma_R$ is a part of a circle of radius $R$
+    that the following $f(z)$ satisfy $f(z) = O\left( \frac{1}{z^p} \right)$ for some $p>1$.
     \begin{itemize}
         \item $\frac{1}{z+z^2}$
-        \item $\frac{\sin{z}}{z^{3/2}+z^2}$
+        \item $\frac{1}{z^{3/2}+z^2}$
             \begin{itemize}
                 \item $\Gamma_R$ here would have to exclude the branch cut!
             \end{itemize}
         \item $z^ne^{-z}$ for any $n \in \mathbb{Z}$
+        \item (WRONG EXAMPLE) $\frac{\sin{z}}{z^2}$
+            \begin{itemize}
+                \item Note that $|\sin{z}| \leq 1$ is not true in complex analysis!!!
+            \end{itemize}
     \end{itemize}
 \end{example}
 
+Here is a result that is given in lectures that you ARE allowed to use.
+\begin{exercise}[Jordan's Lemma]
+    \label{ex: Jordan's Lemma}
+    Let $f:\mathbb{H} \rightarrow \C_{\infty}$ be a meromorphic function on
+    $\mathbb{H} \coloneqq \left\{ z \in \C | \Im{(z)} > 0 \right\}$.
+    Suppose $f(z) \rightarrow 0$ as $z \rightarrow \infty$ in $\mathbb{H}$,
+    then if $\gamma_R (t) \coloneqq R e^{it}$ for $t \in \left[ 0, \pi \right]$,
+    you have
+    \begin{equation*}
+        \int_{\gamma_R} f(z) e^{i \alpha z} \intd z \rightarrow 0
+    \end{equation*}
+    as $R \rightarrow 0$ for any $\alpha > 0$.
+\end{exercise}
+\begin{remark}
+    The pro tip (Remark \ref{rmk: PRO TIP: Behaviour at Infinity})
+    covers way more general cases, but you will only need Jordan's lemma in the exam!
+\end{remark}
+
+%\begin{example}[Sine Integral]
+%    Consider the following integral:
+%    \begin{equation*}
+%        I \coloneqq \int_{-\infty}^{\infty} \frac{\sin{x}}{x} \intd x
+%    \end{equation*}
+%    Again consider a similar contour to Figure \ref{fig: Residue Calculus Contour 1} and the following integral (yellow and blue contour are denoted by $y_R, b_R$ respectively)
+%    \begin{equation*}
+%        \tilde I_R \coloneqq \underbrace{\int_{y_R} \frac{\sin{z}}{z} \intd z}_{\int_{-R}^R \frac{\sin{x}}{x} \intd x} + \int_{b_R} \frac{\sin{z}}{z}\intd z
+%    \end{equation*}
+%\end{example}
 \end{document}
 
 
