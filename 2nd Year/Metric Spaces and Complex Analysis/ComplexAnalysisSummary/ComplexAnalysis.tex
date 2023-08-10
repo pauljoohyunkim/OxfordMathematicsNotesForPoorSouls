@@ -1774,6 +1774,163 @@ In the case of simply-connected domains, it turns out that most are conformally 
     which means $f$ is a bounded function.
     By Liouville, $f$ must be a constant function, but a constant function is not conformal.
 \end{remark}
+\subsection{Laplace's Equation}
+It turns out that if $f(z) = u(x,y) + i v(x,y)$ is a holomorphic function,
+from the Cauchy-Riemann equations, $u$ and $v$ are \textit{harmonic},
+that is, they satisfy the Laplace's equation.
+
+This suggests one could turn the problem of finding the solution to Laplace's equation
+to finding a holomorphic function that satisfies some equivalent conditions.
+
+\begin{remark}
+    Note that if $f$ and $g$ are holomorphic functions,
+    $g \circ f$ must also be holomorphic.
+    This suggests that $\Re\left( f \circ g \right), \Im \left( f \circ g \right)$
+    are also harmonic.
+\end{remark}
+\begin{example}[Heat Problem]
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics[width=0.4\textwidth]{LaplaceEquation1}
+        \caption{Steady heat problem}
+        \label{fig: Steady heat problem}
+    \end{figure}
+    It is known that heat flow is governed by the heat equation ($\partial_t u = \Delta u$).
+    Suppose that there is no change according to the time, that is,
+    it has reached its thermal equilibrium, then we end up with a Laplace equation ($\Delta u = 0$).
+
+    Refer to Figure \ref{fig: Steady heat problem} for the setup.
+    Suppose two identical disks of temperatures held at $u=1$ and $u=-1$
+    are in contact in a thermally conductive domain (outside of green region).
+    We pose that they decay at infinity (for a physical solution.)
+    Find $u(x,y)$.
+
+    For simplicity, say the circles are $|z \pm i| = 1$.
+
+    Note that because $u$ is supposed to be harmonic,
+    you can write it as imaginary part of some function $f(z)$, that is:
+    \begin{equation*}
+        u(x,y) = \Im\left( f(z) \right) = \Im \left( f(x+yi) \right)
+    \end{equation*}
+
+    The region can be mapped to a strip of width 2 by the map $z \mapsto \frac{1}{z}$,
+    which you can see in Figure \ref{fig: Inversion map of steady heat}.
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics[width=0.6\textwidth]{LaplaceEquation2}
+        \caption{After inversion map of the region}
+        \label{fig: Inversion map of steady heat}
+    \end{figure}
+    
+    Here, we are working in this ``transformed'' world, where we use different variables:
+    namely $\xi$, $\eta$, and $Z = \frac{1}{z}$,
+    with $U\left( \xi, \eta \right)$ satisfying the Laplace's equation, where
+    \begin{equation*}
+        U\left( \xi, \eta \right) = \Im \left( F(Z) \right) = \Im \left( F\left( \xi + \eta i \right) \right)
+    \end{equation*}
+    and $f(z) = F(Z)$
+
+    Because $U$ is in a region that is much easier to solve, we can spot the solution:
+    \begin{equation*}
+        U\left( \xi, \eta \right) = -2 \eta
+    \end{equation*}
+    (Note that there would not $\xi$ dependence due to infinite domain.)
+    You can spot an appropriate holomorphic function $F(Z)$:
+    \begin{equation*}
+        F(Z) = -2 Z
+    \end{equation*}
+    which means,
+    \begin{equation*}
+        f(z) = \frac{-2}{z} = -2 \times \frac{1}{x + yi} = -2 \times \frac{x-yi}{x^2 + y^2}
+    \end{equation*}
+    so taking imaginary part,
+    \begin{equation*}
+        u(x,y) = \frac{2y}{x^2 + y^2}
+    \end{equation*}
+\end{example}
+\begin{example}
+    Let's try to solve $\Delta u(x,y) = 0$ on the first quadrant where $u(x,0) = 0$ and $u(0,y) = 1$.
+
+    \textbf{Mapping}:
+    One must find a conformal map to some other region which it is more convenient to find the solution of Laplace's equation to.
+    Often this will be a strip or a disk (strip preferred).
+    Since we know that a strip and upper half plane are related by the exponential map,
+    and upper half plane is related to a quadrant by the square map,
+    the strategy is to compose the maps between these regions.
+
+    First, we map the first quadrant to the upper half plane by $g(z) = z^2$.
+    \begin{figure}[tbp]
+        \centering
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{LaplaceEquation3}
+            \caption{First quadrant}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{LaplaceEquation4}
+            \caption{Upper half plane}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{LaplaceEquation5}
+            \caption{Strip of width $\pi$}
+        \end{subfigure}
+        \caption{Real limit (former) only concerns the approaching value from left and right side, but complex limit (latter) oncerns the approaching value from all direction.}
+        \label{fig: Mapping from first quadrant to a strip}
+    \end{figure}
+    After that we need to map the upper half plane to the strip.
+    Recall that $z \mapsto e^{z}$ took the strip of width $\pi$ to the upper half plane,
+    so we need to take the inverse operation, that is, $h(z) = \log z$,
+    where I would define the branch cut to be at the negative imaginary axis to avoid the upper half plane.
+
+    Overall, it took the composition of $g$ and $h$ for mapping the first quadrant to the strip.\footnote{
+        Note that I am not writing $\log \left( z^2 \right) = 2 \log \left( z \right)$,
+        since I am in the world of complex numbers, and that is not correct most of the time, if not still dangerous.
+    }
+    \begin{equation*}
+        Z = h \circ g (z) = \log \left( z^2 \right)
+    \end{equation*}
+
+    \textbf{Solving Laplace's equation on the transformed coordinate system}:
+    Now we have to solve for harmonic $U\left( \xi, \eta \right) = \Im \left( F(Z) \right) = \Im \left( f(z) \right)$ such that $U=0$ on $\eta = 0$ and $U = 1$ on $\eta = 1$.
+    One can spot the solution:
+    \begin{equation*}
+        U\left( \xi, \eta \right) = \frac{\eta}{\pi}
+    \end{equation*}
+    This suggests an appropriate/possible $F(Z)$ is:
+    \begin{equation*}
+        F(Z) = \frac{Z}{\pi}
+    \end{equation*}
+    Transforming back to $z$ coordinates,
+    \begin{equation*}
+        F(Z) = f(z) = \frac{\log \left( z^2 \right)}{\pi} 
+    \end{equation*}
+    Taking the imaginary part of $f(z)$ to recover $u$,
+    \begin{align*}
+    u(x,y) &= \Im \left( \frac{\log \left( z^2 \right)}{\pi} \right) \\
+    &= \frac{1}{\pi} \arg \left( z^2 \right) \\
+    &= \frac{1}{\pi} \arctan \left( \frac{y}{x} \right)
+    \end{align*}
+    The plot of this solution is shown in Figure \ref{fig: Laplacian First Quadrant}.
+    \begin{figure}[tbp]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{FanLaplacian1}
+            \caption{3D plot of the solution}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{FanLaplacian2}
+            \caption{Contour plot of the solution}
+        \end{subfigure}
+        \caption{Solution to the Laplacian in the first quadrant}
+        \label{fig: Laplacian First Quadrant}
+    \end{figure}
+
+\end{example}
 
 \end{document}
 
