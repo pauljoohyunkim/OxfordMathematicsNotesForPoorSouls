@@ -1096,6 +1096,21 @@ Being able to compute complex integrals very easily means one could now compute 
     Whenever you see an integral involving trig function such as $\sin z$ or $\cos z$, you know that you can write it as some combination of $z, \bar z$, but it is convenient to take the curve to be unit circle so that $\bar z = \frac{1}{z}$, so that we don't have to worry about the conjugate symbol.
 \end{remark}
 
+\section{Conformal Mapping}
+Many of the holomorphic functions that we deal with are ``conformal''.
+\begin{definition}[Conformal Map]
+    If $\gamma:[-1,1]\rightarrow \C$ is $C^1$ path such that $\gamma'(t) \neq 0$ for all $t$,
+    we first define \textbf{tangent line} of the curve at $t$ as
+    \begin{equation*}
+        \left\{ \gamma(t) + s \gamma'(t) \middle| s \in \R \right\}.
+    \end{equation*}
+    Then given two such $C^1$ paths, define the \textbf{angle of the paths} at the intersection
+    as the angle between the respective tangent lines.
+
+    $f$ is a \textbf{conformal map} at $z_0$ if the angle between two $C^1$ curves at $z_0$
+    is preserved under the map $f$, that is, it is equal to the angle at $f(z_0)$ of the images
+    of the two curves under $f$.
+\end{definition}
 \end{document}
 
 
