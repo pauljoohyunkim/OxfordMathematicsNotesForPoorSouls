@@ -1072,6 +1072,7 @@ Here is a very important theorem.
     where $\gamma(t) = -1 + \frac{1}{5} e^{it}$ over $t\in\left[ 0,2\pi \right]$.
 \end{exercise}
 
+
 \subsection{Residue Calculus}
 Being able to compute complex integrals very easily means one could now compute real integrals that does not have an easy antiderivative.
 \begin{example}
@@ -1225,6 +1226,94 @@ Here is a result that is given in lectures that you ARE allowed to use.
     The pro tip (Remark \ref{rmk: PRO TIP: Behaviour at Infinity})
     covers way more general cases, but you will only need Jordan's lemma in the exam!
 \end{remark}
+
+\begin{example}[Integral in the Method of Stationary Phase]
+    \textbf{This is material from Part B Waves and Compressible Flow and Part C Perturbation Methods}
+    and the exact derivation is not expected in Part A.
+    \ul{Howeverm, the relevant bit is the computation of one complex integral.}
+
+    \ul{Method of stationary phase} is a way of approximating an integral of the following form as $x \rightarrow \infty$:
+    \begin{equation*}
+        I(x) = \int_a^b f(t) e^{i x \psi (t)} \intd t
+    \end{equation*}
+    where $\psi'(t) \neq 0$ for $a<t<c$ and $c<t<b$ for some $c \in \left[ a,b \right]$, and $\psi''(c) \neq 0$.
+
+    The leading order approximation by method of stationary phase\footnote{In a nutshell, you can derive this by Taylor expanding the integrand at $t = c$ and arguing that the contribution around a small interval around $c$ dominates the contributions from rest of the domain.} turns out to be:
+    \begin{equation*}
+        I(x) = \underbrace{\frac{f(c) e^{i x \psi(c)}}{x^{1/2}} \int_{-\infty}^{\infty} e^{i s^2 \psi''(c) / 2} \intd s}_{\text{Approximation}} + \underbrace{O\left( \frac{1}{x \epsilon} \right)}_{\text{Correction Term}}
+    \end{equation*}
+    where the correction term decays as $x \rightarrow \infty$ (enforced by choosing $\epsilon>0$ in some range).
+    \ul{To derive the explicit form of the approximation term, one needs to be able to compute:}
+    \begin{equation*}
+        \tilde I \coloneqq \int_{-\infty}^{\infty} e^{is^2 \psi''(c) / 2} \intd s
+    \end{equation*}
+    Note that by the ``evenness'' of the integrand, one can write:
+    \begin{equation*}
+        \tilde I = 2 \int_{0}^{\infty} e^{is^2 \psi''(c)/2} \intd s
+    \end{equation*}
+    Consider now the following complex integral:
+    \begin{equation*}
+        J \coloneqq
+        \underbrace{
+        \int_{R} e^{is^2 \psi''(c)/2} \intd s
+    }_{= \tilde I / 2}
+        +
+        \int_{B} e^{is^2 \psi''(c)/2} \intd s
+        -
+        \int_{G} e^{is^2 \psi''(c)/2} \intd s
+    \end{equation*}
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics[scale=0.5]{MethodOfStationaryPhase}
+        \caption{Integration contour for method of stationary phase for $\psi''(c)>0$. For $\psi''(c)<0$, one could consider the same path reflected across the $x$ axis.}
+        \label{fig: Method of Stationary Phase}
+    \end{figure}
+    where $R, B, G$ refer to the paths specified in red, blue, green in Figure \ref{fig: Method of Stationary Phase}, respectively.
+    \footnote{You might wonder \textbf{why this path is chosen};
+    it is because as $s$ varies from 0 to infinity,
+    the integrand $e^{is^2 \psi''(c)/2}$ ``oscillates'' in some sense,
+    and is not an easy integral to evaluate.
+    On the other hand, along the $G$ path, by parameterizing it as $s = e^{\pi/4} s$,
+    effectively, we now consider a new integrand of the form $e^{-k t^2}$,
+    which is a Gaussian integral which we know the value to.
+    By relating these two, and the knowledge of complex analysis,
+    we can indirectly compute the former integral.
+    \ul{Note that this is in fact NOT an obvious choice, and some super clever people thought of it!}
+}
+    The directions paths are:
+    \begin{itemize}
+        \item $R$ path goes from the origin to the right infinity.
+        \item $B$ path goes around anticlockwise.
+        \item $G$ path goes from the origin to infinity at $\pi/4$ angle.
+    \end{itemize}
+    (Here I have made a deliberate choice to \ul{make $G$ path start from origin rather than going from infinity to origin} for simplicity in dealing with signs later.)
+    
+    
+    \textbf{First},
+    Because the integrand does not have any poles inside the closed curve,
+    by Cauchy's theorem, $J = 0$.
+
+    \textbf{Second},
+    \ul{By Jordan's lemma}, $\int_B e^{is^2 \psi''(c)/2} \intd s \rightarrow 0$ as the radius goes to infinity.
+
+    \textbf{Hence},
+    putting these two information,
+    we deduce that as radius diverges:
+    \begin{equation*}
+        2 \times \int_G e^{i s^2 \psi''(c) / 2} \intd s
+        \rightarrow 2 \int_{t=0}^{\infty} e^{-\psi''(c)t^2/2} e^{i \pi / 4}\intd t
+        =
+        \tilde I  
+    \end{equation*}
+    where the second integral comes from substitution $s = e^{i\pi/4} t$.
+    
+    We finally have $\tilde I$ in terms of a Gaussian integral.
+    I invite you to finish the computation and verify that:
+    \begin{equation*}
+        I(x) = \frac{\sqrt{2\pi} f(c) e^{ix\psi(c)}e^{i\pi/4}}{x^{1/2} \sqrt{\psi''(c)}} + O \left( \frac{1}{x \epsilon} \right)
+    \end{equation*}
+    
+\end{example}
 
 %\begin{example}[Sine Integral]
 %    Consider the following integral:
