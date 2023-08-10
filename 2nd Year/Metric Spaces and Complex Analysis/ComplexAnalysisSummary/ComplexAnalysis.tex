@@ -1544,7 +1544,125 @@ Many of the holomorphic functions that we deal with are ``conformal''.
     $f$ is a \textbf{conformal map} at $z_0$ if the angle between two $C^1$ curves at $z_0$
     is preserved under the map $f$, that is, it is equal to the angle at $f(z_0)$ of the images
     of the two curves under $f$.
+
+    See from Figure \ref{fig: Conformal Map} that the right angles in the grid are preserved in the image as well (locally).
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics[scale=0.3]{ConformalMap}
+        \caption{Conformal maps are functions that locally preserve the angles.}
+        \label{fig: Conformal Map}
+    \end{figure}
 \end{definition}
+
+Here is why conformal maps are related to complex analysis.
+\begin{remark}[Nonconstant holomorphic functions are conformal]
+    If $f:U \rightarrow \C$ is holomorphic on $U$ and $f'(z) \neq 0$ for all $z \in U$, then it is conformal on $U$.
+
+    The intuition is that, locally nonconstant holomorphic functions are translation, dialation and rotation.
+    Take $a \in U$.
+    Locally, one could Taylor expand in a neighborhood:
+    \begin{equation*}
+        f(z) = f(a) + f'(a)(z-a) + \frac{1}{2}f''(a) \left( z-a \right)^2 + O \left( \left( z-a \right)^3 \right)
+    \end{equation*}
+
+    $f(a)$ is the image of $a$, which takes care of translation.
+
+    Also note that $z-a$ can be understood as a vector from $a$ to $z$ on $\C$,
+    and multiplication by $f'(a) = |f'(a)| e^{i \arg f'(a)}$ is dialation by $|f'(a)|$ and rotation by $\arg f'(a)$.
+    (See Figure \ref{fig: Local Conformal Map})
+
+    \begin{figure}[tbp]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{LocalConformal1}
+            \caption{Local behaviour of holomorphic function}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{LocalConformal2}
+            \caption{Any angle between curves preserved.}
+        \end{subfigure}
+        \caption{Local behaviour of holomorphic functions suggests that they are conformal.}
+        \label{fig: Local Conformal Map}
+    \end{figure}
+\end{remark}
+\begin{example}[Square Map]
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics{square}
+        \caption{Squaring map opens up a region like a fan (doubling the angle at the origin) and squares the modulus of each point.}
+        \label{fig: Square Map}
+    \end{figure}
+    Consider $f(z) = z^2$. Note that $f'(z) = 2z$, so it is holomorphic on $\C \setminus \left\{ 0 \right\}$.
+    To see what happens, consider writing $z = r e^{i \theta}$.
+    Then $f(z) = r^2 e^{i \left( 2\theta \right)}$.
+Effectively, it opened up a region, ``pivoting'' from the origin (Figure \ref{fig: Square Map}).
+    Note that the origin is not holomorphic; as you can see, it doubled the angle there.
+\end{example}<++>
+\begin{remark}
+    Note that $f'(a) \neq 0$ is when ``holomorphic $\implies$ conformal`` breaks down;
+    this is because $f'(a) = 0$ means it is a dialation by factor zero, meaning, it is ''degenerate``.
+\end{remark}
+\begin{remark}
+    Often times, when dealing with conformal maps,
+    exactly where each point gets mapped to is not something to worry about;
+    rather you'll be working out the image of some region under a holomorphic function.
+
+    Open mapping theorem might be useful;
+    \ul{this suggests that you can usually just attempt to parameterize the boundaries, and see where the boundaries map to}.
+\end{remark}
+\begin{exercise}[M\"obius maps are conformal]
+    \textbf{First}, show that a M\"obius map is conformal.
+    (Trivial, but need to check it is nowhere constant.)
+
+    \textbf{Then}, show that for $z_1, z_2, z_3$ and $w_1, w_2, w_3$, two sets of pairwise distinct complex numbers (including infinity),
+    there exists a unique M\"obius map $f$ such that
+    \begin{equation*}
+        \forall i=1,2,3 \,\, f(z_i) = w_i
+    \end{equation*}
+    (Constructive proof, but one needs to consider cases involving infinity)
+\end{exercise}
+\begin{remark}
+    Recall that M\"obius maps map circlines to circlines.
+    Noting that infinity only exists in lines, M\"obius maps are especially easy to deal with for conformal map stuff!
+
+    Often times, you will also be dealing with maps involving $0$, $1$, and $\infty$ often.
+\end{remark}
+\begin{example}
+    Suppose we wish to find a conformal map that map upper half plane $\mathbb{H}$ to $B\left( 0,1 \right)$, a unit circle.
+    We can try M\"obius map, since we know lines can be mapped to a circle.
+    Attempting to map the real axis to the unit circle via the following:
+    \begin{align*}
+        0 &\mapsto 1 \\
+        1 &\mapsto i \\
+        \infty &\mapsto -1
+    \end{align*}
+    Note that I have deliberately made the choice of image points to be $1$, $i$, and $-1$, as they are clearly on the circle,
+    and are simple numbers.
+    
+    \textbf{First}, consider that $\infty \mapsto -1$ implies that the ratio of the leading order in the M\"obius map must be -1:
+    \begin{equation*}
+        f(z) = -\frac{z + a}{z + b}
+    \end{equation*}
+    
+    \textbf{Second}, 0 maps to 1, so
+    \begin{equation*}
+        f(z) = -\frac{z + a}{z - a}
+    \end{equation*}
+
+    \textbf{Finally}, 1 maps to $i$, so
+    \begin{equation*}
+        f(z) = -\frac{z - i}{z + i}
+    \end{equation*}
+
+    This function maps the real axis to the unit circle.
+    We don't know if this maps to the inside or the outside of the unit circle yet, however!
+    We could find this out by trying where $i$, a point in the upper half plane, lands.
+
+    Since $f(i) = 0$, it must be that $f(z)$ maps the upper half plane to the inside of the circle, so we are done!
+\end{example}
 \end{document}
 
 
