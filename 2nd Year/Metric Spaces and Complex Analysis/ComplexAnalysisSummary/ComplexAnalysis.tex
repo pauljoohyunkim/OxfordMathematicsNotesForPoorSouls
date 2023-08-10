@@ -1571,6 +1571,9 @@ Here is why conformal maps are related to complex analysis.
     and multiplication by $f'(a) = |f'(a)| e^{i \arg f'(a)}$ is dialation by $|f'(a)|$ and rotation by $\arg f'(a)$.
     (See Figure \ref{fig: Local Conformal Map})
 
+    This also suggests that if a conformal map $f$ over complex plane satisfies $f'(a) \neq 0$
+    it is locally biholomorphic.
+
     \begin{figure}[tbp]
         \centering
         \begin{subfigure}[b]{0.5\textwidth}
@@ -1600,7 +1603,7 @@ Here is why conformal maps are related to complex analysis.
     Then $f(z) = r^2 e^{i \left( 2\theta \right)}$.
 Effectively, it opened up a region, ``pivoting'' from the origin (Figure \ref{fig: Square Map}).
     Note that the origin is not holomorphic; as you can see, it doubled the angle there.
-\end{example}<++>
+\end{example}
 \begin{remark}
     Note that $f'(a) \neq 0$ is when ``holomorphic $\implies$ conformal`` breaks down;
     this is because $f'(a) = 0$ means it is a dialation by factor zero, meaning, it is ''degenerate``.
@@ -1630,8 +1633,8 @@ Effectively, it opened up a region, ``pivoting'' from the origin (Figure \ref{fi
 
     Often times, you will also be dealing with maps involving $0$, $1$, and $\infty$ often.
 \end{remark}
-\begin{example}
-    Suppose we wish to find a conformal map that map upper half plane $\mathbb{H}$ to $B\left( 0,1 \right)$, a unit circle.
+\begin{example}[Upper Half Plane to Unit Disk]
+    Suppose we wish to find a conformal map that map upper half plane $\mathbb{H}$ to $B\left( 0,1 \right)$, a unit disk. (See Figure \ref{fig: UHP to Unit Circle})
     We can try M\"obius map, since we know lines can be mapped to a circle.
     Attempting to map the real axis to the unit circle via the following:
     \begin{align*}
@@ -1662,7 +1665,116 @@ Effectively, it opened up a region, ``pivoting'' from the origin (Figure \ref{fi
     We could find this out by trying where $i$, a point in the upper half plane, lands.
 
     Since $f(i) = 0$, it must be that $f(z)$ maps the upper half plane to the inside of the circle, so we are done!
+    (Figure \ref{fig: UHP to Unit Circle})
+    \begin{figure}[tbp]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{UpperHalfPlane}
+            \caption{Upper half plane}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{UnitCircle}
+            \caption{Unit disk}
+        \end{subfigure}
+        \caption{Mapping upper half plane to the unit disk; values 0, 1, and $\infty$ chosen to be mapped to 1, $i$, and -1.}
+        \label{fig: UHP to Unit Circle}
+    \end{figure}
 \end{example}
+\begin{example}
+    Let's do the same as before, but choosing a slightly different information.
+    Suppose we take:
+    \begin{align*}
+        0 &\mapsto 1 \\
+        1 &\mapsto -i \\
+        \infty &\mapsto -1
+    \end{align*}
+    The M\"obius mapping that achieves this is:
+    \begin{equation*}
+        f(z) = -\frac{z+i}{z-i}
+    \end{equation*}
+    This would again map the real axis to the unit circle.
+    However this time, testing with a value in the upper half plane, $f(i/2) = 3$,
+    which is not in the unit disk.
+    It seems that we have mapped the upper half plane to the outside of the circle.
+    (Figure \ref{fig: UHP to Unit Circle 2})
+    \begin{figure}[tbp]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{UpperHalfPlane}
+            \caption{Upper half plane}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{UnitCircle2}
+            \caption{Outer region of the unit circle}
+        \end{subfigure}
+        \caption{Mapping upper half plane to the unit circle; values 0, 1, and $\infty$ chosen to be mapped to 1, $-i$, and -1.}
+        \label{fig: UHP to Unit Circle 2}
+    \end{figure}
+    To correct this, we use the inversion map $g:z \mapsto \frac{1}{z}$, as it preserves the unit circle where it is,
+    but maps infinity to zero and vise versa.
+    
+    The overall conformal map that we constructed is a composition of these two.
+    \begin{equation*}
+        g \circ f (z) = - \frac{z-i}{z+i}
+    \end{equation*}
+\end{example}
+\begin{remark}
+    There is no guarantee that the conformal map you generate will be unique.
+    In fact, there is three degrees according to the full statement of Riemann mapping theorem (which shall be stated later.)
+\end{remark}
+\begin{exercise}[Exponential Map]
+    Check that $z \mapsto e^{\pi z}$ maps the strip of width $\pi$:
+    \begin{equation*}
+        R \coloneqq \left\{ z \in \C \middle| \Im(z) \in \left( 0, \pi\right) \right\}
+    \end{equation*}
+    to the upper half plane.
+\end{exercise}
+\begin{exercise}
+    Investigate what the map $z \mapsto z^{\alpha}$ does to a unit fan of angle and orientation of your choosing, anchored at the origin.
+    (Hint: $\alpha = 2$ is the squaring map from before. The answer is in the next remark.)
+\end{exercise}
+\begin{exercise}
+    What does the map $z \mapsto e^{i \theta} z$ do? (The answer is in the next remark.)
+\end{exercise}
+\begin{remark}[Useful Maps]
+    Now we have a set of maps that are useful for constructing a conformal map from one region to another
+    \begin{itemize}
+        \item M\"obius maps (circlines to circlines)
+        \item Translation: $z \mapsto z + c$
+        \item Dialation: $z \mapsto kz$ where $k \in \R \setminus \left\{ 0 \right\}$
+        \item Rotation: $z \mapsto e^{i \theta} z$
+        \item Exponential: $z \mapsto e^z$ (Horizontal Width-$\pi$ strip to half plane)
+        \item Constant-exponential: $z \mapsto z^{\alpha}$ (Opens up a fan by $\alpha$ times, with the reference along the positive real axis.)
+    \end{itemize}
+    Refer to \url{https://github.com/pauljoohyunkim/OxfordMathematicsNotesForPoorSouls/blob/main/2nd\%20Year/Metric\%20Spaces\%20and\%20Complex\%20Analysis/Conformal\%20Maps.pdf} for a cheat sheet of most of these.
+\end{remark}
+Just a definition that might pop up here:
+\begin{definition}[Conformally Equivalent]
+    If there is a bijective conformal transformation between $U$ and $V$ in the complex plane,
+    they are called \textbf{conformally equivalent}.
+\end{definition}
+
+In the case of simply-connected domains, it turns out that most are conformally equivalent to each other!
+\begin{remark}[Riemann's Mapping Theorem]
+    Let $U$ be open connected simply-connected \ul{proper} subset of $\C$.
+    Then for any $z_0 \in U$ there is a unique bijective conformal transformation $f:U \rightarrow B\left( 0, 1 \right)$ such that $f(z_0) = 0$ and $f'(z_0) > 0$.
+
+    This means all open connected simply-connected proper subsets are conformally equivalent!
+\end{remark}
+\begin{remark}
+    \textbf{Why did Riemann's mapping theorem have to include ``proper''?}
+    Suppose we seek conformal map $f$ mapping $\C$ to a unit circle.
+    Then it must mean that $f(\C) \subset B\left( 0,1 \right)$,
+    which means $f$ is a bounded function.
+    By Liouville, $f$ must be a constant function, but a constant function is not conformal.
+\end{remark}
+
 \end{document}
 
 
