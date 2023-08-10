@@ -1326,6 +1326,200 @@ Here is a result that is given in lectures that you ARE allowed to use.
     \end{equation*}
 \end{remark}
 
+\subsection{Keyhole Contour: When there is a ``constant-factor'' branch cut}
+It is straightforward to compute contour integral if it only involves poles;
+just use the residue theorem (and/or deformation theorem) and you are all good.
+
+However, what if you have a branch cut?
+The problem here is that, \ul{the branch cut that you define may need to extend to infinity,
+which means you might not be able to construct a complex integral with a closed loop
+enclosing a branch point.}
+
+The resolution here is to use a closed curve avoiding the branch cut around branch points.
+These are called \textbf{keyhole contours}.
+
+\begin{example}
+    Suppose you want to compute:
+    \begin{equation*}
+        I \coloneqq \int_{0}^{\infty} \frac{x^{1/2}}{1+x^2} \intd x
+    \end{equation*}
+    The intuition should say you should try to consider a complex integral of the form:
+    \begin{equation*}
+        \tilde I \coloneqq \int_{\Gamma} \frac{z^{1/2}}{1+z^2} \intd z
+    \end{equation*}
+    where $\Gamma$ is a closed curve to be chosen later.
+
+    Because $z^{1/2}$ is a multifunction, one needs to choose a branch cut.
+    For computation of $I$, it involves the contribution of the integrand
+    on the domain $\left[ 0, \infty \right)$.
+    If one chooses the branch cut along the domain, that is, the positive $x$ axis,
+    $z^{1/2} \coloneqq \frac{r}{2} e^{i \theta/2}$ ($\theta \in \left[ 0, 2\pi \right]$) has a \ul{sign difference across the branch cut}\footnote{check this!};
+    this is a good thing, since you want to be able to end up with an equation of the form:
+    \begin{equation*}
+        k \int_{0}^{\infty} \left( Integrand \right) \intd x = \ell
+    \end{equation*}
+    where $k, \ell$ are some constants.\footnote{This is analogous to using IBP twice to evaluate an integral, where you end up turning the problem into a linear equation.}
+
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics[scale=0.5]{Keyhole}
+        \caption{Keyhole contour with branch cut in the positive $x$ axis.}
+        \label{fig: Keyhole 1}
+    \end{figure}
+
+    Choose $\Gamma$ as Figure \ref{fig: Keyhole 1}.
+    Then,
+    \begin{equation*}
+        \tilde I
+        =
+        \int_{\gamma_+} \frac{z^{1/2}}{1+z^2} \intd z
+        +
+        \int_{\gamma_R} \frac{z^{1/2}}{1+z^2} \intd z
+        -
+        \int_{\gamma_-} \frac{z^{1/2}}{1+z^2} \intd z
+        -
+        \int_{\gamma_\epsilon} \frac{z^{1/2}}{1+z^2} \intd z
+    \end{equation*}
+    where
+    \begin{itemize}
+        \item $\gamma_+$ refers to the straight contour above the positive $x$ axis from ``near origin'' to the right.
+            \begin{itemize}
+                \item On this contour, $\frac{z^{1/2}}{1+z^2} = \frac{x^{1/2}}{1+x^2}$
+            \end{itemize}
+        \item $\gamma_R$ is the large anticlockwise arc of radius $R$.
+        \item $\gamma_-$ refers to the straight contour below the positive $x$ axis from ``near origin'' to the right.
+            \begin{itemize}
+                \item On this contour, $\frac{z^{1/2}}{1+z^2} = - \frac{x^{1/2}}{1+x^2}$
+            \end{itemize}
+        \item $\gamma_\epsilon$ is the small anticlockwise arc of radius $\epsilon$ around the origin.
+    \end{itemize}
+    (Pay attention to the direction of the contour and all the signs!)
+    Considering the values of the $\frac{z^{1/2}}{1+z^2}$ on $\gamma_\pm$,
+    note that:
+    \begin{equation*}
+        \tilde I
+        =
+        \int_0^{\tilde R} \frac{x^{1/2}}{1+x^2} \intd x
+        +
+        \int_{\gamma_R} \frac{z^{1/2}}{1+z^2} \intd z
+        +
+        \int_0^{\tilde R} \frac{x^{1/2}}{1+x^2} \intd x
+        -
+        \int_{\gamma_\epsilon} \frac{z^{1/2}}{1+z^2} \intd z
+    \end{equation*}
+    where $\tilde R$ is the $x$ value of the right-end of the $\gamma_{\pm}$,
+    which is not important.
+
+    We will be taking the limits as $R \rightarrow \infty$ and $\epsilon \rightarrow 0^+$.
+
+    \textbf{First},
+    by residue theorem,
+    one can compute $\tilde I = 2\pi i \left( \frac{1}{2} e^{-\pi i / 4} + \frac{1}{2} e^{5 \pi i / 4} \right) = \pi \sqrt{2}$.
+
+    \textbf{Second},
+    Note that
+    \begin{equation*}
+        \left| \int_{\gamma_R} \frac{z^{1/2}}{1+z^2} \intd z \right|
+        \leq
+        \sup_{z \in \gamma_R} \left|\frac{z^{1/2}}{1 + z^2} \right| \times 2 \pi R
+        \rightarrow 0
+    \end{equation*}
+    where we used estimation lemma, reverse triangle inequality, and sandwich lemma to show that
+    the contribution from $\int_{\gamma_R} \frac{z^{1/2}}{1+z^2} \intd z$ decays as $R \rightarrow \infty$.
+    \textbf{If you weren't sure if the contribution was zero a priory though},
+    read my pro tip at Remark \ref{rmk: PRO TIP: Behaviour at Infinity};
+    since $\left|\frac{z^{1/2}}{1 + z^2}\right| \sim \frac{R^{1/2}}{1+R^2} \sim \frac{1}{R^{3/2}} \ll O\left( \frac{1}{R} \right)$ as $R \rightarrow \infty$,
+    immediately, you should've known that the contribution is zero.
+
+    \textbf{Third},
+    similarly, we note
+    \begin{equation*}
+        \int_{\gamma_\epsilon} \frac{z^{1/2}}{1+z^2} \intd z
+        \leq
+        \sup_{z \in \gamma_\epsilon} \left|\frac{z^{1/2}}{1+z^2} \right| 2 \pi \epsilon
+        \rightarrow 0
+    \end{equation*}
+    so again, you get no contribution from this integral\footnote{I haven't thought much into if the trick in Remark \ref{rmk: PRO TIP: Behaviour at Infinity} could work with curve going to zero, but it is worth investigating on your own I guess\dots} in the limit $\epsilon \rightarrow 0$.
+
+    \textbf{Hence},
+    putting all these together,
+    we deduce
+    \begin{equation*}
+        2 \int_{0}^{\infty} \frac{x^{1/2}}{1 + x^2} \intd x = \pi \sqrt{2}
+    \end{equation*},
+    so we get
+    \begin{equation*}
+        \int_{0}^{\infty}\frac{x^{1/2}}{1 + x^2} \intd x =\frac{\pi}{\sqrt{2}}
+    \end{equation*}
+\end{example}
+\begin{remark}
+    The fact that there was a factor (of negative one) difference across the branch cut is what allowed us to use the keyhole contour!
+\end{remark}
+
+\begin{example}
+    Let's go through the computation of the followwing integral quickly!
+    \begin{equation*}
+        I \coloneqq \int_{0}^{\infty} \frac{x^{1/2} \log x}{\left( 1+x \right)^2} \intd x
+    \end{equation*}
+    Remember from discussion of branch cuts of $\log z$ that it doesn't have a constant factor difference across the branch cuts, but a constant addition across the branch cuts;
+    this is not a good thing, as it's like using IBP twice and accidentally removing the integral you needed to compute\dots
+    Fortunately, in this case, $z^{1/2}$ also provides branch cut, which has a factor difference.
+
+    Using the same keyhole contour (Figure \ref{fig: Keyhole 1}),
+    define
+    \begin{equation*}
+        \tilde I \coloneqq
+        \int_{\gamma_+} \frac{z^{1/2} \log z}{\left( 1+z \right)^2} \intd z
+        +
+        \int_{\gamma_R} \frac{z^{1/2} \log z}{\left( 1+z \right)^2} \intd z
+        -
+        \int_{\gamma_-} \frac{z^{1/2} \log z}{\left( 1+z \right)^2} \intd z
+        -
+        \int_{\gamma_\epsilon} \frac{z^{1/2} \log z}{\left( 1+z \right)^2} \intd z
+    \end{equation*}
+
+    \textbf{First},
+    Note that $\frac{z^{1/2} \log z}{\left( 1+z \right)^2} = \pm \frac{x^{1/2} \log x}{\left( 1+x \right)^2}$ on $\gamma_{\pm}$.
+
+    \textbf{Second},
+    Because as $R \rightarrow \infty$,
+    \begin{equation*}
+        \left| \frac{z^{1/2} \log z}{\left( 1+z \right)^2} \right|
+        \sim
+        \frac{R^{1/2} \log R}{ R^2}
+    \end{equation*}
+    by Remark \ref{rmk: PRO TIP: Behaviour at Infinity},
+    contribution from $\gamma_R$ is zero.
+
+    \textbf{Third},
+    similarly,
+    \begin{equation*}
+        \int_{\gamma_\epsilon} \frac{z^{1/2} \log z}{\left( 1+z \right)^2} \intd z
+        \leq
+        \sup_{z \in \gamma_{\epsilon}} \left|\frac{z^{1/2} \log z}{\left( 1+z \right)^2}\right| 2\pi \epsilon
+        \rightarrow 0
+    \end{equation*}
+    so no contribution from $\gamma_\epsilon$.\footnote{For those who want to see in more detail as to showing the limit going to zero, it might be helpful to note that $\epsilon \sqrt{\epsilon} \log \epsilon = \sqrt{\epsilon} \frac{\log \epsilon}{1/\epsilon}$, and use l'H\^opital on $\frac{\log \epsilon}{1/\epsilon}$.}
+
+    \textbf{Fourth}
+    computing $\tilde I$ directly using the residue theorem,
+    \begin{equation*}
+        \tilde I = \pi^2 + 2\pi
+    \end{equation*}
+
+    \textbf{Hence},
+    putting all the info together (taking real part)
+    deduce
+    \begin{equation*}
+        I = \pi
+    \end{equation*}
+
+    As a byproduct, by taking imaginary part instead, you also deduce
+    \begin{equation*}
+        \int_{0}^{\infty} \frac{\sqrt{x}}{\left( 1+x \right)^2} \intd x = \pi / 2
+    \end{equation*}
+\end{example}
+
 %\begin{example}[Sine Integral]
 %    Consider the following integral:
 %    \begin{equation*}
