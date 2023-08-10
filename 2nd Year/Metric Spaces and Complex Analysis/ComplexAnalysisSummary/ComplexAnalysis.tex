@@ -1312,8 +1312,19 @@ Here is a result that is given in lectures that you ARE allowed to use.
     \begin{equation*}
         I(x) = \frac{\sqrt{2\pi} f(c) e^{ix\psi(c)}e^{i\pi/4}}{x^{1/2} \sqrt{\psi''(c)}} + O \left( \frac{1}{x \epsilon} \right)
     \end{equation*}
-    
 \end{example}
+\begin{remark}
+    In the previous example of method of stationary phase,
+    if one wants to be less rigorous (for the intuition's sake),
+    one could think that the integral contribution of the arc is nearly zero due to the exponential decay (in the positive upper half plane),
+    and think of $G$ path as a ``deformation'' from $R$ curve (noting the homotopicity since no pole in the integrand, and complex infinity is treated as just a point)
+    hence by deformation theorem
+    \begin{equation*}
+        \int_{R} e^{is^2 \psi''(c)/2} \intd s
+        =
+        \int_{G} e^{is^2 \psi''(c)/2} \intd s
+    \end{equation*}
+\end{remark}
 
 %\begin{example}[Sine Integral]
 %    Consider the following integral:
