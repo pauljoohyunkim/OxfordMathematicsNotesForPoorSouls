@@ -1730,7 +1730,7 @@ Effectively, it opened up a region, ``pivoting'' from the origin (Figure \ref{fi
 \end{example}
 \begin{remark}
     There is no guarantee that the conformal map you generate will be unique.
-    In fact, there is three degrees according to the full statement of Riemann mapping theorem (which shall be stated later.)
+    In fact, it is unique if you provide three mapping points according to the full statement of Riemann mapping theorem (which shall be stated later.)
 \end{remark}
 \begin{exercise}[Exponential Map]
     Check that $z \mapsto e^{\pi z}$ maps the strip of width $\pi$:
@@ -1757,6 +1757,13 @@ Effectively, it opened up a region, ``pivoting'' from the origin (Figure \ref{fi
         \item Constant-exponential: $z \mapsto z^{\alpha}$ (Opens up a fan by $\alpha$ times, with the reference along the positive real axis.)
     \end{itemize}
     Refer to \url{https://github.com/pauljoohyunkim/OxfordMathematicsNotesForPoorSouls/blob/main/2nd\%20Year/Metric\%20Spaces\%20and\%20Complex\%20Analysis/Conformal\%20Maps.pdf} for a cheat sheet of most of these.
+\end{remark}
+\begin{remark}[(Another PRO TIP) Conformal Map Preserves Orientation]
+    If $f$ is a conformal map over domain $U$,
+    it is necessary that the orientation of the image of domain is preserved under $f$.
+    See Figure \ref{fig: UHP to Unit Circle} and \ref{fig: UHP to Unit Circle 2}.
+    In both cases, as you walk along $A$ to $B$ to $C$, back to $A$, the domain was on the ``left'' side.
+    On the image, you see that the region is still on the ``left'' side.
 \end{remark}
 Just a definition that might pop up here:
 \begin{definition}[Conformally Equivalent]
